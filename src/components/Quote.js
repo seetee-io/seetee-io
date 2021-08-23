@@ -1,0 +1,57 @@
+import React, { forwardRef } from "react";
+import Img from "gatsby-image";
+import styled from "styled-components";
+
+import Text from "@components/Text";
+
+const Wrapper = styled.section`
+  font-weight: var(--weightLight);
+`;
+
+const ImageWrapper = styled.div`
+  max-width: 11.75rem;
+  margin: 0 auto;
+
+  > div {
+    border-radius: 50%;
+  }
+
+  @media (min-width: 50rem) {
+    max-width: 13.75rem;
+  }
+`;
+
+const Blockquote = styled.blockquote`
+  margin: 1.5rem 0 1rem 0;
+  font-size: 1.5rem;
+
+  @media (min-width: 50rem) {
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+`;
+
+const StyledText = styled(Text)`
+  line-height: 130%;
+`;
+
+const Quote = forwardRef(({ img }, ref) => {
+  return (
+    <Wrapper ref={ref}>
+      <ImageWrapper>
+        {img && <Img fluid={img} alt="Kjell Inge Røkke" />}
+      </ImageWrapper>
+
+      <Blockquote>
+        "We are not going to wait for the future - we want to join in building
+        it as well! I encourage entrepreneurs to reach out to Seetee. The bigger
+        the dream, the more we listen."
+      </Blockquote>
+      <StyledText fontSize={1} fontSizeLarge={1.5} color="rgba(255,255,255,.8)">
+        Kjell Inge Røkke <br /> Chairman of Aker &amp; Founder of Seetee
+      </StyledText>
+    </Wrapper>
+  );
+});
+
+export default Quote;
