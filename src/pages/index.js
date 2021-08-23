@@ -1,30 +1,27 @@
-import React, { useRef, Fragment } from "react";
-import { graphql } from "gatsby";
-import styled from "styled-components";
+import { useRef, useEffect, Fragment } from "react";
+import styled from 'styled-components'
 
-import { ReactComponent as Logo } from "@assets/logo.svg";
+import Logo from "../../public/logo.svg";
 
-import Layout from "@components/Layout";
-import Text from "@components/Text";
-import Background from "@components/BackgroundLottie";
-import Button from "@components/Button";
-import Animated from "@components/Animated";
-import CallToAction from "@components/CallToAction";
-import Quote from "@components/Quote";
-import Contact from "@components/Contact";
-import Footer from "@components/Footer";
+import Layout from '../components/Layout'
+import Text from '../components/Text'
+import Background from '../components/BackgroundLottie'
+import Button from '../components/Button'
+import Animated from '../components/Animated'
+import CallToAction from '../components/CallToAction'
+import Quote from '../components/Quote'
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
 
 const Header = styled.header`
   text-align: center;
   padding: 2rem 3rem;
   margin-bottom: 3.4375rem;
-
   @media (max-width: 50rem) {
     button {
       display: none;
     }
   }
-
   @media (min-width: 50rem) {
     margin-bottom: 7.875rem;
     display: flex;
@@ -83,8 +80,8 @@ const blurbs = [
   "Bitcoin is the heart of an ecosystem. We invest in people and companies who want to pull, push, and poke life as we know it.",
 ];
 
-const IndexPage = ({ data }) => {
-  const sectionOneRef = useRef(null);
+const IndexPage = () => {
+  const sectionOneRef = useRef(null)
 
   const scrollTo = (ref) => {
     const element = ref.current;
@@ -140,7 +137,7 @@ const IndexPage = ({ data }) => {
 
           <Animated>
             <Box>
-              <Quote img={data.hero.childImageSharp.fluid} />
+              <Quote img={'/kir.png'}/>
             </Box>
             <Bar height="150px" />
           </Animated>
@@ -158,15 +155,4 @@ const IndexPage = ({ data }) => {
   );
 };
 
-export const query = graphql`
-  query {
-    hero: file(relativePath: { eq: "kir.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 1376) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
-  }
-`;
 export default IndexPage;

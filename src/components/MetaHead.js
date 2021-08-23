@@ -1,39 +1,20 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
+import Head from 'next/head'
+import config from '../config'
 
-import favicon from "@assets/favicon.ico";
-
-const Head = (props) => {
-  const query = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-          description
-        }
-      }
-    }
-  `);
-  const siteMeta = query.site.siteMetadata;
-
+const MetaHead = () => {
   return (
     <>
-      <Helmet
-        titleTemplate={`%s | ${siteMeta.title}`}
-        defaultTitle={siteMeta.title}
-        htmlAttributes={{ lang: "en" }}
-      >
-        <link rel="shortcut icon" href={favicon} />
-      </Helmet>
-      <SubHead {...siteMeta} title={props.title} />
+      <Head>
+        <link rel="shortcut icon" href={'favicon.ico'} />
+      </Head>
+      <SubHead {...config} />
     </>
   );
 };
 
 const SubHead = (props) => {
   return (
-    <Helmet>
+    <Head>
       <title>{props.title}</title>
 
       {props.description && (
@@ -50,8 +31,9 @@ const SubHead = (props) => {
         <meta name="twitter:description" content={props.description} />
       )}
       {props.image && <meta name="twitter:image" content={props.image} />}
-    </Helmet>
+    </Head>
   );
 };
 
-export default Head;
+
+export default MetaHead;

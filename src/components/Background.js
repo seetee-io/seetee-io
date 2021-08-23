@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 
-import { ReactComponent as BackgroundSVG } from "@assets/bg_header.svg";
+import BackgroundSVG from "../../public/bg_header.svg";
 
 const Wrapper = styled.div`
   position: fixed;

@@ -1,6 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-import Head from "@components/Head";
+import MetaHead from "./MetaHead";
 
 const Container = styled.div`
   color: var(--white);
@@ -16,7 +15,7 @@ const Container = styled.div`
 const Layout = ({ children }) => {
   return (
     <>
-      <Head />
+      <MetaHead />
       <Container>{children}</Container>
     </>
   );
