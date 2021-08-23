@@ -1,0 +1,39 @@
+{
+  "name": "seetee",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Seetee buys and holds crypto currencies, while investing in ambitious projects and companies throughout the ecosystem.",
+  "author": "Megan Pearson",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^2.26.1",
+    "gatsby-image": "^2.10.0",
+    "gatsby-plugin-alias-imports": "^1.0.5",
+    "gatsby-plugin-react-helmet": "^3.9.0",
+    "gatsby-plugin-sharp": "^2.13.1",
+    "gatsby-plugin-sitemap": "^2.11.0",
+    "gatsby-plugin-styled-components": "^3.9.0",
+    "gatsby-source-filesystem": "^2.10.0",
+    "gatsby-transformer-sharp": "^2.11.0",
+    "normalize.css": "^8.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
+    "react-lottie": "^1.2.3",
+    "smoothscroll-polyfill": "^0.4.4",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
+    "gatsby-plugin-svgr": "^2.1.0"
+  }
+}
