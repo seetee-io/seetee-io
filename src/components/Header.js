@@ -1,11 +1,7 @@
-import styled from 'styled-components'
 import Link from 'next/link'
+import styled from 'styled-components'
 
-import StyledLogo from './StyledLogo'
-import Text from './Text'
-import Button from './Button'
-
-import styles from './Header.module.css'
+import { StyledLogo, Text, Button } from '.'
 
 const Container = styled.header`
   text-align: center;
@@ -35,6 +31,23 @@ const ActionItems = styled.span`
   }
 `
 
+const DownloadButton = styled.span`
+  @media (max-width: 50rem) {
+    display: none;
+  }
+}
+`
+
+const TabLink = styled.a`
+  color: var(--white);
+  text-decoration: none;
+
+  :hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`
+
 const Header = ({ children }) => {
   return (
     <Container>
@@ -45,18 +58,20 @@ const Header = ({ children }) => {
       </Link>
       <ActionItems>
         <Link href="/blog">
-          <a className={styles.navtab}>
+          <TabLink>
             <Text fontSize={1.125} fontSizeLarge={1.25} font>Blog</Text>
-          </a>
+          </TabLink>
         </Link>
         <Link href="/podcast">
-          <a className={styles.navtab}>
+          <TabLink>
             <Text fontSize={1.125} fontSizeLarge={1.25} font>Podcast</Text>
-          </a>
+          </TabLink>
         </Link>
-        <Button className={styles.downloadbutton} as="a" href={"/shareholder_letter.pdf"} download>
+        <DownloadButton>
+          <Button as="a" href={"/shareholder_letter.pdf"} download>
           Read our shareholder letter
-        </Button>
+          </Button>
+        </DownloadButton>
       </ActionItems>
     </Container>
   );

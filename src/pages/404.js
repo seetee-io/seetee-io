@@ -1,8 +1,8 @@
-import Link from "next/link";
-import styled from "styled-components";
+import Link from 'next/link'
+import styled from 'styled-components'
 
-import Text from "../components/Text";
-import Button from "../components/Button";
+import Text from '../components/Text'
+import Button from '../components/Button'
 
 const Wrapper = styled.div`
   padding: 2rem;
@@ -10,11 +10,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const StyledText = styled(Text)`
   margin-bottom: 2rem;
-`;
+`
 
 const Buttons = styled.span`
   display: flex;
@@ -42,7 +42,7 @@ const NotFoundPage = () => {
       </Button>
       </Buttons>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default NotFoundPage;
+export default NotFoundPage

@@ -1,14 +1,7 @@
-import { useRef, useEffect, Fragment } from "react";
+import { Fragment } from 'react'
 import styled from 'styled-components'
 
-import Logo from "../../public/logo.svg";
-
-import Text from '../components/Text'
-import Animated from '../components/Animated'
-import CallToAction from '../components/CallToAction'
-import Quote from '../components/Quote'
-import Contact from "../components/Contact";
-import Bar from '../components/Bar'
+import { Text, Animated, CallToAction, Quote, Contact, Bar } from '../components'
 
 const Tagline = styled(Text)`
   margin: 1rem 0 2.5rem;
@@ -16,7 +9,7 @@ const Tagline = styled(Text)`
   @media (min-width: 50rem) {
     margin: 1.5rem 0 3rem;
   }
-`;
+`
 
 const Box = styled.div`
   padding-top: ${({ pt }) => (pt ? `${pt}rem` : `2rem`)};
@@ -24,13 +17,13 @@ const Box = styled.div`
   position: relative;
 
   ${({ mb }) => mb && `margin-bottom: ${mb}`};
-`;
+`
 
 const blurbs = [
   "Bitcoin is our treasury asset. Our first purchase was 1,170 BTC and our strategy is to hodl.",
   "Bitcoin can be an economic battery. We will mine to hodl in geographies where we can contribute and be supportive.",
   "Bitcoin is the heart of an ecosystem. We invest in people and companies who want to pull, push, and poke life as we know it.",
-];
+]
 
 const IndexPage = () => {
   return (
@@ -76,7 +69,7 @@ const IndexPage = () => {
         <Bar />
       </Animated>
     </>
-  );
-};
+  )
+}
 
-export default IndexPage;
+export default IndexPage

@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 
-import MetaHead from './MetaHead'
-import Header from './Header'
-import Footer from './Footer'
-import Background from '../components/BackgroundLottie'
+import { MetaHead, Header, Footer, BackgroundLottie } from '.'
 
 const Container = styled.div`
   color: var(--white);
@@ -14,7 +11,7 @@ const Container = styled.div`
   @media (min-width: 50rem) {
     font-size: var(--fontBodyLarge);
   }
-`;
+`
 
 const Main = styled.main`
   max-width: 22.4375rem;
@@ -25,13 +22,13 @@ const Main = styled.main`
   @media (min-width: 50rem) {
     max-width: 43rem;
   }
-`;
+`
 
 const Layout = ({ children }) => {
   return (
     <>
       <MetaHead />
-      <Background />
+      <BackgroundLottie />
       <Container>
         <Header />
         <Main>
@@ -40,7 +37,7 @@ const Layout = ({ children }) => {
         <Footer />
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
