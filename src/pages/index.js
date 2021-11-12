@@ -3,66 +3,18 @@ import styled from 'styled-components'
 
 import Logo from "../../public/logo.svg";
 
-import Layout from '../components/Layout'
 import Text from '../components/Text'
-import Background from '../components/BackgroundLottie'
-import Button from '../components/Button'
 import Animated from '../components/Animated'
 import CallToAction from '../components/CallToAction'
 import Quote from '../components/Quote'
 import Contact from "../components/Contact";
-import Footer from "../components/Footer";
-
-const Header = styled.header`
-  text-align: center;
-  padding: 2rem 3rem;
-  margin-bottom: 3.4375rem;
-  @media (max-width: 50rem) {
-    button {
-      display: none;
-    }
-  }
-  @media (min-width: 50rem) {
-    margin-bottom: 7.875rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-`;
-
-const StyledLogo = styled(Logo)`
-  color: var(--orange);
-  width: 10rem;
-  height: 100%;
-`;
+import Bar from '../components/Bar'
 
 const Tagline = styled(Text)`
   margin: 1rem 0 2.5rem;
 
   @media (min-width: 50rem) {
     margin: 1.5rem 0 3rem;
-  }
-`;
-
-const Main = styled.main`
-  max-width: 22.4375rem;
-  margin: 0 auto;
-  text-align: center;
-  padding: 0 1rem;
-
-  @media (min-width: 50rem) {
-    max-width: 43rem;
-  }
-`;
-
-const Bar = styled.div`
-  width: 1px;
-  background: var(--orange);
-  margin: 0 auto;
-  height: ${({ height }) => (height ? height : "300px;")};
-
-  @media (min-width: 50rem) {
-    height: ${({ height }) => (height ? height : "500px;")};
   }
 `;
 
@@ -81,76 +33,48 @@ const blurbs = [
 ];
 
 const IndexPage = () => {
-  const sectionOneRef = useRef(null)
-
-  const scrollTo = (ref) => {
-    const element = ref.current;
-
-    const elementRect = element.getBoundingClientRect();
-    const absoluteElementTop = elementRect.top + window.pageYOffset;
-    const elementHeightOffset = elementRect.height / 2;
-    const elementMiddle =
-      absoluteElementTop - window.innerHeight / 2 + elementHeightOffset;
-
-    window.scrollTo({ top: elementMiddle, behavior: "smooth" });
-  };
-
   return (
     <>
-      <Background />
+      <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
+        We invest in a new financial horizon
+      </Text>
 
-      <Layout>
-        <Header>
-          <StyledLogo />
-          <Button onClick={() => scrollTo(sectionOneRef)}>
-            Read our shareholder letter →
-          </Button>
-        </Header>
+      <Tagline fontWeight="var(--weightLight)">
+        Seetee is a company in the Aker family. We keep our liquid
+        investable assets in bitcoin and invest in exciting projects and
+        companies throughout the Bitcoin ecosystem.
+      </Tagline>
+      <Bar />
 
-        <Main>
-          <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
-            We invest in a new financial horizon
-          </Text>
-
-          <Tagline fontWeight="var(--weightLight)">
-            Seetee is a company in the Aker family. We keep our liquid
-            investable assets in bitcoin and invest in exciting projects and
-            companies throughout the Bitcoin ecosystem.
-          </Tagline>
-          <Bar />
-
-          {blurbs.map((blurb, index) => (
-            <Fragment key={index}>
-              <Animated>
-                <Box pt="1.5" pb="2.5">
-                  <Text>{blurb}</Text>
-                </Box>
-                <Bar />
-              </Animated>
-            </Fragment>
-          ))}
-
-          <Box ref={sectionOneRef}>
-            <CallToAction />
-          </Box>
-          <Bar />
-
+      {blurbs.map((blurb, index) => (
+        <Fragment key={index}>
           <Animated>
-            <Box>
-              <Quote img={'/kir.png'}/>
-            </Box>
-            <Bar height="150px" />
-          </Animated>
-
-          <Animated>
-            <Box>
-              <Contact />
+            <Box pt="1.5" pb="2.5">
+              <Text>{blurb}</Text>
             </Box>
             <Bar />
           </Animated>
-        </Main>
-        <Footer />
-      </Layout>
+        </Fragment>
+      ))}
+
+      <Box>
+        <CallToAction />
+      </Box>
+      <Bar />
+
+      <Animated>
+        <Box>
+          <Quote img={'/kir.png'}/>
+        </Box>
+        <Bar height="150px" />
+      </Animated>
+
+      <Animated>
+        <Box>
+          <Contact />
+        </Box>
+        <Bar />
+      </Animated>
     </>
   );
 };
