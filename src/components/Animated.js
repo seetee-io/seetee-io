@@ -4,7 +4,7 @@ import styled from "styled-components";
 import useInView from "../hooks/useInView";
 
 const Wrapper = styled.div`
-  transform: translateY(${({ animate }) => (animate ? `0px` : `70px`)});
+  transform: translateY(${({ animate, amount }) => (animate ? `0px` : amount ? amount : `70px`)});
   transition-duration: 800ms;
   transition-timing-function: ease-out;
   transition-delay: 100ms;
@@ -15,13 +15,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const Animated = ({ children }) => {
+const Animated = ({ amount, children }) => {
   const wrapperRef = useRef(null);
   const isShowing = useInView(wrapperRef);
 
   // This could take in props for changing transition/transform/opacity values
   return (
-    <Wrapper ref={wrapperRef} animate={isShowing}>
+    <Wrapper ref={wrapperRef} animate={isShowing} amount={amount}>
       {children}
     </Wrapper>
   );

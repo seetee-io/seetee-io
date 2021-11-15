@@ -20,7 +20,7 @@ const Main = styled.main`
   padding: 0 1rem;
 
   @media (min-width: 50rem) {
-    max-width: 43rem;
+    max-width: 70rem;
   }
 `
 

@@ -80,11 +80,10 @@ const TextItem = styled.a`
 
 const Header = () => {
   const getActiveItemFromPath = (path) => {
-    switch (path) {
-      case "/": return 0
-      case "/blog": return 1
-      case "/podcast": return 2
-      default: return null
+    switch (true) {
+      case /\/blog.*/.test(path): return 1
+      case /\/podcast.*/.test(path): return 2
+      default: return 0
     }
   }
 

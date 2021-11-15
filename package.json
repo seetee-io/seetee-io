@@ -11,6 +11,10 @@
     "export": "next build && next export"
   },
   "dependencies": {
+    "dateformat": "^5.0.2",
+    "fast-xml-parser": "^3.21.1",
+    "he": "^1.2.0",
+    "html-entities": "^2.3.2",
     "next": "^12.0.3",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",

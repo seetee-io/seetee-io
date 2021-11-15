@@ -3,6 +3,12 @@ import styled from 'styled-components'
 
 import { Text, Animated, CallToAction, Quote, Contact, Bar } from '../components'
 
+const Container = styled.div`
+  max-width: 43rem;
+  margin-left: auto;
+  margin-right: auto;
+`
+
 const Tagline = styled(Text)`
   margin: 1rem 0 2.5rem;
 
@@ -27,7 +33,7 @@ const blurbs = [
 
 const IndexPage = () => {
   return (
-    <>
+    <Container>
       <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
         We invest in a new financial horizon
       </Text>
@@ -68,7 +74,7 @@ const IndexPage = () => {
         </Box>
         <Bar />
       </Animated>
-    </>
+    </Container>
   )
 }
 

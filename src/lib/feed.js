@@ -1,0 +1,39 @@
+import parser from 'fast-xml-parser'
+import { decode, encode } from 'html-entities'
+import he from 'he'
+
+const xml2jsonOpts = {
+  ignoreAttributes: false,
+  attrNodeName: '@_',
+  attributeNamePrefix: ''
+}
+
+const slugify = (str) => str.toLowerCase()
+  .replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
+  .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
+  .replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '')
+
+const parseEpisode = (e) => {
+  const title = e.title.replace(/^#[0-9]* - /, '').replace(/^[\w\W]*: /, '')
+  const guestMatch = e.title.replace(/^#[0-9]* - /, '').match(/^[\w\W]*: /)
+  const guest = guestMatch.length == 1 ? guestMatch[0].replace(/: $/, '') : null
+  const date = e.pubDate
+  const image = e['itunes:image']['@_'].href
+  const season = e['itunes:season']
+  const episode = e['itunes:episode']
+  const duration = e['itunes:duration']
+  const slug = slugify(`s${season} e${episode} ${title}`)
+  return { title, guest, date, image, season, episode, duration, slug }
+}
+
+export async function fetchEpisodes() {
+  const res = await fetch('https://closing-the-loop.github.io/feed.xml')
+  const xml = await res.text()
+  const feed = parser.parse(xml, xml2jsonOpts)
+
+  const episodes = feed.rss.channel.item.map((item) => {
+    return parseEpisode(item)
+  })
+
+  return episodes
+}
