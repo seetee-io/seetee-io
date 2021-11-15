@@ -1,81 +1,126 @@
-import Link from 'next/link'
+import { useState } from 'react'
+
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { StyledLogo, Text, Button } from '.'
 
-const Container = styled.header`
-  text-align: center;
-  padding: 2rem 3rem;
+const StyledHeader = styled.header`
   margin-bottom: 3.4375rem;
+  padding: 2rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
+  @media (max-width: 20rem) {
+    flex-direction: column;
+  }
+
   @media (max-width: 50rem) {
-      padding: 2rem 1.5rem;
+    .download-button {
+      display: none;
+    }
   }
 
   @media (min-width: 50rem) {
+    padding: 2rem 3rem;
     margin-bottom: 7.875rem;
   }
 `
 
-const ActionItems = styled.span`
+const HomeItem = styled.a`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`
+
+const TrailingItems = styled.span`
+  margin-left: 1rem;
+
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-  gap: 1rem;
+  align-items: baseline;
 
   @media (min-width: 50rem) {
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+
+  @media (max-width: 20rem) {
+    margin-left: 0px;
+    margin-top: 1rem;
   }
 `
 
-const DownloadButton = styled.span`
-  @media (max-width: 50rem) {
-    display: none;
-  }
-}
+const NavItems = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 0.3rem;
 `
 
-const TabLink = styled.a`
+const TextItem = styled.a`
   color: var(--white);
+  font-size: 1.125rem;
   text-decoration: none;
+  cursor: pointer;
 
-  :hover {
-    text-decoration: underline;
-    cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 24px;
+  background: ${props => props.active ? "rgba(255, 255, 255, .1)" : "rgba(255, 255, 255, 0)"};
+
+  @media (min-width: 50rem) {
+    font-size: 1.25rem;
+    padding: 0.75rem 1.5rem;
+
+    :hover {
+      background: rgba(255, 255, 255, .05);
+    }
   }
 `
 
-const Header = ({ children }) => {
+const Header = () => {
+  const getActiveItemFromPath = (path) => {
+    switch (path) {
+      case "/": return 0
+      case "/blog": return 1
+      case "/podcast": return 2
+      default: return null
+    }
+  }
+
+  const router = useRouter()
+  const [activeItem, setActiveItem] = useState(() => {
+    return getActiveItemFromPath(router.pathname)
+  })
+
+  const handleItemClick = (e, path) => {
+    e.preventDefault()
+
+    setActiveItem(getActiveItemFromPath(path))
+
+    router.push(path)
+  }
+
   return (
-    <Container>
-      <Link href="/">
-        <a>
-          <StyledLogo/>
-        </a>
-      </Link>
-      <ActionItems>
-        <Link href="/blog">
-          <TabLink>
-            <Text fontSize={1.125} fontSizeLarge={1.25} font>Blog</Text>
-          </TabLink>
-        </Link>
-        <Link href="/podcast">
-          <TabLink>
-            <Text fontSize={1.125} fontSizeLarge={1.25} font>Podcast</Text>
-          </TabLink>
-        </Link>
-        <DownloadButton>
-          <Button as="a" href={"/shareholder_letter.pdf"} download>
+    <StyledHeader>
+      <HomeItem onClick={(e) => handleItemClick(e, "/")}>
+        <StyledLogo />
+      </HomeItem>
+      <TrailingItems>
+        <NavItems>
+          <TextItem onClick={(e) => handleItemClick(e, "/blog")} active={activeItem == 1}>
+            Blog
+          </TextItem>
+          <TextItem onClick={(e) => handleItemClick(e, "/podcast")} active={activeItem == 2}>
+            Podcast
+          </TextItem>
+          </NavItems>
+        <Button className="download-button" as="a" href="/shareholder_letter.pdf" download>
           Read our shareholder letter
-          </Button>
-        </DownloadButton>
-      </ActionItems>
-    </Container>
-  );
-};
+        </Button>
+      </TrailingItems>
+    </StyledHeader>
+  )
+}
 
 export default Header
-
