@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import dateformat from 'dateformat'
+import Link from 'next/link'
 
 import { Text } from './'
 
@@ -7,14 +8,6 @@ const Card = styled.div`
   background: rgba(255,255,255,.9);
   border-radius: 18px;
   border: 2px solid rgba(30,30,30,1);
-
-  @media (min-width: 50rem) {
-    max-width: 28rem;
-    min-width: 28rem;
-    :hover {
-      border: 2px solid var(--orange);
-    }
-  }
 `
 
 const Content = styled.div`
@@ -62,7 +55,26 @@ const Metadata = styled.span`
   }
 `
 
-const EpisodeCard = ({ episode }) => {
+const Footer = styled.span`
+  display: flex;
+
+  color: rgba(0,0,0,0.4);
+  font-size: 0.8rem;
+
+  a {
+    text-decoration: none;
+    color: rgba(0,0,0,0.4);
+    font-size: 0.8rem;
+  }
+
+  @media (min-width: 50rem) {
+    font-size: 1rem;
+  }
+`
+
+const EpisodePlayer = ({ episode }) => {
+  console.log(episode)
+
   const getEpisodeDuration = (seconds) => {
     const hours = Math.floor(seconds / 3600)
     const minutes = Math.floor((seconds - (hours * 3600)) / 60)
@@ -83,10 +95,15 @@ const EpisodeCard = ({ episode }) => {
             <Text>{dateformat(episode.date, 'dd. mmm, yyyy')}</Text>
           </Metadata>
           <Text fontSize={1} fontSizeLarge={1.15}>{episode.title} with {episode.guest}</Text>
+          <Footer>
+            <Link href={episode.url}>
+              <a>&#8595; Download</a>
+            </Link>
+          </Footer>
         </Details>
       </Content>
     </Card>
   )
 }
 
-export default EpisodeCard
+export default EpisodePlayer

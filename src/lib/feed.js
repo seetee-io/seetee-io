@@ -1,6 +1,5 @@
 import parser from 'fast-xml-parser'
 import { decode, encode } from 'html-entities'
-import he from 'he'
 
 const xml2jsonOpts = {
   ignoreAttributes: false,
@@ -13,6 +12,14 @@ const slugify = (str) => str.toLowerCase()
   .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
   .replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '')
 
+const replacements = (str) => {
+  return str && str.replace(/<\/?u>/g, '')
+}
+
+const stripHTML = (str) => {
+  return str && encode(decode(str.replace(/(<([^>]+)>)/ig, '').trim().replace(/\n\s*/g, '\n')), { level: 'xml' })
+}
+
 const parseEpisode = (e) => {
   const title = e.title.replace(/^#[0-9]* - /, '').replace(/^[\w\W]*: /, '')
   const guestMatch = e.title.replace(/^#[0-9]* - /, '').match(/^[\w\W]*: /)
@@ -23,7 +30,9 @@ const parseEpisode = (e) => {
   const episode = e['itunes:episode']
   const duration = e['itunes:duration']
   const slug = slugify(`s${season} e${episode} ${title}`)
-  return { title, guest, date, image, season, episode, duration, slug }
+  const url = e['enclosure']['@_'].url
+  const descriptionHTML = e['description']
+  return { title, guest, date, image, season, episode, duration, slug, url, descriptionHTML }
 }
 
 export async function fetchEpisodes() {
