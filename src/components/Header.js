@@ -42,7 +42,7 @@ const TrailingItems = styled.span`
   align-items: baseline;
 
   @media (min-width: 50rem) {
-    gap: 1rem;
+    gap: 1.8rem;
   }
 
   @media (max-width: 20rem) {

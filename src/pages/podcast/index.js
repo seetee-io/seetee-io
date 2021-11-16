@@ -69,6 +69,8 @@ export default function Podcasts({ episodes }) {
           </Fragment>
         ))}
       </EpisodesContainer>
+
+      <Bar />
     </>
   )
 }
