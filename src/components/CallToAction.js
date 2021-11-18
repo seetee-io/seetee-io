@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import File from "@assets/shareholder_letter.pdf";
-
-import Text from "@components/Text";
-import Button from "@components/Button";
+import Text from "./Text.js";
+import Button from "./Button.js";
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,7 +35,7 @@ const CallToAction = () => {
       <StyledText fontSize={2} fontSizeLarge={3}>
         Read our shareholder letter
       </StyledText>
-      <Button as="a" href={File} download>
+      <Button as="a" href={"/shareholder_letter.pdf"} download>
         Download
       </Button>
     </Wrapper>

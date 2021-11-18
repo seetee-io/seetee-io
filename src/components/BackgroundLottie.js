@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Lottie from "react-lottie";
-import animation from "@assets/lottie.json";
+import animation from "../../public/lottie.json";
 
 const Wrapper = styled.div`
   position: fixed;

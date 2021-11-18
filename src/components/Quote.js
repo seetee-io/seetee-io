@@ -1,8 +1,7 @@
 import React, { forwardRef } from "react";
-import Img from "gatsby-image";
 import styled from "styled-components";
 
-import Text from "@components/Text";
+import Text from "./Text.js";
 
 const Wrapper = styled.section`
   font-weight: var(--weightLight);
@@ -12,7 +11,7 @@ const ImageWrapper = styled.div`
   max-width: 11.75rem;
   margin: 0 auto;
 
-  > div {
+  > img {
     border-radius: 50%;
   }
 
@@ -39,7 +38,7 @@ const Quote = forwardRef(({ img }, ref) => {
   return (
     <Wrapper ref={ref}>
       <ImageWrapper>
-        {img && <Img fluid={img} alt="Kjell Inge Røkke" />}
+        {img && <img src={img} alt="Kjell Inge Røkke" width="100%" height="100%"/>}
       </ImageWrapper>
 
       <Blockquote>

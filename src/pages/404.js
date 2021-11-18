@@ -1,9 +1,8 @@
-import React from "react";
-import { Link } from "gatsby";
+import Link from "next/link";
 import styled from "styled-components";
 
-import Layout from "@components/Layout";
-import Text from "@components/Text";
+import Layout from "../components/Layout";
+import Text from "../components/Text";
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ const NotFoundPage = () => {
     <Layout>
       <Wrapper>
         <StyledText>...we can't find the page you're looking for</StyledText>
-        <Link to="/">Return home</Link>
+        <Link href="/">Return home</Link>
       </Wrapper>
     </Layout>
   );

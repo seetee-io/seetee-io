@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 
-import useInView from "@hooks/useInView";
+import useInView from "../hooks/useInView";
 
 const Wrapper = styled.div`
   transform: translateY(${({ animate }) => (animate ? `0px` : `70px`)});

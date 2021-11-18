@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import Text from "@components/Text";
-import Button from "@components/Button";
+import Text from "./Text";
+import Button from "./Button";
 
 const Wrapper = styled.div`
   display: flex;
