@@ -55,20 +55,10 @@ const EpisodesContainer = styled.div`
   }
 `
 
-export async function getStaticProps() {
-  const episodes = await fetchEpisodes()
-
-  return {
-    props: {
-      episodes
-    }
-  }
-}
-
 export default function Podcasts({ episodes }) {
   return (
     <>
-        <HeadlineContainer>
+      <HeadlineContainer>
         <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
           Closing the Loop
         </Text>
@@ -106,4 +96,14 @@ export default function Podcasts({ episodes }) {
       <Bar />
     </>
   )
+}
+
+export async function getStaticProps() {
+  const episodes = await fetchEpisodes()
+
+  return {
+    props: {
+      episodes
+    }
+  }
 }

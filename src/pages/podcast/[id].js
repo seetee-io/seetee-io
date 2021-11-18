@@ -35,16 +35,30 @@ const BadgesContainer = styled.div`
   }
 `
 
-const DescriptionContainer = styled(Text)`
+const DescriptionContainer = styled.div`
   margin-top: 2rem;
-  padding: 1.5rem 1.2rem 1.5rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+`
+
+const DescriptionHeadingContainer = styled.div`
+  padding: 1rem 1.2rem;
+  background: rgba(220, 220, 220, 1);;
+  border-radius: 18px 18px 0 0;
+  text-align: left;
+  font-size: 1.4rem;
+  color: rgba(0, 0, 0, .4);
+`
+
+const DescriptionTextContainer = styled.div`
+  padding: 1.5rem 1.2rem;
   margin-left: auto;
   margin-right: auto;
   font-size: 1rem;
   font-weight: var(--weightLight);
   text-align: justify;
 
-  border-radius: 18px;
+  border-radius: 0 0 18px 18px;
   color: var(--black);
   background: rgba(255,255,255,0.9);
 
@@ -66,7 +80,12 @@ export default function Podcast({ episode }) {
       </BadgesContainer>
       <Bar height="100px"/>
       <DescriptionContainer>
-        <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>
+        <DescriptionHeadingContainer>
+          Show Notes
+        </DescriptionHeadingContainer>
+        <DescriptionTextContainer>
+          <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>
+        </DescriptionTextContainer>
       </DescriptionContainer>
     </Container>
     <Bar />
