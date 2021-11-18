@@ -10,7 +10,7 @@ const EpisodePlayer = dynamic(
 )
 
 const Container = styled.div`
-  padding: 0rem 0rem 3rem 0rem;
+  padding: 0rem 0rem 2rem 0rem;
 
   margin-left: auto;
   margin-right: auto;
@@ -22,26 +22,31 @@ const Container = styled.div`
 `
 
 const EpisodeContainer = styled.div`
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `
 
 const BadgesContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  margin-bottom: 1rem;
+  justify-content: center;
+  margin: 0rem 0 2rem 0;
+
+  @media (min-width: 50rem) {
+    display: none;
+  }
 `
 
 const DescriptionContainer = styled(Text)`
-  padding: 1rem;
+  margin-top: 2rem;
+  padding: 1.5rem 1.2rem 1.5rem 1.2rem;
   margin-left: auto;
   margin-right: auto;
   font-size: 1rem;
   font-weight: var(--weightLight);
   text-align: justify;
 
-  color: var(--black);
   border-radius: 18px;
-  background: rgba(255,255,255,.9);
+  color: var(--black);
+  background: rgba(255,255,255,0.9);
 
   a {
     color: var(--black);
@@ -59,6 +64,7 @@ export default function Podcast({ episode }) {
       <BadgesContainer>
         <BreezBadge width={10} height="100%" episode={episode} />
       </BadgesContainer>
+      <Bar height="100px"/>
       <DescriptionContainer>
         <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>
       </DescriptionContainer>
