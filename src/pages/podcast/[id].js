@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import dynamic from 'next/dynamic'
 
 import { fetchEpisodes } from '../../lib/feed'
-import { Text, Bar, Footer } from '../../components'
+import { Text, Bar, Footer, BreezBadge } from '../../components'
 
 const EpisodePlayer = dynamic(
   () => import('../../components/EpisodePlayer'),
@@ -25,6 +25,12 @@ const EpisodeContainer = styled.div`
   margin-bottom: 3rem;
 `
 
+const BadgesContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+`
+
 const DescriptionContainer = styled(Text)`
   margin-left: auto;
   margin-right: auto;
@@ -45,6 +51,9 @@ export default function Podcast({ episode }) {
       <EpisodeContainer>
         <EpisodePlayer episode={episode} />
       </EpisodeContainer>
+      <BadgesContainer>
+        <BreezBadge width={10} episode={episode} />
+      </BadgesContainer>
       <DescriptionContainer>
         <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>
       </DescriptionContainer>

@@ -32,11 +32,16 @@ const parseEpisode = (e) => {
   const slug = slugify(`s${season} e${episode} ${title}`)
   const url = e['enclosure']['@_'].url
   const descriptionHTML = e['description']
-  return { title, guest, date, image, season, episode, duration, slug, url, descriptionHTML }
+  const guid = e['guid']['#text']
+  const value = {}
+  const parsedRecipients = [].concat(e['podcast:value']['podcast:valueRecipient'])
+  const recipients = parsedRecipients.map((r) => { return r['@_'] })
+
+  return { title, guest, date, image, season, episode, duration, slug, url, descriptionHTML, guid, recipients }
 }
 
 export async function fetchEpisodes() {
-  const res = await fetch('https://closing-the-loop.github.io/feed.xml')
+  const res = await fetch('https://closing-the-loop.github.io/feed.xml') // todo: config file
   const xml = await res.text()
   const feed = parser.parse(xml, xml2jsonOpts)
 

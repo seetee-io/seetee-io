@@ -4,9 +4,17 @@ import styled from 'styled-components'
 import dateformat from 'dateformat'
 import Amplitude from 'amplitudejs'
 
-import { Text } from '.'
+import { Text, Value4Value } from '.'
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  a {
+    text-decoration: none;
+    color: rgba(0,0,0,0.4);
+  }
 `
 
 const Card = styled.div`
@@ -32,6 +40,10 @@ const EpisodeDataContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 0.2rem;
+
+  @media (min-width: 50rem) {
+    max-width: 55%;
+  }
 `
 
 const MetadataContainer = styled.div`
@@ -56,8 +68,11 @@ const TitleContainer = styled.div`
 
   @media (min-width: 50rem) {
       font-size: 1.1rem;
-      max-width: 70%;
   }
+`
+
+const Value4ValueContainer = styled.div`
+  margin-top: 0.3rem;
 `
 
 const BottomContainer = styled.div`
@@ -153,11 +168,6 @@ const TotalDurationContainer = styled.div`
 const DownloadLink = styled.a`
   font-size: 0.7rem;
 
-  a {
-    text-decoration: none;
-    color: rgba(0,0,0,0.4);
-  }
-
   @media (min-width: 50rem) {
     font-size: 0.8rem;
   }
@@ -202,6 +212,9 @@ const EpisodePlayer = ({ episode }) => {
             <TitleContainer>
               <Text>{episode.guest}: {episode.title}</Text>
             </TitleContainer>
+            <Value4ValueContainer>
+              <Value4Value recipients={episode.recipients}/>
+            </Value4ValueContainer>
           </EpisodeDataContainer>
         </CardContentContainer>
       </Card>

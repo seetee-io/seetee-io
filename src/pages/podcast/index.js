@@ -1,9 +1,15 @@
 import { Fragment } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 
 import { Text, Bar, Animated, EpisodeCard, Footer } from '../../components'
 import { fetchEpisodes } from '../../lib/feed'
+
+const EpisodePlayer = dynamic(
+  () => import('../../components/EpisodePlayer'),
+  { ssr: false }
+)
 
 const HeadlineContainer = styled.div`
   max-width: 43rem;
@@ -16,6 +22,23 @@ const Tagline = styled(Text)`
 
   @media (min-width: 50rem) {
     margin: 1.5rem 0 3rem;
+  }
+`
+
+const EpisodeContainer = styled.div`
+  margin: 3rem 0 3rem 0;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 50rem) {
+    min-width: 50rem;
+    max-width: 50rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgba(0,0,0,0.4);
   }
 `
 
@@ -57,6 +80,16 @@ export default function Podcasts({ episodes }) {
       </HeadlineContainer>
 
       <Bar height="200px"/>
+
+      <EpisodeContainer>
+        <Link href={`/podcast/${episodes[0].slug}`}>
+          <a>
+            <EpisodePlayer episode={episodes[0]} />
+          </a>
+        </Link>
+      </EpisodeContainer>
+
+      <Bar height="100px"/>
 
       <EpisodesContainer>
         {episodes.map((episode, index) => (
