@@ -107,9 +107,6 @@ const Header = () => {
       </HomeItem>
       <TrailingItems>
         <NavItems>
-          <TextItem onClick={(e) => handleItemClick(e, "/blog")} active={activeItem == 1}>
-            Blog
-          </TextItem>
           <TextItem onClick={(e) => handleItemClick(e, "/podcast")} active={activeItem == 2}>
             Podcast
           </TextItem>
