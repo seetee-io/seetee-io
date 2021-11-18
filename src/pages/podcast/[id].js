@@ -32,14 +32,19 @@ const BadgesContainer = styled.div`
 `
 
 const DescriptionContainer = styled(Text)`
+  padding: 1rem;
   margin-left: auto;
   margin-right: auto;
   font-size: 1rem;
   font-weight: var(--weightLight);
   text-align: justify;
 
+  color: var(--black);
+  border-radius: 18px;
+  background: rgba(255,255,255,.9);
+
   a {
-    color: var(--white);
+    color: var(--black);
     text-decoration: underline;
   }
 `
@@ -52,7 +57,7 @@ export default function Podcast({ episode }) {
         <EpisodePlayer episode={episode} />
       </EpisodeContainer>
       <BadgesContainer>
-        <BreezBadge width={10} episode={episode} />
+        <BreezBadge width={10} height="100%" episode={episode} />
       </BadgesContainer>
       <DescriptionContainer>
         <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>

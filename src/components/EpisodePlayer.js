@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import dateformat from 'dateformat'
 import Amplitude from 'amplitudejs'
 
+import ShareIcon from '../../public/share.svg'
+
 import { Text, Value4Value } from '.'
 
 const Container = styled.div`
@@ -17,22 +19,46 @@ const Container = styled.div`
   }
 `
 
+const TopContainer = styled.div`
+  padding: 0.7rem 0.5rem 0 0.7rem;
+  background: rgba(255,255,255,.9);
+  height: 1rem;
+  border-radius: 18px 18px 0 0;
+  display: flex;
+  justify-content flex-end;
+  align-items: center;
+`
+
+const StyledShareIcon = styled(ShareIcon)`
+  width: 1.5rem;
+  color: rgba(0,0,0,0.4);
+`
+
 const Card = styled.div`
   background: rgba(255,255,255,.9);
-  border-radius: 18px 18px 0 0;
 `
 
 const CardContentContainer = styled.div`
-  padding: 0.8rem;
+  padding: 0 1.2rem 1.2rem 1.2rem;
   color: var(--black);
   display: flex;
   gap: 1rem;
   align-items: center;
+
+  @media (min-width: 50rem) {
+    padding: 0 1.2rem 1.5rem 1.2rem;
+    gap: 1.5rem;
+  }
 `
 
 const Image = styled.img`
-  width: 10rem;
+  width: 8rem;
   border-radius: 18px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+  @media (min-width: 50rem) {
+    width: 10rem;
+  }
 `
 
 const EpisodeDataContainer = styled.div`
@@ -103,10 +129,10 @@ const BottomContainer = styled.div`
 
   // foreground color
   progress[value]::-moz-progress-bar {
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.15);
   }
   progress[value]::-webkit-progress-value {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.15);
   }
 `
 
@@ -187,17 +213,28 @@ const EpisodePlayer = ({ episode }) => {
     })
 
     const element = document.getElementById('song-played-progress')
-    if (element == null) { return }
+
     element.addEventListener('click', (e) => {
       var offset = element.getBoundingClientRect()
       var x = e.pageX - offset.left
       var percentage = ( parseFloat( x ) / parseFloat( element.offsetWidth) ) * 100
       Amplitude.setSongPlayedPercentage(percentage)
     })
+
+    return () => {
+      Amplitude.stop()
+    }
   }, [])
 
   return (
     <Container>
+      <TopContainer>
+        <Link href="https://pod.link/1578199828">
+          <a>
+            <StyledShareIcon />
+          </a>
+        </Link>
+      </TopContainer>
       <Card>
         <CardContentContainer>
           <Image src={episode.image} />
