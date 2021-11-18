@@ -1,7 +1,13 @@
 import styled from 'styled-components'
+import dynamic from 'next/dynamic'
 
 import { fetchEpisodes } from '../../lib/feed'
-import { Text, Bar, EpisodePlayer, Footer } from '../../components'
+import { Text, Bar, Footer } from '../../components'
+
+const EpisodePlayer = dynamic(
+  () => import('../../components/EpisodePlayer'),
+  { ssr: false }
+)
 
 const Container = styled.div`
   padding: 0rem 0rem 3rem 0rem;
@@ -27,7 +33,7 @@ const DescriptionContainer = styled(Text)`
   text-align: justify;
 
   a {
-    color: var(--orange);
+    color: var(--white);
     text-decoration: underline;
   }
 `
