@@ -64,7 +64,37 @@ const Value4ValueContainer = styled.div`
   margin-top: 0.3rem;
 `
 
-const EpisodePlayer = ({ episode }) => {
+const renderCard = (episode, link) => {
+  if (link) {
+    return <Card style={{cursor: "pointer"}}>
+      <Link href={link}>
+        <CardContentContainer>
+          <EpisodeImage src={episode.image} width={8} widthLarge={10}/>
+          <EpisodeDataContainer>
+            <EpisodeTitle episode={episode} />
+            <Value4ValueContainer>
+              <Value4Value recipients={episode.recipients}/>
+            </Value4ValueContainer>
+          </EpisodeDataContainer>
+        </CardContentContainer>
+      </Link>
+    </Card>
+  }
+
+  return <Card>
+    <CardContentContainer>
+      <EpisodeImage src={episode.image} width={8} widthLarge={10}/>
+      <EpisodeDataContainer>
+        <EpisodeTitle episode={episode} />
+        <Value4ValueContainer>
+          <Value4Value recipients={episode.recipients}/>
+        </Value4ValueContainer>
+      </EpisodeDataContainer>
+    </CardContentContainer>
+  </Card>
+}
+
+const EpisodePlayer = ({ episode, link }) => {
   useEffect(() => {
     Amplitude.init({
       "songs": [ { "url": episode.url } ]
@@ -93,17 +123,7 @@ const EpisodePlayer = ({ episode }) => {
           </a>
         </Link>
       </TopContainer>
-      <Card>
-        <CardContentContainer>
-          <EpisodeImage src={episode.image} width={8} widthLarge={10}/>
-          <EpisodeDataContainer>
-            <EpisodeTitle episode={episode} />
-            <Value4ValueContainer>
-              <Value4Value recipients={episode.recipients}/>
-            </Value4ValueContainer>
-          </EpisodeDataContainer>
-        </CardContentContainer>
-      </Card>
+      {renderCard(episode, link)}
       <EpisodePlayerControls episode={episode} />
     </Container>
   )

@@ -72,11 +72,7 @@ export default function Podcasts({ episodes }) {
       <Bar height="200px"/>
 
       <EpisodeContainer>
-        <Link href={`/podcast/${episodes[0].slug}`}>
-          <a>
-            <EpisodePlayer episode={episodes[0]} />
-          </a>
-        </Link>
+        <EpisodePlayer episode={episodes[0]} link={`/podcast/${episodes[0].slug}`} />
       </EpisodeContainer>
 
       <Bar height="100px"/>
