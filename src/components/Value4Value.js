@@ -17,9 +17,9 @@ const Container = styled.div`
 
 const Recipient = styled.div`
   padding: 0.3rem;
-  border: 1px solid  rgba(0,0,0,0.4);
+  border: 1px solid  var(--gray);
   border-radius: 4px;
-  color: rgba(0,0,0,0.4);
+  color: var(--gray);
   cursor: pointer;
 `
 
@@ -29,7 +29,7 @@ const getTooltipText = (recipient, recipients) => {
 
   const totalShares = recipients.reduce((acc, r) => {
     const parsedSplit = parseInt(r.split)
-    if (isNaN(parsedSplit)) { return 0 }
+    if (isNaN(parsedSplit)) { return acc }
     return acc + parsedSplit
   }, 0)
 

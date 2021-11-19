@@ -21,18 +21,18 @@ const Container = styled.div`
 
   // background color
   progress.amplitude-song-played-progress {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, .1);
   }
   progress[value]::-webkit-progress-bar {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, .1);
   }
 
   // foreground color
   progress[value]::-moz-progress-bar {
-    background-color: rgba(0,0,0,0.15);
+    background-color: rgba(0, 0, 0, .15);
   }
   progress[value]::-webkit-progress-value {
-    background-color: rgba(0,0,0,0.15);
+    background-color: rgba(0, 0, 0, .15);
   }
 `
 
@@ -45,7 +45,7 @@ const PlayPause = styled.div`
 
 const ProgressBar = styled.progress`
   margin: 0 1rem 0 1rem;
-  background-color: rgba(255,111,59,0.8);
+  background-color: rgba(255, 111, 59, .8);
   -webkit-appearance: none;
   appearance: none;
   height: 0.4rem;
@@ -55,7 +55,7 @@ const ProgressBar = styled.progress`
 
 const DurationContainer = styled.div`
   display: flex;
-  color: rgba(0,0,0,0.4);
+  color: var(--gray);
   font-size: 0.6rem;
 
   @media (min-width: 50rem) {
@@ -66,7 +66,7 @@ const DurationContainer = styled.div`
 const CurrentDurationContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  color: rgba(0,0,0,0.4);
+  color: var(--gray);
   font-size: 0.6rem;
   flex-shrink: 0;
   width: 3rem;
@@ -80,7 +80,7 @@ const CurrentDurationContainer = styled.div`
 const TotalDurationContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  color: rgba(0,0,0,0.4);
+  color: var(--gray);
   font-size: 0.6rem;
   flex-shrink: 0;
   width: 3rem;
@@ -102,23 +102,23 @@ const DownloadLink = styled.a`
 const EpisodePlayerControls = ({ episode }) => {
   return (
     <Container>
-        <PlayPause className="amplitude-play-pause" />
-        <ProgressBar className="amplitude-song-played-progress" id="song-played-progress"/>
-        <DurationContainer>
-          <CurrentDurationContainer>
-            <span className="amplitude-current-hours"></span>:<span className="amplitude-current-minutes"></span>:<span className="amplitude-current-seconds"></span>
-          </CurrentDurationContainer>
-          &nbsp;/&nbsp;
-          <TotalDurationContainer>
-            <span className="amplitude-duration-hours"></span>:<span className="amplitude-duration-minutes"></span>:<span className="amplitude-duration-seconds"></span>
-          </TotalDurationContainer>
-        </DurationContainer>
-        <DownloadLink>
-          <Link href={episode.url}>
-            <a>&#8595;&nbsp;Download</a>
-          </Link>
-        </DownloadLink>
-      </Container>
+      <PlayPause className="amplitude-play-pause" />
+      <ProgressBar className="amplitude-song-played-progress" id="song-played-progress"/>
+      <DurationContainer>
+        <CurrentDurationContainer>
+          <span className="amplitude-current-hours"></span>:<span className="amplitude-current-minutes"></span>:<span className="amplitude-current-seconds"></span>
+        </CurrentDurationContainer>
+        &nbsp;/&nbsp;
+        <TotalDurationContainer>
+          <span className="amplitude-duration-hours"></span>:<span className="amplitude-duration-minutes"></span>:<span className="amplitude-duration-seconds"></span>
+        </TotalDurationContainer>
+      </DurationContainer>
+      <DownloadLink>
+        <Link href={episode.url}>
+          <a>&#8595;&nbsp;Download</a>
+        </Link>
+      </DownloadLink>
+    </Container>
   )
 }
 

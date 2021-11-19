@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const MetadataContainer = styled.div`
   display: flex;
-  color: rgba(0, 0, 0, .4);
+  color: var(--gray);
 
   font-size: 0.5rem;
   gap: 0.3rem;

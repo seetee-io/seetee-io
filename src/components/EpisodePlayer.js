@@ -13,13 +13,13 @@ const Container = styled.div`
 
   a {
     text-decoration: none;
-    color: rgba(0,0,0,0.4);
+    color: var(--gray);
   }
 `
 
 const TopContainer = styled.div`
   padding: 0.7rem 0.5rem 0 0.7rem;
-  background: rgba(255,255,255,.9);
+  background: rgba(255, 255, 255, .9);
   height: 1rem;
   border-radius: 18px 18px 0 0;
   display: flex;
@@ -29,11 +29,11 @@ const TopContainer = styled.div`
 
 const StyledShareIcon = styled(ShareIcon)`
   width: 1.5rem;
-  color: rgba(0,0,0,0.4);
+  color: var(--gray);
 `
 
 const Card = styled.div`
-  background: rgba(255,255,255,.9);
+  background: rgba(255, 255, 255, .9);
 `
 
 const CardContentContainer = styled.div`
@@ -64,33 +64,29 @@ const Value4ValueContainer = styled.div`
   margin-top: 0.3rem;
 `
 
+const renderCardContainer = (episode) => {
+  return <CardContentContainer>
+    <EpisodeImage src={episode.image} width={8} widthLarge={10}/>
+    <EpisodeDataContainer>
+      <EpisodeTitle episode={episode} />
+      <Value4ValueContainer>
+        <Value4Value recipients={episode.recipients}/>
+      </Value4ValueContainer>
+    </EpisodeDataContainer>
+  </CardContentContainer>
+}
+
 const renderCard = (episode, link) => {
   if (link) {
     return <Card style={{cursor: "pointer"}}>
       <Link href={link}>
-        <CardContentContainer>
-          <EpisodeImage src={episode.image} width={8} widthLarge={10}/>
-          <EpisodeDataContainer>
-            <EpisodeTitle episode={episode} />
-            <Value4ValueContainer>
-              <Value4Value recipients={episode.recipients}/>
-            </Value4ValueContainer>
-          </EpisodeDataContainer>
-        </CardContentContainer>
+        {renderCardContainer(episode)}
       </Link>
     </Card>
   }
 
   return <Card>
-    <CardContentContainer>
-      <EpisodeImage src={episode.image} width={8} widthLarge={10}/>
-      <EpisodeDataContainer>
-        <EpisodeTitle episode={episode} />
-        <Value4ValueContainer>
-          <Value4Value recipients={episode.recipients}/>
-        </Value4ValueContainer>
-      </EpisodeDataContainer>
-    </CardContentContainer>
+    {renderCardContainer(episode)}
   </Card>
 }
 
@@ -101,11 +97,10 @@ const EpisodePlayer = ({ episode, link }) => {
     })
 
     const element = document.getElementById('song-played-progress')
-
     element.addEventListener('click', (e) => {
       var offset = element.getBoundingClientRect()
       var x = e.pageX - offset.left
-      var percentage = ( parseFloat( x ) / parseFloat( element.offsetWidth) ) * 100
+      var percentage = (parseFloat(x) / parseFloat(element.offsetWidth)) * 100
       Amplitude.setSongPlayedPercentage(percentage)
     })
 

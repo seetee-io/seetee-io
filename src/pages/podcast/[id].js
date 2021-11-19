@@ -43,11 +43,11 @@ const DescriptionContainer = styled.div`
 
 const DescriptionHeadingContainer = styled.div`
   padding: 1rem 1.2rem;
-  background: rgba(220, 220, 220, 1);;
+  background: rgba(220, 220, 220, 1);
   border-radius: 18px 18px 0 0;
   text-align: left;
   font-size: 1.4rem;
-  color: rgba(0, 0, 0, .4);
+  color: var(--gray);
 `
 
 const DescriptionTextContainer = styled.div`
@@ -110,6 +110,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+  // Fetching all episodes again is fine for static site generation,
+  // but should be handled more efficiently if we ever switch to server side
+  // rendering.
   const episodes = await fetchEpisodes()
   const filtered = episodes.filter((episode) => {
     return episode.slug === params.id

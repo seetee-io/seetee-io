@@ -38,7 +38,7 @@ const EpisodeContainer = styled.div`
 
   a {
     text-decoration: none;
-    color: rgba(0,0,0,0.4);
+    color: var(--gray);
   }
 `
 
@@ -71,14 +71,17 @@ export default function Podcasts({ episodes }) {
 
       <Bar height="200px"/>
 
+      { episodes.length > 0 &&
       <EpisodeContainer>
         <EpisodePlayer episode={episodes[0]} link={`/podcast/${episodes[0].slug}`} />
       </EpisodeContainer>
+      }
 
       <Bar height="100px"/>
 
       <EpisodesContainer>
         {episodes.map((episode, index) => (
+          <Animated amount="10px">
           <Fragment key={index}>
             <Link href={`/podcast/${episode.slug}`}>
                 <a>
@@ -86,6 +89,7 @@ export default function Podcasts({ episodes }) {
                 </a>
             </Link>
           </Fragment>
+          </Animated>
         ))}
       </EpisodesContainer>
 

@@ -24,7 +24,7 @@ const Content = styled.div`
 
   color: var(--black);
 
-  padding: 0.75rem 0.75rem;
+  padding: 0.75rem;
 
   @media (min-width: 50rem) {
     gap: 1rem;

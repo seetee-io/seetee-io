@@ -1,5 +1,4 @@
 import parser from 'fast-xml-parser'
-import { decode, encode } from 'html-entities'
 import config from '../config'
 
 const xml2jsonOpts = {
@@ -12,14 +11,6 @@ const slugify = (str) => str.toLowerCase()
   .replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
   .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
   .replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '')
-
-const replacements = (str) => {
-  return str && str.replace(/<\/?u>/g, '')
-}
-
-const stripHTML = (str) => {
-  return str && encode(decode(str.replace(/(<([^>]+)>)/ig, '').trim().replace(/\n\s*/g, '\n')), { level: 'xml' })
-}
 
 const parseEpisode = (e) => {
   const title = e.title.replace(/^#[0-9]* - /, '').replace(/^[\w\W]*: /, '')
