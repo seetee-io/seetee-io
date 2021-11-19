@@ -1,5 +1,6 @@
 import parser from 'fast-xml-parser'
 import { decode, encode } from 'html-entities'
+import config from '../config'
 
 const xml2jsonOpts = {
   ignoreAttributes: false,
@@ -41,7 +42,7 @@ const parseEpisode = (e) => {
 }
 
 export async function fetchEpisodes() {
-  const res = await fetch('https://closing-the-loop.github.io/feed.xml') // todo: config file
+  const res = await fetch(config.podcastFeed)
   const xml = await res.text()
   const feed = parser.parse(xml, xml2jsonOpts)
 
