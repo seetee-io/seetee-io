@@ -6,8 +6,9 @@ import { Text } from '.'
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
 
   @media (min-width: 50rem) {
     flex-direction: row;

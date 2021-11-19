@@ -13,7 +13,7 @@ const MetadataContainer = styled.div`
   display: flex;
   color: var(--gray);
 
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   gap: 0.3rem;
 
   @media (min-width: 50rem) {
