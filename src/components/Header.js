@@ -111,7 +111,7 @@ const Header = () => {
             Podcast
           </TextItem>
           </NavItems>
-        <Button className="download-button" as="a" href="/shareholder_letter.pdf" download>
+        <Button className="download-button" as="a" href="/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf" download>
           Read our shareholder letter
         </Button>
       </TrailingItems>

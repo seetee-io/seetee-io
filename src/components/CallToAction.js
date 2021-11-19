@@ -35,7 +35,7 @@ const CallToAction = () => {
       <StyledText fontSize={2} fontSizeLarge={3}>
         Read our shareholder letter
       </StyledText>
-      <Button as="a" href={"/shareholder_letter.pdf"} download>
+      <Button as="a" href={"/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf"} download>
         Download
       </Button>
     </Wrapper>

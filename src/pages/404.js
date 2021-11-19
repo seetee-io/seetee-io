@@ -37,7 +37,7 @@ const NotFoundPage = () => {
           <Button>Return home</Button>
         </a>
       </Link>
-      <Button as="a" href={"/shareholder_letter.pdf"} download>
+      <Button as="a" href={"/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf"} download>
         Read our shareholder letter
       </Button>
       </Buttons>
