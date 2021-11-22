@@ -1,7 +1,9 @@
 import { Fragment } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
+import Head from 'next/head'
 import dynamic from 'next/dynamic'
+import config from '../../config'
 
 import { Text, Bar, Animated, EpisodeCard, Footer } from '../../components'
 import { fetchEpisodes } from '../../lib/feed'
@@ -58,6 +60,15 @@ const EpisodesContainer = styled.div`
 export default function Podcasts({ episodes }) {
   return (
     <>
+      <Head>
+        {config.podcastTitle && (
+          <title>{config.podcastTitle}</title>
+        )}
+
+        {config.podcastDescription && (
+          <meta name="description" content={config.podcastDescription} />
+        )}
+      </Head>
       <HeadlineContainer>
         <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
           Closing the Loop

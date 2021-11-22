@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { StyleSheetManager } from 'styled-components';
 import smoothscroll from 'smoothscroll-polyfill'
+import Head from 'next/head'
 
 import 'normalize.css/normalize.css'
 import '../styles/global.css'
@@ -11,6 +12,9 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => { smoothscroll.polyfill() })
 
   const Content = <>
+    <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
     <Layout>
       <Component {...pageProps} />
     </Layout>

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 
 import { fetchEpisodes } from '../../lib/feed'
 import { Text, Bar, Footer, BreezBadge } from '../../components'
@@ -71,6 +72,15 @@ const DescriptionTextContainer = styled.div`
 export default function Podcast({ episode }) {
   return (
     <>
+    <Head>
+      {episode.title && (
+        <title>{episode.title}</title>
+      )}
+
+      {episode.description && (
+        <meta name="description" content={episode.description} />
+      )}
+    </Head>
     <Container>
       <EpisodeContainer>
         <EpisodePlayer episode={episode} />
