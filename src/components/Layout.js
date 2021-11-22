@@ -31,9 +31,7 @@ const Layout = ({ children }) => {
       <BackgroundLottie />
       <Container>
         <Header />
-        <Main>
-          {children}
-        </Main>
+        <Main>{children}</Main>
         <Footer />
       </Container>
     </>

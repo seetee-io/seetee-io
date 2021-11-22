@@ -8,10 +8,9 @@ import config from '../../config'
 import { Text, Bar, Animated, EpisodeCard, Footer } from '../../components'
 import { fetchEpisodes } from '../../lib/feed'
 
-const EpisodePlayer = dynamic(
-  () => import('../../components/EpisodePlayer'),
-  { ssr: false }
-)
+const EpisodePlayer = dynamic(() => import('../../components/EpisodePlayer'), {
+  ssr: false,
+})
 
 const HeadlineContainer = styled.div`
   max-width: 43rem;
@@ -61,9 +60,7 @@ export default function Podcasts({ episodes }) {
   return (
     <>
       <Head>
-        {config.podcastTitle && (
-          <title>{config.podcastTitle}</title>
-        )}
+        {config.podcastTitle && <title>{config.podcastTitle}</title>}
 
         {config.podcastDescription && (
           <meta name="description" content={config.podcastDescription} />
@@ -75,29 +72,33 @@ export default function Podcasts({ episodes }) {
         </Text>
 
         <Tagline fontWeight="var(--weightLight)">
-          Closing the Loop is a podcast about Bitcoin.
-          In it, we will be speaking with the entrepreneurs, developers, and thinkers who are contributing to the evolution of this revolutionary technology.
+          Closing the Loop is a podcast about Bitcoin. In it, we will be
+          speaking with the entrepreneurs, developers, and thinkers who are
+          contributing to the evolution of this revolutionary technology.
         </Tagline>
       </HeadlineContainer>
 
-      <Bar height="200px"/>
+      <Bar height="200px" />
 
-      {episodes.length > 0 &&
-      <EpisodeContainer>
-        <EpisodePlayer episode={episodes[0]} link={`/podcast/${episodes[0].slug}`} />
-      </EpisodeContainer>
-      }
+      {episodes.length > 0 && (
+        <EpisodeContainer>
+          <EpisodePlayer
+            episode={episodes[0]}
+            link={`/podcast/${episodes[0].slug}`}
+          />
+        </EpisodeContainer>
+      )}
 
-      <Bar height="100px"/>
+      <Bar height="100px" />
 
       <EpisodesContainer>
         {episodes.map((episode, index) => (
           <Animated amount="10px" key={index}>
             <Fragment key={index}>
               <Link href={`/podcast/${episode.slug}`}>
-                  <a>
-                    <EpisodeCard episode={episode}/>
-                  </a>
+                <a>
+                  <EpisodeCard episode={episode} />
+                </a>
               </Link>
             </Fragment>
           </Animated>
@@ -114,7 +115,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      episodes
-    }
+      episodes,
+    },
   }
 }

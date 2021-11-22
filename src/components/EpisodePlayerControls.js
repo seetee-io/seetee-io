@@ -45,7 +45,7 @@ const PlayPause = styled.div`
 
 const ProgressBar = styled.progress`
   margin: 0 1rem 0 1rem;
-  background-color: rgba(255, 111, 59, .8);
+  background-color: rgba(255, 111, 59, 0.8);
   -webkit-appearance: none;
   appearance: none;
   height: 0.4rem;
@@ -103,14 +103,21 @@ const EpisodePlayerControls = ({ episode }) => {
   return (
     <Container>
       <PlayPause className="amplitude-play-pause" />
-      <ProgressBar className="amplitude-song-played-progress" id="song-played-progress"/>
+      <ProgressBar
+        className="amplitude-song-played-progress"
+        id="song-played-progress"
+      />
       <DurationContainer>
         <CurrentDurationContainer>
-          <span className="amplitude-current-hours"></span>:<span className="amplitude-current-minutes"></span>:<span className="amplitude-current-seconds"></span>
+          <span className="amplitude-current-hours"></span>:
+          <span className="amplitude-current-minutes"></span>:
+          <span className="amplitude-current-seconds"></span>
         </CurrentDurationContainer>
         &nbsp;/&nbsp;
         <TotalDurationContainer>
-          <span className="amplitude-duration-hours"></span>:<span className="amplitude-duration-minutes"></span>:<span className="amplitude-duration-seconds"></span>
+          <span className="amplitude-duration-hours"></span>:
+          <span className="amplitude-duration-minutes"></span>:
+          <span className="amplitude-duration-seconds"></span>
         </TotalDurationContainer>
       </DurationContainer>
       <DownloadLink>

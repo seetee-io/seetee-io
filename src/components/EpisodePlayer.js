@@ -4,7 +4,13 @@ import styled from 'styled-components'
 import dateformat from 'dateformat'
 import Amplitude from 'amplitudejs'
 import ShareIcon from '../../public/share.svg'
-import { Text, EpisodeImage, EpisodeTitle, Value4Value, EpisodePlayerControls } from '.'
+import {
+  Text,
+  EpisodeImage,
+  EpisodeTitle,
+  Value4Value,
+  EpisodePlayerControls,
+} from '.'
 
 const Container = styled.div`
   display: flex;
@@ -33,7 +39,7 @@ const StyledShareIcon = styled(ShareIcon)`
 `
 
 const Card = styled.div`
-  background: rgba(255, 255, 255, .9);
+  background: rgba(255, 255, 255, 0.9);
 `
 
 const CardContentContainer = styled.div`
@@ -65,35 +71,35 @@ const Value4ValueContainer = styled.div`
 `
 
 const renderCardContainer = (episode) => {
-  return <CardContentContainer>
-    <EpisodeImage src={episode.image} width={8} widthLarge={10}/>
-    <EpisodeDataContainer>
-      <EpisodeTitle episode={episode} />
-      <Value4ValueContainer>
-        <Value4Value recipients={episode.recipients}/>
-      </Value4ValueContainer>
-    </EpisodeDataContainer>
-  </CardContentContainer>
+  return (
+    <CardContentContainer>
+      <EpisodeImage src={episode.image} width={8} widthLarge={10} />
+      <EpisodeDataContainer>
+        <EpisodeTitle episode={episode} />
+        <Value4ValueContainer>
+          <Value4Value recipients={episode.recipients} />
+        </Value4ValueContainer>
+      </EpisodeDataContainer>
+    </CardContentContainer>
+  )
 }
 
 const renderCard = (episode, link) => {
   if (link) {
-    return <Card style={{cursor: "pointer"}}>
-      <Link href={link}>
-        {renderCardContainer(episode)}
-      </Link>
-    </Card>
+    return (
+      <Card style={{ cursor: 'pointer' }}>
+        <Link href={link}>{renderCardContainer(episode)}</Link>
+      </Card>
+    )
   }
 
-  return <Card>
-    {renderCardContainer(episode)}
-  </Card>
+  return <Card>{renderCardContainer(episode)}</Card>
 }
 
 const EpisodePlayer = ({ episode, link }) => {
   useEffect(() => {
     Amplitude.init({
-      "songs": [ { "url": episode.url } ]
+      songs: [{ url: episode.url }],
     })
 
     const element = document.getElementById('song-played-progress')

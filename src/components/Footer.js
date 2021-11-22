@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import Text from "./Text";
+import Text from './Text'
 
 const StyledFooter = styled.footer`
   font-size: 1rem;
@@ -20,7 +20,7 @@ const StyledFooter = styled.footer`
       text-decoration: underline;
     }
   }
-`;
+`
 
 const Footer = () => {
   return (
@@ -30,7 +30,7 @@ const Footer = () => {
         <a href="mailto:hello@seetee.io">hello@seetee.io</a>
       </Text>
     </StyledFooter>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

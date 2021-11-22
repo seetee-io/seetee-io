@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import styled from "styled-components";
+import React, { useRef, useEffect } from 'react'
+import styled from 'styled-components'
 
-import BackgroundSVG from "../../public/bg_header.svg";
+import BackgroundSVG from '../../public/bg_header.svg'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -13,33 +13,33 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   z-index: -1;
-`;
+`
 
 const InnerWrapper = styled.div`
   width: 100%;
-`;
+`
 
 const StyledSVG = styled(BackgroundSVG)`
   position: relative;
   fill: rgba(255, 255, 255, 0.05);
-`;
+`
 
 const Button = () => {
-  const svgRef = useRef();
+  const svgRef = useRef()
 
   useEffect(() => {
     const scrollRotate = () => {
-      const middleSvg = svgRef.current.childNodes[0].children[1];
-      middleSvg.style.transform = "rotate(" + window.pageYOffset / 32 + "deg)";
-      middleSvg.style.transformOrigin = "center";
-    };
+      const middleSvg = svgRef.current.childNodes[0].children[1]
+      middleSvg.style.transform = 'rotate(' + window.pageYOffset / 32 + 'deg)'
+      middleSvg.style.transformOrigin = 'center'
+    }
 
-    window.addEventListener("scroll", scrollRotate);
+    window.addEventListener('scroll', scrollRotate)
 
     return () => {
-      window.removeEventListener("scroll", scrollRotate);
-    };
-  }, []);
+      window.removeEventListener('scroll', scrollRotate)
+    }
+  }, [])
 
   return (
     <Wrapper>
@@ -47,7 +47,7 @@ const Button = () => {
         <StyledSVG />
       </InnerWrapper>
     </Wrapper>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

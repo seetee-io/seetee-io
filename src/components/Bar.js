@@ -4,10 +4,10 @@ const Bar = styled.div`
   width: 1px;
   background: var(--orange);
   margin: 0 auto;
-  height: ${({ height }) => (height ? height : "300px")};
+  height: ${({ height }) => (height ? height : '300px')};
 
   @media (min-width: 50rem) {
-    height: ${({ height }) => (height ? height : "500px")};
+    height: ${({ height }) => (height ? height : '500px')};
   }
 `
 

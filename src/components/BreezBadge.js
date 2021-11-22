@@ -5,7 +5,7 @@ import config from '../config'
 import Badge from '../../public/breez_white.svg'
 
 const StyledBreezBadge = styled(Badge)`
-  width: ${({width}) => `${width}rem` };
+  width: ${({ width }) => `${width}rem`};
 `
 
 const getBreezLink = (episode) => {

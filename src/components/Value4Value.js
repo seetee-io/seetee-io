@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const Recipient = styled.div`
   padding: 0.3rem;
-  border: 1px solid  var(--gray);
+  border: 1px solid var(--gray);
   border-radius: 4px;
   color: var(--gray);
   cursor: pointer;
@@ -26,11 +26,15 @@ const Recipient = styled.div`
 
 const getTooltipText = (recipient, recipients) => {
   const recipientSplit = parseInt(recipient.split)
-  if (isNaN(recipientSplit)) { return 0 }
+  if (isNaN(recipientSplit)) {
+    return 0
+  }
 
   const totalShares = recipients.reduce((acc, r) => {
     const parsedSplit = parseInt(r.split)
-    if (isNaN(parsedSplit)) { return acc }
+    if (isNaN(parsedSplit)) {
+      return acc
+    }
     return acc + parsedSplit
   }, 0)
 
@@ -42,7 +46,7 @@ const getTooltipText = (recipient, recipients) => {
 export default function Value4Value({ recipients }) {
   return (
     <Container>
-      <ReactTooltip effect="solid" place="bottom" multiline="true"/>
+      <ReactTooltip effect="solid" place="bottom" multiline="true" />
       {recipients.map((r, index) => (
         <Recipient key={index} data-tip={getTooltipText(r, recipients)}>
           {r.name}

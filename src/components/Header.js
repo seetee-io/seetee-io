@@ -66,14 +66,15 @@ const TextItem = styled.a`
 
   padding: 0.5rem 0.75rem;
   border-radius: 24px;
-  background: ${props => props.active ? "rgba(255, 255, 255, .1)" : "rgba(255, 255, 255, 0)"};
+  background: ${(props) =>
+    props.active ? 'rgba(255, 255, 255, .1)' : 'rgba(255, 255, 255, 0)'};
 
   @media (min-width: 50rem) {
     font-size: 1.25rem;
     padding: 0.75rem 1.5rem;
 
     :hover {
-      background: rgba(255, 255, 255, .05);
+      background: rgba(255, 255, 255, 0.05);
     }
   }
 `
@@ -81,9 +82,12 @@ const TextItem = styled.a`
 const Header = () => {
   const getActiveItemFromPath = (path) => {
     switch (true) {
-      case /\/blog.*/.test(path): return 1
-      case /\/podcast.*/.test(path): return 2
-      default: return 0
+      case /\/blog.*/.test(path):
+        return 1
+      case /\/podcast.*/.test(path):
+        return 2
+      default:
+        return 0
     }
   }
 
@@ -102,16 +106,24 @@ const Header = () => {
 
   return (
     <StyledHeader>
-      <HomeItem onClick={(e) => handleItemClick(e, "/")}>
+      <HomeItem onClick={(e) => handleItemClick(e, '/')}>
         <StyledLogo />
       </HomeItem>
       <TrailingItems>
         <NavItems>
-          <TextItem onClick={(e) => handleItemClick(e, "/podcast")} active={activeItem == 2}>
+          <TextItem
+            onClick={(e) => handleItemClick(e, '/podcast')}
+            active={activeItem == 2}
+          >
             Podcast
           </TextItem>
-          </NavItems>
-        <Button className="download-button" as="a" href="/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf" download>
+        </NavItems>
+        <Button
+          className="download-button"
+          as="a"
+          href="/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf"
+          download
+        >
           Read our shareholder letter
         </Button>
       </TrailingItems>

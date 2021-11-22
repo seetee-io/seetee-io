@@ -36,7 +36,7 @@ const TitleContainer = styled.div`
 
 const formatEpisodeDuration = (seconds) => {
   const hours = Math.floor(seconds / 3600)
-  const minutes = Math.floor((seconds - (hours * 3600)) / 60)
+  const minutes = Math.floor((seconds - hours * 3600) / 60)
 
   return `${hours}h ${minutes}m`
 }
@@ -45,14 +45,18 @@ const EpisodeTitle = ({ episode }) => {
   return (
     <Container>
       <MetadataContainer>
-        <Text>S{episode.season} E{episode.episode}</Text>
+        <Text>
+          S{episode.season} E{episode.episode}
+        </Text>
         <Text>&#8226;</Text>
         <Text>{formatEpisodeDuration(episode.duration)}</Text>
         <Text>&#8226;</Text>
         <Text>{dateformat(episode.date, 'dd. mmm, yyyy')}</Text>
       </MetadataContainer>
       <TitleContainer>
-        <Text>{episode.guest}: {episode.title}</Text>
+        <Text>
+          {episode.guest}: {episode.title}
+        </Text>
       </TitleContainer>
     </Container>
   )

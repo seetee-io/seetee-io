@@ -5,24 +5,42 @@ import parser from 'fast-xml-parser'
 import { decode, encode } from 'html-entities'
 import config from '../config'
 
-const replacements = str => {
+const replacements = (str) => {
   return str && str.replace(/<\/?u>/g, '')
 }
 
-const stripHTML = str => {
-  return str && encode(decode(str.replace(/(<([^>]+)>)/ig, '').trim().replace(/\n\s*/g, '\n')), { level: 'xml' })
+const stripHTML = (str) => {
+  return (
+    str &&
+    encode(
+      decode(
+        str
+          .replace(/(<([^>]+)>)/gi, '')
+          .trim()
+          .replace(/\n\s*/g, '\n')
+      ),
+      { level: 'xml' }
+    )
+  )
 }
 
 const xml2jsonOpts = {
   ignoreAttributes: false,
   attrNodeName: '@_',
-  attributeNamePrefix: ''
+  attributeNamePrefix: '',
 }
 
-const slugify = (str) => str.toLowerCase()
-  .replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')
-  .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
-  .replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '')
+const slugify = (str) =>
+  str
+    .toLowerCase()
+    .replace('ä', 'ae')
+    .replace('ö', 'oe')
+    .replace('ü', 'ue')
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '')
 
 const parseEpisode = (e) => {
   const title = e.title.replace(/^#[0-9]* - /, '').replace(/^[\w\W]*: /, '')
@@ -39,10 +57,28 @@ const parseEpisode = (e) => {
   const description = stripHTML(replacements(descriptionHTML))
   const guid = e['guid']['#text']
   const value = {}
-  const parsedRecipients = [].concat(e['podcast:value']['podcast:valueRecipient'])
-  const recipients = parsedRecipients.map((r) => { return r['@_'] })
+  const parsedRecipients = [].concat(
+    e['podcast:value']['podcast:valueRecipient']
+  )
+  const recipients = parsedRecipients.map((r) => {
+    return r['@_']
+  })
 
-  return { title, guest, date, image, season, episode, duration, slug, url, descriptionHTML, description, guid, recipients }
+  return {
+    title,
+    guest,
+    date,
+    image,
+    season,
+    episode,
+    duration,
+    slug,
+    url,
+    descriptionHTML,
+    description,
+    guid,
+    recipients,
+  }
 }
 
 export async function fetchEpisodes() {

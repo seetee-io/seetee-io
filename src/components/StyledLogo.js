@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import Logo from '../../public/logo.svg';
+import Logo from '../../public/logo.svg'
 
 const StyledLogo = styled(Logo)`
   color: var(--orange);

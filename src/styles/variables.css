@@ -1,7 +1,7 @@
 :root {
   --black: #111111;
   --white: #ffffff;
-  --gray: rgba(0, 0, 0, .4);
+  --gray: rgba(0, 0, 0, 0.4);
   --orange: #ff6f3b;
 
   --fontBody: 1.5rem; /*24px*/

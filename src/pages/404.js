@@ -30,16 +30,24 @@ const Buttons = styled.span`
 const NotFoundPage = () => {
   return (
     <Wrapper>
-      <StyledText>We couldn&apos;t find the page you&apos;re looking for.</StyledText>
+      <StyledText>
+        We couldn&apos;t find the page you&apos;re looking for.
+      </StyledText>
       <Buttons>
-      <Link href="/">
-        <a>
-          <Button>Return home</Button>
-        </a>
-      </Link>
-      <Button as="a" href={"/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf"} download>
-        Read our shareholder letter
-      </Button>
+        <Link href="/">
+          <a>
+            <Button>Return home</Button>
+          </a>
+        </Link>
+        <Button
+          as="a"
+          href={
+            '/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf'
+          }
+          download
+        >
+          Read our shareholder letter
+        </Button>
       </Buttons>
     </Wrapper>
   )

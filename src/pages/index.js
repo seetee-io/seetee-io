@@ -1,7 +1,14 @@
 import { Fragment } from 'react'
 import styled from 'styled-components'
 
-import { Text, Animated, CallToAction, Quote, Contact, Bar } from '../components'
+import {
+  Text,
+  Animated,
+  CallToAction,
+  Quote,
+  Contact,
+  Bar,
+} from '../components'
 
 const Container = styled.div`
   max-width: 43rem;
@@ -26,9 +33,9 @@ const Box = styled.div`
 `
 
 const blurbs = [
-  "Bitcoin is our treasury asset. Our first purchase was 1,170 BTC and our strategy is to hodl.",
-  "Bitcoin can be an economic battery. We will mine to hodl in geographies where we can contribute and be supportive.",
-  "Bitcoin is the heart of an ecosystem. We invest in people and companies who want to pull, push, and poke life as we know it.",
+  'Bitcoin is our treasury asset. Our first purchase was 1,170 BTC and our strategy is to hodl.',
+  'Bitcoin can be an economic battery. We will mine to hodl in geographies where we can contribute and be supportive.',
+  'Bitcoin is the heart of an ecosystem. We invest in people and companies who want to pull, push, and poke life as we know it.',
 ]
 
 const IndexPage = () => {
@@ -39,9 +46,9 @@ const IndexPage = () => {
       </Text>
 
       <Tagline fontWeight="var(--weightLight)">
-        Seetee is a company in the Aker family. We keep our liquid
-        investable assets in bitcoin and invest in exciting projects and
-        companies throughout the Bitcoin ecosystem.
+        Seetee is a company in the Aker family. We keep our liquid investable
+        assets in bitcoin and invest in exciting projects and companies
+        throughout the Bitcoin ecosystem.
       </Tagline>
       <Bar />
 
@@ -63,7 +70,7 @@ const IndexPage = () => {
 
       <Animated>
         <Box>
-          <Quote img={'/kir.png'}/>
+          <Quote img={'/kir.png'} />
         </Box>
         <Bar height="150px" />
       </Animated>

@@ -5,10 +5,9 @@ import Head from 'next/head'
 import { fetchEpisodes } from '../../lib/feed'
 import { Text, Bar, Footer, BreezBadge } from '../../components'
 
-const EpisodePlayer = dynamic(
-  () => import('../../components/EpisodePlayer'),
-  { ssr: false }
-)
+const EpisodePlayer = dynamic(() => import('../../components/EpisodePlayer'), {
+  ssr: false,
+})
 
 const Container = styled.div`
   padding: 0rem 0rem 2rem 0rem;
@@ -61,7 +60,7 @@ const DescriptionTextContainer = styled.div`
 
   border-radius: 0 0 18px 18px;
   color: var(--black);
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
 
   a {
     color: var(--black);
@@ -72,33 +71,31 @@ const DescriptionTextContainer = styled.div`
 export default function Podcast({ episode }) {
   return (
     <>
-    <Head>
-      {episode.title && (
-        <title>{episode.title}</title>
-      )}
+      <Head>
+        {episode.title && <title>{episode.title}</title>}
 
-      {episode.description && (
-        <meta name="description" content={episode.description} />
-      )}
-    </Head>
-    <Container>
-      <EpisodeContainer>
-        <EpisodePlayer episode={episode} />
-      </EpisodeContainer>
-      <BadgesContainer>
-        <BreezBadge width={10} height="100%" episode={episode} />
-      </BadgesContainer>
-      <Bar height="100px"/>
-      <DescriptionContainer>
-        <DescriptionHeadingContainer>
-          Show Notes
-        </DescriptionHeadingContainer>
-        <DescriptionTextContainer>
-          <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>
-        </DescriptionTextContainer>
-      </DescriptionContainer>
-    </Container>
-    <Bar />
+        {episode.description && (
+          <meta name="description" content={episode.description} />
+        )}
+      </Head>
+      <Container>
+        <EpisodeContainer>
+          <EpisodePlayer episode={episode} />
+        </EpisodeContainer>
+        <BadgesContainer>
+          <BreezBadge width={10} height="100%" episode={episode} />
+        </BadgesContainer>
+        <Bar height="100px" />
+        <DescriptionContainer>
+          <DescriptionHeadingContainer>Show Notes</DescriptionHeadingContainer>
+          <DescriptionTextContainer>
+            <div
+              dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}
+            ></div>
+          </DescriptionTextContainer>
+        </DescriptionContainer>
+      </Container>
+      <Bar />
     </>
   )
 }
@@ -108,14 +105,14 @@ export async function getStaticPaths() {
   const paths = episodes.map((episode) => {
     return {
       params: {
-        id: episode.slug
-      }
+        id: episode.slug,
+      },
     }
   })
 
   return {
     paths,
-    fallback : false
+    fallback: false,
   }
 }
 
@@ -130,13 +127,13 @@ export async function getStaticProps({ params }) {
 
   if (filtered.length != 1) {
     return {
-      notFound: true
+      notFound: true,
     }
   }
 
   return {
     props: {
-      episode: filtered[0]
-    }
+      episode: filtered[0],
+    },
   }
 }
