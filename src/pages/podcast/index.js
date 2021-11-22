@@ -71,7 +71,7 @@ export default function Podcasts({ episodes }) {
 
       <Bar height="200px"/>
 
-      { episodes.length > 0 &&
+      {episodes.length > 0 &&
       <EpisodeContainer>
         <EpisodePlayer episode={episodes[0]} link={`/podcast/${episodes[0].slug}`} />
       </EpisodeContainer>
@@ -81,14 +81,14 @@ export default function Podcasts({ episodes }) {
 
       <EpisodesContainer>
         {episodes.map((episode, index) => (
-          <Animated amount="10px">
-          <Fragment key={index}>
-            <Link href={`/podcast/${episode.slug}`}>
-                <a>
-                  <EpisodeCard episode={episode}/>
-                </a>
-            </Link>
-          </Fragment>
+          <Animated amount="10px" key={index}>
+            <Fragment key={index}>
+              <Link href={`/podcast/${episode.slug}`}>
+                  <a>
+                    <EpisodeCard episode={episode}/>
+                  </a>
+              </Link>
+            </Fragment>
           </Animated>
         ))}
       </EpisodesContainer>
