@@ -18,7 +18,7 @@ const StyledText = styled(Text)`
 
 const Buttons = styled.span`
   display: flex;
-  align-items: center
+  align-items: center;
   justify-content: center;
   gap: 2rem;
 
@@ -30,7 +30,7 @@ const Buttons = styled.span`
 const NotFoundPage = () => {
   return (
     <Wrapper>
-      <StyledText>We couldn't find the page you're looking for.</StyledText>
+      <StyledText>We couldn&apos;t find the page you&apos;re looking for.</StyledText>
       <Buttons>
       <Link href="/">
         <a>

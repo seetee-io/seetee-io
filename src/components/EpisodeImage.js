@@ -13,7 +13,7 @@ const Image = styled.img`
 
 const EpisodeImage = ({ src, width, widthLarge }) => {
   return (
-    <Image src={src} width={width} widthLarge={widthLarge}/>
+    <Image src={src} width={width} widthLarge={widthLarge} alt="Episode Cover" />
   )
 }
 

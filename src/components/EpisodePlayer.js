@@ -107,7 +107,7 @@ const EpisodePlayer = ({ episode, link }) => {
     return () => {
       Amplitude.stop()
     }
-  }, [])
+  }, [episode.url])
 
   return (
     <Container>
