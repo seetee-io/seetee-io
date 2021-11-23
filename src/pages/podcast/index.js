@@ -78,7 +78,7 @@ export default function Podcasts({ episodes }) {
         </Tagline>
       </HeadlineContainer>
 
-      <Bar height="200px" />
+      <Bar height="12.5rem" />
 
       {episodes.length > 0 && (
         <EpisodeContainer>
@@ -89,7 +89,7 @@ export default function Podcasts({ episodes }) {
         </EpisodeContainer>
       )}
 
-      <Bar height="100px" />
+      <Bar height="6.25rem" />
 
       <EpisodesContainer>
         {episodes.map((episode, index) => (

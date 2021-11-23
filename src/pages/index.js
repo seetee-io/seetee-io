@@ -72,7 +72,7 @@ const IndexPage = () => {
         <Box>
           <Quote img={'/kir.png'} />
         </Box>
-        <Bar height="150px" />
+        <Bar height="9.375rem" />
       </Animated>
 
       <Animated>
