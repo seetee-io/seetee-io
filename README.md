@@ -22,3 +22,8 @@ npm install && npm run build && npm run export
 ```
 
 This will output the static build in `out/`. This build can be hosted statically on a webserver without the need of a Node.js server.
+
+## Deployment
+
+We will use Netlify to automatically deploy whatever is merged to `master`.
+This is not yet imoplemented.
