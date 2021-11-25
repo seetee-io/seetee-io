@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Element = styled.button`
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -29,14 +29,14 @@ const Element = styled.button`
   @media (min-width: 50rem) {
     font-size: 1.25rem;
   }
-`;
+`
 
 const Button = ({ as, onClick, children, ...props }) => {
   return (
     <Element as={as} onClick={onClick} {...props}>
       {children}
     </Element>
-  );
-};
+  )
+}
 
-export default Button;
+export default Button

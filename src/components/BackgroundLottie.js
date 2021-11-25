@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import Lottie from "react-lottie";
-import animation from "../../public/lottie.json";
+import Lottie from 'react-lottie'
+import animation from '../../public/lottie.json'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   z-index: -1;
-`;
+`
 
 const Background = () => {
   const defaultOptions = {
@@ -22,14 +22,14 @@ const Background = () => {
     autoplay: true,
     animationData: animation,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
-  };
+  }
   return (
     <Wrapper>
       <Lottie options={defaultOptions} width="100%" height="auto" />
     </Wrapper>
-  );
-};
+  )
+}
 
-export default Background;
+export default Background

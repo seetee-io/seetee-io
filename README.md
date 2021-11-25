@@ -18,7 +18,7 @@ This will run the website on `localhost:3000`.
 To build a static HTML export of the website, run:
 
 ```
-npm install && npm run export
+npm install && npm run build && npm run export
 ```
 
 This will output the static build in `out/`. This build can be hosted statically on a webserver without the need of a Node.js server.

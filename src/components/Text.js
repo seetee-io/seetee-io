@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
 const Element = styled.p`
   ${({ color }) => color && `color: ${color};`}
   ${({ fontWeight }) => fontWeight && `font-weight: ${fontWeight};`}
 
-  ${({ fontSize }) => `font-size: ${fontSize ? `${fontSize}rem;` : "inherit;"}`}
+  ${({ fontSize }) => `font-size: ${fontSize ? `${fontSize}rem;` : 'inherit;'}`}
 
   @media (min-width: 50rem) {
     ${({ fontSizeLarge }) =>
-      `font-size: ${fontSizeLarge ? `${fontSizeLarge}rem;` : "inherit;"}`}
+      `font-size: ${fontSizeLarge ? `${fontSizeLarge}rem;` : 'inherit;'}`}
   }
-`;
+`
 
 const Text = ({
   as,
@@ -33,7 +33,7 @@ const Text = ({
     >
       {children}
     </Element>
-  );
-};
+  )
+}
 
-export default Text;
+export default Text

@@ -9,8 +9,8 @@ const MetaHead = () => {
       </Head>
       <SubHead {...config} />
     </>
-  );
-};
+  )
+}
 
 const SubHead = (props) => {
   return (
@@ -32,8 +32,7 @@ const SubHead = (props) => {
       )}
       {props.image && <meta name="twitter:image" content={props.image} />}
     </Head>
-  );
-};
+  )
+}
 
-
-export default MetaHead;
+export default MetaHead
