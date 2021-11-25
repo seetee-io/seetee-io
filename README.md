@@ -1,9 +1,10 @@
-# 🟠 Seetee Website
+# 🧡 Seetee's Website
 
-The website is a React site running on NextJS.
-This is overkill for now&mdash;we're only using it as a static site&mdash;but gives us some headroom for when we want to add more complex functionality such as LNURL-Auth.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/748069a7-de7b-43bb-8cc5-eeff09e01a42/deploy-status)](https://app.netlify.com/sites/seetee-website/deploys)
 
-## Running the Dev Environment
+The website is a [React](https://reactjs.org/) app build using [NextJS](https://nextjs.org/) and running on [Netlify](https://www.netlify.com/).
+
+## Development
 
 For a local development server, run:
 
@@ -13,7 +14,7 @@ npm install && npm run dev
 
 This will run the website on `localhost:3000`.
 
-## Export the Static Site for Production
+## Production Export
 
 To build a static HTML export of the website, run:
 
@@ -21,4 +22,9 @@ To build a static HTML export of the website, run:
 npm install && npm run build && npm run export
 ```
 
-This will output the static build in `out/`. This build can be hosted statically on a webserver without the need of a Node.js server.
+This will output the static build in `out/`.
+That build can then be hosted statically on a webserver without the need for a Node.js server.
+
+## Deployment
+
+Every merge to `master` will be deployed automatically on Netlify.
