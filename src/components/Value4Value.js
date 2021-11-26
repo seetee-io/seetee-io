@@ -7,7 +7,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 0.5rem;
   font-size: 0.7rem;
 
   @media (min-width: 50rem) {
@@ -22,6 +21,12 @@ const Recipient = styled.div`
   border-radius: 4px;
   color: var(--gray);
   cursor: pointer;
+
+  margin: 0 0 0.5rem 0;
+
+  @media (min-width: 50rem) {
+    margin: 0 0.5rem 0 0;
+  }
 `
 
 const getTooltipText = (recipient, recipients) => {

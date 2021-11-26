@@ -15,7 +15,6 @@ import {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0;
 
   a {
     text-decoration: none;
@@ -46,28 +45,28 @@ const CardContentContainer = styled.div`
   padding: 0 1.2rem 1.2rem 1.2rem;
   color: var(--black);
   display: flex;
-  gap: 1rem;
   align-items: center;
 
   @media (min-width: 50rem) {
     padding: 0 1.2rem 1.5rem 1.2rem;
-    gap: 1.5rem;
   }
 `
 
 const EpisodeDataContainer = styled.div`
+  margin-left: 1rem;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.2rem;
 
   @media (min-width: 50rem) {
+    margin-left: 1.5rem;
     max-width: 55%;
   }
 `
 
 const Value4ValueContainer = styled.div`
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
 `
 
 const renderCardContainer = (episode) => {
