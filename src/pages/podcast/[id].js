@@ -51,11 +51,10 @@ const DescriptionHeadingContainer = styled.div`
 `
 
 const DescriptionTextContainer = styled.div`
-  padding: 1.5rem 1.2rem;
+  padding: 1.5rem 1.5rem;
   margin-left: auto;
   margin-right: auto;
   font-size: 1rem;
-  font-weight: var(--weightLight);
   text-align: justify;
 
   border-radius: 0 0 18px 18px;
@@ -65,6 +64,16 @@ const DescriptionTextContainer = styled.div`
   a {
     color: var(--black);
     text-decoration: underline;
+  }
+
+  div {
+    p:not(:last-child) {
+      margin: 0 0 1rem 0;
+      line-height: 1.3;
+    }
+    ul:last-child {
+      margin-bottom: 0;
+    }
   }
 `
 
