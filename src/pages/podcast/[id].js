@@ -85,7 +85,7 @@ export default function Podcast({ episode }) {
         <BadgesContainer>
           <BreezBadge width={10} height="100%" episode={episode} />
         </BadgesContainer>
-        <Bar height="100px" />
+        <Bar height="6.25rem" />
         <DescriptionContainer>
           <DescriptionHeadingContainer>Show Notes</DescriptionHeadingContainer>
           <DescriptionTextContainer>

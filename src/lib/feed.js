@@ -3,6 +3,8 @@
 
 import parser from 'fast-xml-parser'
 import { decode, encode } from 'html-entities'
+import createDOMPurify from 'dompurify'
+import { JSDOM } from 'jsdom'
 import config from '../config'
 
 const replacements = (str) => {
@@ -42,6 +44,13 @@ const slugify = (str) =>
     .replace(/^-+/, '')
     .replace(/-+$/, '')
 
+const sanitize = (str) => {
+  const window = new JSDOM('').window
+  const DOMPurify = createDOMPurify(window)
+
+  return DOMPurify.sanitize(str)
+}
+
 const parseEpisode = (e) => {
   const title = e.title.replace(/^#[0-9]* - /, '').replace(/^[\w\W]*: /, '')
   const guestMatch = e.title.replace(/^#[0-9]* - /, '').match(/^[\w\W]*: /)
@@ -53,7 +62,7 @@ const parseEpisode = (e) => {
   const duration = e['itunes:duration']
   const slug = slugify(`s${season} e${episode} ${title}`)
   const url = e['enclosure']['@_'].url
-  const descriptionHTML = e['description']
+  const descriptionHTML = sanitize(e['description'])
   const description = stripHTML(replacements(descriptionHTML))
   const guid = e['guid']['#text']
   const value = {}
