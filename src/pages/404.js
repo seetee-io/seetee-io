@@ -20,11 +20,14 @@ const Buttons = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
 
   @media (max-width: 50rem) {
     flex-direction: column;
   }
+`
+
+const ButtonWrapper = styled.div`
+  margin: 2rem;
 `
 
 const NotFoundPage = () => {
@@ -36,7 +39,9 @@ const NotFoundPage = () => {
       <Buttons>
         <Link href="/">
           <a>
-            <Button>Return home</Button>
+            <ButtonWrapper>
+              <Button>Return home</Button>
+            </ButtonWrapper>
           </a>
         </Link>
         <Button

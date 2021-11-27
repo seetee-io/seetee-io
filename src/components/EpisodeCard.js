@@ -7,6 +7,9 @@ const Card = styled.div`
   border: 2px solid rgba(30, 30, 30, 1);
   border-radius: 18px;
 
+  max-width: 20rem;
+  min-width: 20rem;
+
   @media (min-width: 50rem) {
     max-width: 28rem;
     min-width: 28rem;
@@ -20,15 +23,19 @@ const Card = styled.div`
 const Content = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-
   color: var(--black);
-
   padding: 0.75rem;
 
   @media (min-width: 50rem) {
-    gap: 1rem;
     padding: 1rem 1rem;
+  }
+`
+
+const EpisodeDataContainer = styled.div`
+  margin-left: 0.75rem;
+
+  @media (min-width: 50rem) {
+    margin-left: 1rem;
   }
 `
 
@@ -37,7 +44,9 @@ const EpisodeCard = ({ episode }) => {
     <Card>
       <Content>
         <EpisodeImage src={episode.image} width={5} widthLarge={8} />
-        <EpisodeTitle episode={episode} />
+        <EpisodeDataContainer>
+          <EpisodeTitle episode={episode} />
+          </EpisodeDataContainer>
       </Content>
     </Card>
   )

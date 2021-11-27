@@ -26,7 +26,7 @@ const Tagline = styled(Text)`
   }
 `
 
-const EpisodeContainer = styled.div`
+const EpisodePlayerContainer = styled.div`
   margin: 3rem 0 3rem 0;
 
   margin-left: auto;
@@ -44,16 +44,19 @@ const EpisodeContainer = styled.div`
 `
 
 const EpisodesContainer = styled.div`
-  padding: 3rem 0rem;
+  padding: 2rem 0rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 2rem;
 
   a {
     text-decoration: none;
   }
+`
+
+const EpisodeContainer = styled.div`
+  margin: 1rem;
 `
 
 export default function Podcasts({ episodes }) {
@@ -81,29 +84,33 @@ export default function Podcasts({ episodes }) {
       <Bar height="12.5rem" />
 
       {episodes.length > 0 && (
-        <EpisodeContainer>
+        <EpisodePlayerContainer>
           <EpisodePlayer
             episode={episodes[0]}
             link={`/podcast/${episodes[0].slug}`}
           />
-        </EpisodeContainer>
+        </EpisodePlayerContainer>
       )}
 
       <Bar height="6.25rem" />
 
-      <EpisodesContainer>
-        {episodes.map((episode, index) => (
-          <Animated amount="10px" key={index}>
-            <Fragment key={index}>
-              <Link href={`/podcast/${episode.slug}`}>
-                <a>
-                  <EpisodeCard episode={episode} />
-                </a>
-              </Link>
-            </Fragment>
-          </Animated>
-        ))}
-      </EpisodesContainer>
+      {episodes.length > 1 && (
+        <EpisodesContainer>
+          {episodes.slice(1).map((episode, index) => (
+            <Animated amount="10px" key={index}>
+              <Fragment key={index}>
+                <Link href={`/podcast/${episode.slug}`}>
+                  <a>
+                    <EpisodeContainer>
+                      <EpisodeCard episode={episode} />
+                    </EpisodeContainer>
+                  </a>
+                </Link>
+              </Fragment>
+            </Animated>
+          ))}
+        </EpisodesContainer>
+      )}
 
       <Bar />
     </>

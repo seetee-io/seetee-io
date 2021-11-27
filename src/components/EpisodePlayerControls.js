@@ -51,6 +51,31 @@ const ProgressBar = styled.progress`
   height: 0.4rem;
   border: none;
   flex-grow: 1;
+
+  @media (max-width: 50rem) {
+    max-width: 30%; // fix for mobile firefox
+  }
+
+  @media (max-width: 23rem) {
+    max-width: 45%; // fix for mobile firefox
+  }
+
+  @media (max-width: 22rem) {
+    max-width: 40%; // fix for mobile firefox
+  }
+
+  @media (max-width: 21rem) {
+    max-width: 37%; // fix for mobile firefox
+  }
+
+  @media (max-width: 20rem) {
+    max-width: 33%; // fix for mobile firefox
+  }
+`
+
+const DurationDownloadContainer = styled.div`
+  display: flex;
+  align-items: baseline;
 `
 
 const DurationContainer = styled.div`
@@ -99,6 +124,12 @@ const DownloadLink = styled.a`
   }
 `
 
+const DownloadText = styled.span`
+  @media (max-width: 23rem) {
+    display: none;
+  }
+`
+
 const EpisodePlayerControls = ({ episode }) => {
   return (
     <Container>
@@ -107,24 +138,28 @@ const EpisodePlayerControls = ({ episode }) => {
         className="amplitude-song-played-progress"
         id="song-played-progress"
       />
-      <DurationContainer>
-        <CurrentDurationContainer>
-          <span className="amplitude-current-hours"></span>:
-          <span className="amplitude-current-minutes"></span>:
-          <span className="amplitude-current-seconds"></span>
-        </CurrentDurationContainer>
-        &nbsp;/&nbsp;
-        <TotalDurationContainer>
-          <span className="amplitude-duration-hours"></span>:
-          <span className="amplitude-duration-minutes"></span>:
-          <span className="amplitude-duration-seconds"></span>
-        </TotalDurationContainer>
-      </DurationContainer>
-      <DownloadLink>
-        <Link href={episode.url}>
-          <a>&#8595;&nbsp;Download</a>
-        </Link>
-      </DownloadLink>
+      <DurationDownloadContainer>
+        <DurationContainer>
+          <CurrentDurationContainer>
+            <span className="amplitude-current-hours"></span>:
+            <span className="amplitude-current-minutes"></span>:
+            <span className="amplitude-current-seconds"></span>
+          </CurrentDurationContainer>
+          &nbsp;/&nbsp;
+          <TotalDurationContainer>
+            <span className="amplitude-duration-hours"></span>:
+            <span className="amplitude-duration-minutes"></span>:
+            <span className="amplitude-duration-seconds"></span>
+          </TotalDurationContainer>
+        </DurationContainer>
+        <DownloadLink>
+          <Link href={episode.url}>
+            <a>
+            &#8595;<DownloadText>&nbsp;Download</DownloadText>
+            </a>
+          </Link>
+        </DownloadLink>
+      </DurationDownloadContainer>
     </Container>
   )
 }
