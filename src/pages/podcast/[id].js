@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
 import { fetchEpisodes } from '../../lib/feed'
-import { Text, Bar, Footer, BreezBadge } from '../../components'
+import { Text, Bar, Footer, BreezBadge, StyledLogo } from '../../components'
 
 const EpisodePlayer = dynamic(() => import('../../components/EpisodePlayer'), {
   ssr: false,
@@ -67,6 +67,7 @@ const DescriptionTextContainer = styled.div`
   }
 
   div {
+    text-align: block;
     p:not(:last-child) {
       margin: 0 0 1rem 0;
       line-height: 1.3;
@@ -74,6 +75,11 @@ const DescriptionTextContainer = styled.div`
     ul:last-child {
       margin-bottom: 0;
     }
+  }
+
+  hr {
+    border: 1px dashed var(--gray);
+    margin: 2.5rem 20%;
   }
 `
 
