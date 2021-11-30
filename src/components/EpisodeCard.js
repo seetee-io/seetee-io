@@ -18,6 +18,11 @@ const Card = styled.div`
       border: 2px solid var(--orange);
     }
   }
+
+  @media (max-width: 20rem) {
+    max-width: 18rem;
+    min-width: 18rem;
+  }
 `
 
 const Content = styled.div`
@@ -46,7 +51,7 @@ const EpisodeCard = ({ episode }) => {
         <EpisodeImage src={episode.image} width={5} widthLarge={8} />
         <EpisodeDataContainer>
           <EpisodeTitle episode={episode} />
-          </EpisodeDataContainer>
+        </EpisodeDataContainer>
       </Content>
     </Card>
   )
