@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
 import { fetchEpisodes } from '../../lib/feed'
-import { Text, Bar, Footer, BreezBadge, StyledLogo } from '../../components'
+import { Text, Bar, Footer, BreezBadge } from '../../components'
 
 const EpisodePlayer = dynamic(() => import('../../components/EpisodePlayer'), {
   ssr: false,
