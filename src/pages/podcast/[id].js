@@ -79,7 +79,7 @@ const DescriptionTextContainer = styled.div`
 
   hr {
     border: 1px dashed var(--gray);
-    margin: 2.5rem 20%;
+    margin: 2.5rem 10%;
   }
 `
 
