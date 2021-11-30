@@ -51,6 +51,10 @@ const sanitize = (str) => {
   return DOMPurify.sanitize(str)
 }
 
+const styledDescriptionHTML = (descr) => {
+  return descr.replace(/<p>---<\/p>/, '<hr>')
+}
+
 const parseEpisode = (e) => {
   const title = e.title.replace(/^#[0-9]* - /, '').replace(/^[\w\W]*: /, '')
   const guestMatch = e.title.replace(/^#[0-9]* - /, '').match(/^[\w\W]*: /)
@@ -62,7 +66,7 @@ const parseEpisode = (e) => {
   const duration = e['itunes:duration']
   const slug = slugify(`s${season} e${episode} ${title}`)
   const url = e['enclosure']['@_'].url
-  const descriptionHTML = sanitize(e['description'])
+  const descriptionHTML = styledDescriptionHTML(sanitize(e['description']))
   const description = stripHTML(replacements(descriptionHTML))
   const guid = e['guid']['#text']
   const value = {}
