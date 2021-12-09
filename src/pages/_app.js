@@ -3,6 +3,8 @@ import { StyleSheetManager } from 'styled-components'
 import smoothscroll from 'smoothscroll-polyfill'
 import Head from 'next/head'
 
+import { MetaHead } from '../components'
+
 import 'normalize.css/normalize.css'
 import '../styles/global.css'
 
@@ -18,6 +20,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
+      <MetaHead />
       <Layout>
         <Component {...pageProps} />
       </Layout>
