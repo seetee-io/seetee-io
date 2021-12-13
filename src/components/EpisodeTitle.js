@@ -52,9 +52,7 @@ const EpisodeTitle = ({ episode }) => {
   return (
     <Container>
       <MetadataContainer>
-        <Text>
-          S{episode.season} E{episode.episode}
-        </Text>
+        <Text>{episode.shortcode.split(/(?=[E])/).join(' ')}</Text>
         <MetadataSeparator>&#8226;</MetadataSeparator>
         <Text>{formatEpisodeDuration(episode.duration)}</Text>
         <MetadataSeparator>&#8226;</MetadataSeparator>

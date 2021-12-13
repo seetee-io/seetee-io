@@ -87,7 +87,7 @@ export default function Podcasts({ episodes }) {
         <EpisodePlayerContainer>
           <EpisodePlayer
             episode={episodes[0]}
-            link={`/podcast/${episodes[0].slug}`}
+            link={`/podcast/${episodes[0].shortcode}/${episodes[0].seoSlug}`}
           />
         </EpisodePlayerContainer>
       )}
@@ -99,7 +99,7 @@ export default function Podcasts({ episodes }) {
           {episodes.slice(1).map((episode, index) => (
             <Animated amount="10px" key={index}>
               <Fragment key={index}>
-                <Link href={`/podcast/${episode.slug}`}>
+                <Link href={`/podcast/${episode.shortcode}/${episode.seoSlug}`}>
                   <a>
                     <EpisodeContainer>
                       <EpisodeCard episode={episode} />
