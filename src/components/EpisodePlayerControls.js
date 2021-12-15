@@ -155,7 +155,7 @@ const EpisodePlayerControls = ({ episode }) => {
         <DownloadLink>
           <Link href={episode.url}>
             <a>
-            &#8595;<DownloadText>&nbsp;Download</DownloadText>
+              &#8595;<DownloadText>&nbsp;Download</DownloadText>
             </a>
           </Link>
         </DownloadLink>
