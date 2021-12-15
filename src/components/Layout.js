@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { MetaHead, Header, Footer, BackgroundLottie } from '.'
+import { Header, Footer, BackgroundLottie } from '.'
 
 const Container = styled.div`
   color: var(--white);
@@ -27,7 +27,6 @@ const Main = styled.main`
 const Layout = ({ children }) => {
   return (
     <>
-      <MetaHead />
       <BackgroundLottie />
       <Container>
         <Header />

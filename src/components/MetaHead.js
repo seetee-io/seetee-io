@@ -6,32 +6,21 @@ const MetaHead = () => {
     <>
       <Head>
         <link rel="shortcut icon" href={'favicon.ico'} />
+
+        <title>{config.title}</title>
+
+        <meta name="description" content={config.description} />
+
+        <meta name="og:type" property="og:type" content="website" />
+        <meta name="og:title" property="og:title" content={config.title} />
+        <meta name="og:description" property="og:description" content={config.description} />
+        <meta name="og:image" property="og:image" content={config.url + '/logo_social.png'} />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@seetee_io" />
+        <meta name="twitter:image:alt" content="Seetee" />
       </Head>
-      <SubHead {...config} />
     </>
-  )
-}
-
-const SubHead = (props) => {
-  return (
-    <Head>
-      <title>{props.title}</title>
-
-      {props.description && (
-        <meta name="description" content={props.description} />
-      )}
-      {props.url && <meta property="og:url" content={props.url} />}
-      <meta property="og:title" content={props.title} />
-      {props.description && (
-        <meta property="og:description" content={props.description} />
-      )}
-      {props.image && <meta property="og:image" content={props.image} />}
-      <meta name="twitter:title" content={props.title} />
-      {props.description && (
-        <meta name="twitter:description" content={props.description} />
-      )}
-      {props.image && <meta name="twitter:image" content={props.image} />}
-    </Head>
   )
 }
 

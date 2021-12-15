@@ -5,6 +5,8 @@ import Head from 'next/head'
 import { fetchEpisodes } from '../../lib/feed'
 import { Text, Bar, Footer, BreezBadge } from '../../components'
 
+import config from '../../config'
+
 const EpisodePlayer = dynamic(() => import('../../components/EpisodePlayer'), {
   ssr: false,
 })
@@ -87,10 +89,21 @@ export default function Podcast({ episode }) {
   return (
     <>
       <Head>
-        {episode.title && <title>{episode.title}</title>}
+        {episode.title && episode.description && (
+          <>
+            <title>{episode.title}</title>
 
-        {episode.description && (
-          <meta name="description" content={episode.description} />
+            <meta name="description" content={episode.description} />
+
+            <meta name="og:type" property="og:type" content="website" />
+            <meta name="og:title" property="og:title" content={episode.guest + ': ' + episode.title} />
+            <meta name="og:description" property="og:description" content={episode.description} />
+            <meta name="og:image" property="og:image" content={episode.image} />
+
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@seetee_io" />
+            <meta name="twitter:image:alt" content={episode.title} />
+          </>
         )}
       </Head>
       <Container>
@@ -104,9 +117,7 @@ export default function Podcast({ episode }) {
         <DescriptionContainer>
           <DescriptionHeadingContainer>Show Notes</DescriptionHeadingContainer>
           <DescriptionTextContainer>
-            <div
-              dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}
-            ></div>
+            <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>
           </DescriptionTextContainer>
         </DescriptionContainer>
       </Container>
