@@ -1,6 +1,6 @@
 # 🧡 Seetee's Website
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/748069a7-de7b-43bb-8cc5-eeff09e01a42/deploy-status)](https://app.netlify.com/sites/seetee-website/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/271eec30-10ca-4d61-9a30-79c4b555f4bc/deploy-status)](https://app.netlify.com/sites/seetee/deploys)
 
 The website is a [React](https://reactjs.org/) app build using [NextJS](https://nextjs.org/) and running on [Netlify](https://www.netlify.com/).
 
