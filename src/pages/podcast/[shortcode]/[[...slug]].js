@@ -1,15 +1,13 @@
 import styled from 'styled-components'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-import { fetchEpisodes } from '../../lib/feed'
-import { Text, Bar, Footer, BreezBadge } from '../../components'
+import { fetchEpisodes } from '../../../lib/feed'
+import { Text, Bar, Footer, BreezBadge } from '../../../components'
 
-import config from '../../config'
-
-const EpisodePlayer = dynamic(() => import('../../components/EpisodePlayer'), {
-  ssr: false,
-})
+const EpisodePlayer = dynamic(() => import('../../../components/EpisodePlayer'), { ssr: false })
 
 const Container = styled.div`
   padding: 0rem 0rem 2rem 0rem;
@@ -85,7 +83,15 @@ const DescriptionTextContainer = styled.div`
   }
 `
 
-export default function Podcast({ episode }) {
+export default function Episode({ episode, isShortLink }) {
+  const router = useRouter()
+
+  useEffect(() => {
+    if (isShortLink) {
+      router.replace(`/podcast/${episode.shortcode}/${episode.seoSlug}`)
+    }
+  })
+
   return (
     <>
       <Head>
@@ -128,13 +134,25 @@ export default function Podcast({ episode }) {
 
 export async function getStaticPaths() {
   const episodes = await fetchEpisodes()
-  const paths = episodes.map((episode) => {
+  const pathsShort = episodes.map((episode) => {
     return {
       params: {
-        id: episode.slug,
+        shortcode: episode.shortcode,
+        slug: [],
       },
     }
   })
+
+  const pathsLong = episodes.map((episode) => {
+    return {
+      params: {
+        shortcode: episode.shortcode,
+        slug: [episode.seoSlug],
+      },
+    }
+  })
+
+  const paths = pathsShort.concat(pathsLong)
 
   return {
     paths,
@@ -148,7 +166,7 @@ export async function getStaticProps({ params }) {
   // rendering.
   const episodes = await fetchEpisodes()
   const filtered = episodes.filter((episode) => {
-    return episode.slug === params.id
+    return episode.shortcode === params.shortcode
   })
 
   if (filtered.length != 1) {
@@ -160,6 +178,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       episode: filtered[0],
+      isShortLink: !params.slug || params.slug.length == 0,
     },
   }
 }
