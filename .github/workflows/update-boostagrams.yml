@@ -38,14 +38,14 @@ jobs:
           body: |
             Updates Boostagrams for Closing the Loop. This is an automated change.
 
-            ## New Messages
+            ## 📣 New Messages
 
             ${{ env.messages_summary }}
 
-            ## Ignoring Messages
+            ## ✋ Ignoring Messages
 
-            - Checkout the pull requeset branch
-            - Run the ignore script located at: src/boostagrams/ignore.sh:
+            - Checkout the pull request branch
+            - Run the ignore script located at: `src/boostagrams/ignore.sh`:
 
             ```
             ./ignore.sh custom_records/custom_record_NNNNN.json
