@@ -23,6 +23,8 @@ jobs:
           path: seetee-io
           add-paths: src/boostagrams/
           commit-message: Update boostagrams (automated change)
+          committer: GitHub <noreply@github.com>
+          author: Seetee Bot <bot@seetee.io>
           branch: update-boostagrams
           delete-branch: true
           title: '[🤖] Update Boostagrams (Automated)'
