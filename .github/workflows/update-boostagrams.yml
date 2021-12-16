@@ -27,7 +27,7 @@ jobs:
           branch: update-boostagrams
           branch-suffix: timestamp
           delete-branch: true
-          title: '[🤖] Update Boostagrams (Automated)'
+          title: 'Update Boostagrams'
           body: |
             Updates Boostagrams for Closing the Loop. This is an automated change.
 
@@ -40,6 +40,7 @@ jobs:
             ./ignore.sh custom_records/custom_record_NNNNN.json
             ```
           labels: |
-            ⚡ boostagram update
+            automated pr
+            boostagram update
           team-reviewers: |
             seetee-website
