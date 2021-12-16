@@ -23,10 +23,23 @@ jobs:
           path: seetee-io
           add-paths: src/boostagrams/
           commit-message: Update boostagrams (automated change)
-          committer: GitHub <noreply@github.com>
           author: Seetee Bot <bot@seetee.io>
           branch: update-boostagrams
           branch-suffix: timestamp
           delete-branch: true
           title: '[🤖] Update Boostagrams (Automated)'
-          body: Updates Boostagrams for Closing the Loop. This is an automated change.
+          body: |
+            Updates Boostagrams for Closing the Loop. This is an automated change.
+
+            ## Ignoring Boostagrams
+
+            - Checkout the pull requeset branch
+            - Run the ignore script located at: src/boostagrams/ignore.sh:
+
+            ```
+            ./ignore.sh custom_records/custom_record_NNNNN.json
+            ```
+          labels: |
+            ⚡ boostagram update
+          team-reviewers: |
+            seetee-website
