@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Remove and ignore specific custom records.
+# Use it on the PR branch that tries to add the undesired record.
 #
 # Usage: ./ignore.sh custom_records/custom_record_NNNNN.json
 #

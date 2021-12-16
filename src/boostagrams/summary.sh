@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Generates a summary of newly added boostagrams.
+# This is used by the GitHub workflow.
+
 set -e
 
 echo -e "| :page_facing_up: File | :speech_balloon: Message |"
