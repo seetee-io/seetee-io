@@ -1,8 +1,16 @@
 #!/bin/bash
 
-git rm -r --cached $1
+# Remove and ignore specific custom records.
+#
+# Usage: ./ignore.sh custom_records/custom_record_NNNNN.json
+
+FILE_DIR="$(cd -- "$(dirname "$1")" && pwd)"
+FILE="$(basename "$1")"
+FILE_FULL_PATH="$FILE_DIR/$FILE"
+
+git rm -r --cached FILE_FULL_PATH
+echo "custom_records/$FILE" >> .gitignore
 git add .
-echo $1 >> .gitignore
 git commit -m "Remove $1"
 git push
 
