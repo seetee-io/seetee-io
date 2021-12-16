@@ -17,6 +17,11 @@ jobs:
           path: boostagrams
       - name: Copy Boostagrams to Website
         run: cp -R boostagrams/custom_records/ seetee-io/src/boostagrams/
+      - name: Summarize New Messages
+        id: messages-summary
+        run: |
+          summary="$(cd seetee-io/src/boostagrams && ./summary.sh)"
+          echo "::set-output name=summary::$summary"
       - name: Create Pull Request to Website
         uses: peter-evans/create-pull-request@v3
         with:
@@ -31,7 +36,11 @@ jobs:
           body: |
             Updates Boostagrams for Closing the Loop. This is an automated change.
 
-            ## Ignoring Boostagrams
+            ## New Messages
+
+            ${{ steps.messages-summary.outputs.summary }}
+
+            ## Ignoring Messages
 
             - Checkout the pull requeset branch
             - Run the ignore script located at: src/boostagrams/ignore.sh:
