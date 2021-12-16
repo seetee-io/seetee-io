@@ -1,0 +1,29 @@
+name: Update Boostagrams
+on: workflow_dispatch
+jobs:
+  boostagrams:
+    name: Update Boostagrams
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Website Repository
+        uses: actions/checkout@v2
+        with:
+          path: seetee-io
+          ref: boostagrams
+      - name: Checkout Boostagrams Repository
+        uses: actions/checkout@v2
+        with:
+          repository: closing-the-loop/boostagrams
+          path: boostagrams
+      - name: Copy Boostagrams to Website
+        run: cp -R boostagrams/custom_records/ seetee-io/src/boostagrams/
+      - name: Create Pull Request to Website
+        uses: peter-evans/create-pull-request@v3
+        with:
+          path: seetee-io
+          add-paths: src/boostagrams/
+          commit-message: Update boostagrams (automated change)
+          branch: update-boostagrams
+          delete-branch: true
+          title: '[🤖] Update Boostagrams (Automated)'
+          body: Updates Boostagrams for Closing the Loop. This is an automated change.
