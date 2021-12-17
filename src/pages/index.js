@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import styled from 'styled-components'
 
-import { Text, Animated, CallToAction, Quote, Contact, Bar } from '../components'
+import { Text, Animated, CallToAction, Quote, Contact, Bar, Layout, BackgroundLottie } from '../components'
 
 const Container = styled.div`
   max-width: 43rem;
@@ -75,6 +75,15 @@ const IndexPage = () => {
           <Bar />
         </Animated>
       </Container>
+    </>
+  )
+}
+
+IndexPage.getLayout = function getLayout(page) {
+  return (
+    <>
+      <BackgroundLottie />
+      <Layout>{page}</Layout>
     </>
   )
 }
