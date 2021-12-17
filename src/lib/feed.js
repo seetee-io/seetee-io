@@ -115,7 +115,9 @@ export function boostagramsByEpisodes() {
     }
   )
 
-  readBoostagrams().forEach((boostagram) => (byEpisode[boostagram.episode] = boostagram))
+  readBoostagrams().forEach((boostagram) => {
+    byEpisode[boostagram.episode] = boostagram
+  })
 
   return byEpisode
 }

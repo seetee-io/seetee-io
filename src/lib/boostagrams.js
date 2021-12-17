@@ -1,4 +1,6 @@
 import fs from 'fs'
+import createDOMPurify from 'dompurify'
+import { JSDOM } from 'jsdom'
 
 const boostagrams_dir = 'src/boostagrams/custom_records'
 
@@ -36,16 +38,33 @@ function filterAndFix(boostagrams) {
       else return false
     })
     .map((boostagram) => {
+      const maxLength = 280
+      var trimmed = boostagram.message.trim()
+      trimmed =
+        trimmed.length > maxLength ? trimmed.substring(0, maxLength - 3) + '...' : trimmed.substring(0, maxLength)
+      boostagram.message = sanitize(trimmed)
+      return boostagram
+    })
+    .map((boostagram) => {
       if (!!boostagram.time && !boostagram.ts) {
+        boostagram.time = sanitize(boostagram.time.trim())
         // Add `ts` field if missing.
         const [hours, minutes, seconds] = boostagram.time.split(':')
         const secondsTotal = Number(hours) * 60 * 60 + Number(minutes) * 60 + Number(seconds)
         boostagram.ts = secondsTotal
       } else if (!!boostagram.ts && !boostagram.time) {
+        boostagram.ts = sanitize(boostagram.ts.trim())
         // Add `time` field if missing.
         boostagram.time = new Date(boostagram.ts * 1000).toISOString().substr(11, 8)
       }
 
       return boostagram
     })
+}
+
+const sanitize = (str) => {
+  const window = new JSDOM('').window
+  const DOMPurify = createDOMPurify(window)
+
+  return DOMPurify.sanitize(str)
 }

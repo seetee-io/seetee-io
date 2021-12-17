@@ -9,10 +9,9 @@ import { Text, Bar, Footer, BreezBadge } from '../../../components'
 
 const EpisodePlayer = dynamic(() => import('../../../components/EpisodePlayer'), { ssr: false })
 const FeaturedBoostagram = dynamic(() => import('../../../components/FeaturedBoostagram'), { ssr: false })
+const Boostagram = dynamic(() => import('../../../components/Boostagram'), { ssr: false })
 
 const Container = styled.div`
-  padding: 0rem 0rem 2rem 0rem;
-
   margin-left: auto;
   margin-right: auto;
 
@@ -45,18 +44,15 @@ const FeaturedBoostagramsContainer = styled.div`
 `
 
 const DescriptionContainer = styled.div`
-  margin-top: 2rem;
+  margin: 2rem 0 2rem 0;
   display: flex;
   flex-direction: column;
 `
 
-const DescriptionHeadingContainer = styled.div`
+const SectionHeading = styled.div`
   padding: 1rem 1.2rem;
-  background: rgba(220, 220, 220, 1);
-  border-radius: 18px 18px 0 0;
   text-align: left;
   font-size: 1.4rem;
-  color: var(--gray);
 `
 
 const DescriptionTextContainer = styled.div`
@@ -66,12 +62,13 @@ const DescriptionTextContainer = styled.div`
   font-size: 1rem;
   text-align: justify;
 
-  border-radius: 0 0 18px 18px;
-  color: var(--black);
-  background: rgba(255, 255, 255, 0.9);
+  color: rgba(220, 220, 220, 1);
+
+  border-radius: 18px;
+  background-color: rgba(25, 25, 25, 1);
 
   a {
-    color: var(--black);
+    color: var(--white);
     text-decoration: underline;
   }
 
@@ -87,9 +84,20 @@ const DescriptionTextContainer = styled.div`
   }
 
   hr {
-    border: 1px dashed var(--gray);
+    border: 1px dashed rgba(150, 150, 150, 1);
     margin: 2.5rem 10%;
   }
+`
+
+const AllBoostagramsContainer = styled.div`
+  margin: 2rem 0 2rem 0;
+`
+
+const AllBoostagrams = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
 `
 
 export default function Episode({ episode, isShortLink }) {
@@ -141,11 +149,22 @@ export default function Episode({ episode, isShortLink }) {
         </FeaturedBoostagramsContainer>
         <Bar height="6.25rem" />
         <DescriptionContainer>
-          <DescriptionHeadingContainer>Show Notes</DescriptionHeadingContainer>
+          <SectionHeading>Show Notes</SectionHeading>
           <DescriptionTextContainer>
             <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>
           </DescriptionTextContainer>
         </DescriptionContainer>
+        <Bar height="6.25rem" />
+        {episode.boostagrams.length > 0 && (
+          <AllBoostagramsContainer>
+            <SectionHeading>Community Boosts</SectionHeading>
+            <AllBoostagrams>
+              {episode.boostagrams.map((boostagram) => (
+                <Boostagram boostagram={boostagram} />
+              ))}
+            </AllBoostagrams>
+          </AllBoostagramsContainer>
+        )}
       </Container>
       <Bar />
     </>

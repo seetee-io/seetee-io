@@ -8,15 +8,12 @@ const Card = styled.div`
   gap: 0.5rem;
 
   background-color: rgba(25, 25, 25, 1);
+  border: 2px solid rgba(25, 25, 25, 1);
   border-radius: 16px;
   padding: 1rem;
 
-  max-width: 15rem;
-  max-height: 5rem;
-
   :hover {
-    transform: scale(1.05);
-    transition: transform 0.1s ease-out;
+    border: 2px solid rgba(35, 35, 35, 1);
     cursor: pointer;
   }
 `
@@ -27,10 +24,6 @@ const Timestamp = styled.div`
 `
 
 const Message = styled.div`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
   font-size: 1rem;
   text-align: left;
   min-width: 5rem;
@@ -42,7 +35,7 @@ const skipTo = (seconds) => {
   Amplitude.setSongPlayedPercentage(targetPerc)
 }
 
-const FeaturedBoostagram = ({ boostagram }) => {
+const Boostagram = ({ boostagram }) => {
   const boostEmojis = ['🚀', '⚡️', '💬', '📣', '🧡']
   const boostEmoji = boostEmojis[Math.floor(Math.random() * boostEmojis.length)]
   return (
@@ -53,4 +46,4 @@ const FeaturedBoostagram = ({ boostagram }) => {
   )
 }
 
-export default FeaturedBoostagram
+export default Boostagram
