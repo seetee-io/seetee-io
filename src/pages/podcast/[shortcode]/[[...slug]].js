@@ -8,6 +8,7 @@ import { fetchEpisodes } from '../../../lib/feed'
 import { Text, Bar, Footer, BreezBadge } from '../../../components'
 
 const EpisodePlayer = dynamic(() => import('../../../components/EpisodePlayer'), { ssr: false })
+const FeaturedBoostagram = dynamic(() => import('../../../components/FeaturedBoostagram'), { ssr: false })
 
 const Container = styled.div`
   padding: 0rem 0rem 2rem 0rem;
@@ -33,6 +34,14 @@ const BadgesContainer = styled.div`
   @media (min-width: 50rem) {
     display: none;
   }
+`
+
+const FeaturedBoostagramsContainer = styled.div`
+  margin: 2rem 0 2rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
 `
 
 const DescriptionContainer = styled.div`
@@ -92,6 +101,12 @@ export default function Episode({ episode, isShortLink }) {
     }
   })
 
+  const featuredBoostagrams = episode.boostagrams
+    .filter((boostagram) => {
+      return boostagram.message.length <= 50
+    })
+    .slice(0, 5)
+
   return (
     <>
       <Head>
@@ -119,6 +134,11 @@ export default function Episode({ episode, isShortLink }) {
         <BadgesContainer>
           <BreezBadge width={10} height="100%" episode={episode} />
         </BadgesContainer>
+        <FeaturedBoostagramsContainer>
+          {featuredBoostagrams.map((boostagram) => (
+            <FeaturedBoostagram boostagram={boostagram} />
+          ))}
+        </FeaturedBoostagramsContainer>
         <Bar height="6.25rem" />
         <DescriptionContainer>
           <DescriptionHeadingContainer>Show Notes</DescriptionHeadingContainer>

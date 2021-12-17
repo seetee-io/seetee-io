@@ -97,21 +97,10 @@ const parseEpisode = (e) => {
 }
 
 export function boostagramsByEpisodes() {
-  const boostagrams = readBoostagrams().filter((boostagram) => {
-    if (!!boostagram.podcast) return boostagram.podcast === 'Closing the Loop'
-    if (!!boostagram.feedID) return boostagram.feedID === '4058673'
-    if (!!boostagram.url) return boostagram.url === 'https://closing-the-loop.github.io/feed.xml'
-
-    if (!!boostagram.message) return boostagram.message.length > 0
-    else return false
-  })
-
-  // Group by episode.
   // Todo:
-  // The 'episode' key is not required.
-  // We should probably support other means of identifying episodes such as their item ids.
+  // The 'episode' key is not required in the boostagram spec.
+  // Eventually, we should probably support other means of identifying episodes such as their item ids.
   // For this we'll need to query the Podcastindex API.
-
   const byEpisode = new Proxy(
     {},
     {
@@ -126,7 +115,7 @@ export function boostagramsByEpisodes() {
     }
   )
 
-  boostagrams.forEach((boostagram) => (byEpisode[boostagram.episode] = boostagram))
+  readBoostagrams().forEach((boostagram) => (byEpisode[boostagram.episode] = boostagram))
 
   return byEpisode
 }
