@@ -30,8 +30,9 @@ const Message = styled.div`
 `
 
 const skipTo = (seconds) => {
+  const targetSec = Math.max(seconds - 5, 0)
   const duration = Amplitude.getSongDuration()
-  const targetPerc = parseFloat(seconds / duration) * 100
+  const targetPerc = parseFloat(targetSec / duration) * 100
   Amplitude.setSongPlayedPercentage(targetPerc)
 }
 
