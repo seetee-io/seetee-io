@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import { fetchEpisodes } from '../../../lib/feed'
@@ -28,7 +28,7 @@ const EpisodeContainer = styled.div`
 const BadgesContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 0rem 0 2rem 0;
+  margin: 2rem 0;
 
   @media (min-width: 50rem) {
     display: none;
@@ -36,11 +36,43 @@ const BadgesContainer = styled.div`
 `
 
 const FeaturedBoostagramsContainer = styled.div`
-  margin: 2rem 0 2rem 0;
+  margin: 3rem 0 2rem 0;
+`
+
+const FeaturedBoostagramsHeading = styled.div`
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--white);
+`
+
+const FeaturedBoostagrams = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
+
+  @media (min-width: 50rem) {
+    gap: 1.5rem;
+  }
+`
+
+const ScrollDownCard = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(25, 25, 25, 1);
+  border: 2px solid rgba(25, 25, 25, 1);
+  border-radius: 16px;
+  padding: 1rem;
+
+  font-size: 0.8rem;
+  width: 5rem;
+
+  cursor: pointer;
+
+  :hover {
+    border: 2px solid rgba(35, 35, 35, 1);
+  }
 `
 
 const DescriptionContainer = styled.div`
@@ -50,7 +82,7 @@ const DescriptionContainer = styled.div`
 `
 
 const SectionHeading = styled.div`
-  padding: 1rem 1.2rem;
+  padding: 0 0 1rem 1.2rem;
   text-align: left;
   font-size: 1.4rem;
 `
@@ -62,7 +94,7 @@ const DescriptionTextContainer = styled.div`
   font-size: 1rem;
   text-align: justify;
 
-  color: rgba(220, 220, 220, 1);
+  color: var(--white);
 
   border-radius: 18px;
   background-color: rgba(25, 25, 25, 1);
@@ -97,11 +129,21 @@ const AllBoostagrams = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 1.5rem;
+  gap: 1rem;
+
+  @media (min-width: 50rem) {
+    gap: 1.5rem;
+  }
 `
 
 export default function Episode({ episode, isShortLink }) {
   const router = useRouter()
+
+  const boostagramRef = useRef()
+
+  const scrollToBoostagrams = () => {
+    boostagramRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
 
   useEffect(() => {
     if (isShortLink) {
@@ -109,11 +151,12 @@ export default function Episode({ episode, isShortLink }) {
     }
   })
 
+  const numFeaturedBoostagrams = 5
   const featuredBoostagrams = episode.boostagrams
     .filter((boostagram) => {
       return boostagram.message.length <= 50
     })
-    .slice(0, 5)
+    .slice(0, numFeaturedBoostagrams)
 
   return (
     <>
@@ -142,11 +185,17 @@ export default function Episode({ episode, isShortLink }) {
         <BadgesContainer>
           <BreezBadge width={10} height="100%" episode={episode} />
         </BadgesContainer>
-        <FeaturedBoostagramsContainer>
-          {featuredBoostagrams.map((boostagram) => (
-            <FeaturedBoostagram boostagram={boostagram} />
-          ))}
-        </FeaturedBoostagramsContainer>
+        {featuredBoostagrams.length > 0 && (
+          <FeaturedBoostagramsContainer>
+            <FeaturedBoostagramsHeading>⚡️ Lightning Boosts</FeaturedBoostagramsHeading>
+            <FeaturedBoostagrams>
+              {featuredBoostagrams.map((boostagram) => (
+                <FeaturedBoostagram boostagram={boostagram} />
+              ))}
+              <ScrollDownCard onClick={scrollToBoostagrams}>Read More...</ScrollDownCard>
+            </FeaturedBoostagrams>
+          </FeaturedBoostagramsContainer>
+        )}
         <Bar height="6.25rem" />
         <DescriptionContainer>
           <SectionHeading>Show Notes</SectionHeading>
@@ -156,7 +205,7 @@ export default function Episode({ episode, isShortLink }) {
         </DescriptionContainer>
         <Bar height="6.25rem" />
         {episode.boostagrams.length > 0 && (
-          <AllBoostagramsContainer>
+          <AllBoostagramsContainer ref={boostagramRef}>
             <SectionHeading>Community Boosts</SectionHeading>
             <AllBoostagrams>
               {episode.boostagrams.map((boostagram) => (

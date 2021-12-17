@@ -12,11 +12,12 @@ const Card = styled.div`
   padding: 1rem;
 
   max-width: 15rem;
-  max-height: 5rem;
+
+  transition: all 0.3s ease-out;
 
   :hover {
     transform: scale(1.05);
-    transition: transform 0.1s ease-out;
+    transition: transform 0.2s ease-out;
     cursor: pointer;
   }
 `
@@ -43,7 +44,7 @@ const skipTo = (seconds) => {
 }
 
 const FeaturedBoostagram = ({ boostagram }) => {
-  const boostEmojis = ['🚀', '⚡️', '💬', '📣', '🧡']
+  const boostEmojis = ['🚀', '💬', '📣', '🧡']
   const boostEmoji = boostEmojis[Math.floor(Math.random() * boostEmojis.length)]
   return (
     <Card onClick={(e) => skipTo(boostagram.ts)}>
