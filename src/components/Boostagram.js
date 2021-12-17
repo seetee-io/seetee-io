@@ -7,13 +7,13 @@ const Card = styled.div`
   flex-direction: column;
   gap: 0.5rem;
 
-  background-color: rgba(25, 25, 25, 1);
-  border: 2px solid rgba(25, 25, 25, 1);
+  background-color: var(--darkgray);
+  border: 2px solid var(--darkgray);
   border-radius: 16px;
   padding: 1rem;
 
   :hover {
-    border: 2px solid rgba(35, 35, 35, 1);
+    border: 2px solid var(--lightgray);
     cursor: pointer;
   }
 `

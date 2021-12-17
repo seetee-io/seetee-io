@@ -60,8 +60,8 @@ const ScrollDownCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(25, 25, 25, 1);
-  border: 2px solid rgba(25, 25, 25, 1);
+  background-color: var(--darkgray);
+  border: 2px solid var(--darkgray);
   border-radius: 16px;
   padding: 1rem;
 
@@ -71,7 +71,7 @@ const ScrollDownCard = styled.div`
   cursor: pointer;
 
   :hover {
-    border: 2px solid rgba(35, 35, 35, 1);
+    border: 2px solid var(--lightgray);
   }
 `
 
@@ -97,7 +97,7 @@ const DescriptionTextContainer = styled.div`
   color: var(--white);
 
   border-radius: 18px;
-  background-color: rgba(25, 25, 25, 1);
+  background-color: var(--darkgray);
 
   a {
     color: var(--white);
@@ -206,7 +206,7 @@ export default function Episode({ episode, isShortLink }) {
         <Bar height="6.25rem" />
         {episode.boostagrams.length > 0 && (
           <AllBoostagramsContainer ref={boostagramRef}>
-            <SectionHeading>Community Boosts</SectionHeading>
+            <SectionHeading>Lightning Boosts</SectionHeading>
             <AllBoostagrams>
               {episode.boostagrams.map((boostagram, index) => (
                 <Boostagram key={index} boostagram={boostagram} />

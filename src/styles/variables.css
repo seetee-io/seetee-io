@@ -2,6 +2,8 @@
   --black: #111111;
   --white: #ffffff;
   --gray: rgba(0, 0, 0, 0.4);
+  --darkgray: rgba(25, 25, 25, 1);
+  --lightgray: rgba(35, 35, 35, 1);
   --orange: #ff6f3b;
 
   --fontBody: 1.5rem; /*24px*/
