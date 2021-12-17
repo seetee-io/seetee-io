@@ -5,7 +5,7 @@
 #
 # Usage: ./ignore.sh custom_records/custom_record_NNNNN.json
 #
-# Todo: We could probably easily automate this via a GitHub workflow that
+# Todo: We could probably easily automate this via a GitHub workflow
 # that is triggered by comments on the "Update Boostagrams" PR itself.
 
 FILE_DIR="$(cd -- "$(dirname "$1")" && pwd)"

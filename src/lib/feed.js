@@ -66,7 +66,8 @@ const parseEpisode = (e) => {
   const season = e['itunes:season']
   const episode = e['itunes:episode']
   const duration = e['itunes:duration']
-  const slug = slugify(`s${season} e${episode} ${title}`)
+  const shortcode = `S${season}E${episode}`
+  const seoSlug = slugify(`${guest} ${title}`)
   const url = e['enclosure']['@_'].url
   const descriptionHTML = styledDescriptionHTML(sanitize(e['description']))
   const description = stripHTML(replacements(descriptionHTML))
@@ -85,7 +86,8 @@ const parseEpisode = (e) => {
     season,
     episode,
     duration,
-    slug,
+    shortcode,
+    seoSlug,
     url,
     descriptionHTML,
     description,
