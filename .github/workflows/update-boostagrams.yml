@@ -9,7 +9,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: seetee-io
-          ref: boostagrams
       - name: Checkout Boostagrams Repository
         uses: actions/checkout@v2
         with:
