@@ -7,6 +7,8 @@ import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 import config from '../config'
 
+import { readBoostagrams } from './boostagrams'
+
 const replacements = (str) => {
   return str && str.replace(/<\/?u>/g, '')
 }
@@ -70,9 +72,7 @@ const parseEpisode = (e) => {
   const description = stripHTML(replacements(descriptionHTML))
   const guid = e['guid']['#text']
   const value = {}
-  const parsedRecipients = [].concat(
-    e['podcast:value']['podcast:valueRecipient']
-  )
+  const parsedRecipients = [].concat(e['podcast:value']['podcast:valueRecipient'])
   const recipients = parsedRecipients.map((r) => {
     return r['@_']
   })
@@ -94,13 +94,53 @@ const parseEpisode = (e) => {
   }
 }
 
+export function boostagramsByEpisodes() {
+  const boostagrams = readBoostagrams().filter((boostagram) => {
+    if (!!boostagram.podcast) return boostagram.podcast === 'Closing the Loop'
+    if (!!boostagram.feedID) return boostagram.feedID === '4058673'
+    if (!!boostagram.url) return boostagram.url === 'https://closing-the-loop.github.io/feed.xml'
+
+    if (!!boostagram.message) return boostagram.message.length > 0
+    else return false
+  })
+
+  // Group by episode.
+  // Todo:
+  // The 'episode' key is not required.
+  // We should probably support other means of identifying episodes such as their item ids.
+  // For this we'll need to query the Podcastindex API.
+
+  const byEpisode = new Proxy(
+    {},
+    {
+      set(target, key, value) {
+        if (!target[key]) {
+          target[key] = [value]
+        } else {
+          target[key].push(value)
+        }
+        return true
+      },
+    }
+  )
+
+  boostagrams.forEach((boostagram) => (byEpisode[boostagram.episode] = boostagram))
+
+  return byEpisode
+}
+
 export async function fetchEpisodes() {
   const res = await fetch(config.podcastFeed)
   const xml = await res.text()
   const feed = parser.parse(xml, xml2jsonOpts)
+  const allBoostagrams = boostagramsByEpisodes()
 
   const episodes = feed.rss.channel.item.map((item) => {
-    return parseEpisode(item)
+    const episode = parseEpisode(item)
+
+    episode.boostagrams = allBoostagrams[item.title] || []
+
+    return episode
   })
 
   return episodes
