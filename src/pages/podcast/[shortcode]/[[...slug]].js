@@ -189,8 +189,8 @@ export default function Episode({ episode, isShortLink }) {
           <FeaturedBoostagramsContainer>
             <FeaturedBoostagramsHeading>⚡️ Lightning Boosts</FeaturedBoostagramsHeading>
             <FeaturedBoostagrams>
-              {featuredBoostagrams.map((boostagram) => (
-                <FeaturedBoostagram boostagram={boostagram} />
+              {featuredBoostagrams.map((boostagram, index) => (
+                <FeaturedBoostagram key={index} boostagram={boostagram} />
               ))}
               <ScrollDownCard onClick={scrollToBoostagrams}>Read More...</ScrollDownCard>
             </FeaturedBoostagrams>
@@ -208,8 +208,8 @@ export default function Episode({ episode, isShortLink }) {
           <AllBoostagramsContainer ref={boostagramRef}>
             <SectionHeading>Community Boosts</SectionHeading>
             <AllBoostagrams>
-              {episode.boostagrams.map((boostagram) => (
-                <Boostagram boostagram={boostagram} />
+              {episode.boostagrams.map((boostagram, index) => (
+                <Boostagram key={index} boostagram={boostagram} />
               ))}
             </AllBoostagrams>
           </AllBoostagramsContainer>
