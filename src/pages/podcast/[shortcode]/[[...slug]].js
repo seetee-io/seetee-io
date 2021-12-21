@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import { fetchEpisodes } from '../../../lib/feed'
+import { trimMessage, messageLength } from '../../../lib/utils'
 import { Text, Bar, Footer, BreezBadge } from '../../../components'
 
 const EpisodePlayer = dynamic(() => import('../../../components/EpisodePlayer'), { ssr: false })
@@ -154,7 +155,7 @@ export default function Episode({ episode, isShortLink }) {
   const numFeaturedBoostagrams = 5
   const featuredBoostagrams = episode.boostagrams
     .filter((boostagram) => {
-      return boostagram.message.length <= 50
+      return messageLength(boostagram.message) <= 50
     })
     .slice(0, numFeaturedBoostagrams)
 

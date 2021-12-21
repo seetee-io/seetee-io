@@ -1,6 +1,7 @@
 import fs from 'fs'
 import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
+import { trimMessage } from './utils'
 
 const boostagrams_dir = 'src/boostagrams/custom_records'
 
@@ -39,10 +40,8 @@ function filterAndFix(boostagrams) {
     })
     .map((boostagram) => {
       const maxLength = 280
-      var trimmed = boostagram.message.trim()
-      trimmed =
-        trimmed.length > maxLength ? trimmed.substring(0, maxLength - 3) + '...' : trimmed.substring(0, maxLength)
-      boostagram.message = sanitize(trimmed)
+      boostagram.message = trimMessage(sanitize(boostagram.message), maxLength)
+
       return boostagram
     })
     .map((boostagram) => {
