@@ -1,0 +1,61 @@
+name: Ignore Boostagrams
+on:
+  pull_request_review:
+    types: [submitted]
+jobs:
+  ignore-boostagrams:
+    name: Ignore Boostagrams
+    if: |
+      contains(github.event.pull_request.labels.*.name, 'boostagram update') && (
+        github.event.review.author_association == 'COLLABORATOR' ||
+        github.event.review.author_association == 'MEMBER' ||
+        github.event.review.author_association == 'OWNER'
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for files to ignore
+        if: contains(github.event.review.body, '/ignore')
+        run: |
+          ignores="$(echo "${{ github.event.review.body }}" | grep -e '/ignore' | sed -e 's/[[:space:]]*\/ignore[[:space:]]*[\r\n]*//')"
+          echo "message_ignores<<EOF" >> $GITHUB_ENV
+          echo "$ignores" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+      - name: Clone repository
+        if: env.message_ignores
+        uses: actions/checkout@v2
+      - name: Checkout pull request branch
+        if: env.message_ignores
+        run: git fetch && git checkout ${{ github.event.pull_request.head.ref }}
+      - name: Ignore files
+        id: ignoring
+        if: env.message_ignores
+        run: |
+          ignored_files=""
+          cd src/boostagrams
+          while IFS= read -r line; do
+            line=$(echo $line | sed -e 's/[\r\n]//')
+            file="custom_records/$line.json"
+            if [ -f "$file" ]; then
+              git config --global user.name 'Seetee Bot'
+              git config --global user.email 'bot@seetee.io'
+              git rm -r --cached $file
+              echo "$file" >> .gitignore
+              git add .
+              git commit -m "Remove $line.json (automated change)"
+              git push
+              ignored_files="$ignored_files\n- \`$file\`"
+            fi
+          done <<< "${{ env.message_ignores }}"
+          echo "::set-output name=ignored_files::$ignored_files"
+      - name: Comment on pull request
+        if: env.message_ignores && steps.ignoring.outputs.ignored_files != ''
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '**🗑 Removed the following files:**\n\n${{ steps.ignoring.outputs.ignored_files }}'
+            })
