@@ -15,15 +15,15 @@ function MyApp({ Component, pageProps }) {
     smoothscroll.polyfill()
   })
 
+  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>)
+
   const Content = (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <MetaHead />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {getLayout(<Component {...pageProps} />)}
     </>
   )
 

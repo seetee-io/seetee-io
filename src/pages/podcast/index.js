@@ -5,7 +5,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import config from '../../config'
 
-import { Text, Bar, Animated, EpisodeCard, Footer } from '../../components'
+import { Text, Bar, Animated, EpisodeCard, Footer, Layout, BackgroundLottie } from '../../components'
 import { fetchEpisodes } from '../../lib/feed'
 
 const EpisodePlayer = dynamic(() => import('../../components/EpisodePlayer'), {
@@ -65,9 +65,7 @@ export default function Podcasts({ episodes }) {
       <Head>
         {config.podcastTitle && <title>{config.podcastTitle}</title>}
 
-        {config.podcastDescription && (
-          <meta name="description" content={config.podcastDescription} />
-        )}
+        {config.podcastDescription && <meta name="description" content={config.podcastDescription} />}
       </Head>
       <HeadlineContainer>
         <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
@@ -75,9 +73,8 @@ export default function Podcasts({ episodes }) {
         </Text>
 
         <Tagline fontWeight="var(--weightLight)">
-          Closing the Loop is a podcast about Bitcoin. In it, we will be
-          speaking with the entrepreneurs, developers, and thinkers who are
-          contributing to the evolution of this revolutionary technology.
+          Closing the Loop is a podcast about Bitcoin. In it, we will be speaking with the entrepreneurs, developers,
+          and thinkers who are contributing to the evolution of this revolutionary technology.
         </Tagline>
       </HeadlineContainer>
 
@@ -85,10 +82,7 @@ export default function Podcasts({ episodes }) {
 
       {episodes.length > 0 && (
         <EpisodePlayerContainer>
-          <EpisodePlayer
-            episode={episodes[0]}
-            link={`/podcast/${episodes[0].shortcode}/${episodes[0].seoSlug}`}
-          />
+          <EpisodePlayer episode={episodes[0]} link={`/podcast/${episodes[0].shortcode}/${episodes[0].seoSlug}`} />
         </EpisodePlayerContainer>
       )}
 
@@ -113,6 +107,15 @@ export default function Podcasts({ episodes }) {
       )}
 
       <Bar />
+    </>
+  )
+}
+
+Podcasts.getLayout = function getLayout(page) {
+  return (
+    <>
+      <BackgroundLottie />
+      <Layout>{page}</Layout>
     </>
   )
 }

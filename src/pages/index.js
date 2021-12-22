@@ -1,14 +1,7 @@
 import { Fragment } from 'react'
 import styled from 'styled-components'
 
-import {
-  Text,
-  Animated,
-  CallToAction,
-  Quote,
-  Contact,
-  Bar,
-} from '../components'
+import { Text, Animated, CallToAction, Quote, Contact, Bar, Layout, BackgroundLottie } from '../components'
 
 const Container = styled.div`
   max-width: 43rem;
@@ -40,48 +33,58 @@ const blurbs = [
 
 const IndexPage = () => {
   return (
-    <Container>
-      <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
-        We invest in a new financial horizon
-      </Text>
+    <>
+      <Container>
+        <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
+          We invest in a new financial horizon
+        </Text>
 
-      <Tagline fontWeight="var(--weightLight)">
-        Seetee is a company in the Aker family. We keep our liquid investable
-        assets in bitcoin and invest in exciting projects and companies
-        throughout the Bitcoin ecosystem.
-      </Tagline>
-      <Bar />
+        <Tagline fontWeight="var(--weightLight)">
+          Seetee is a company in the Aker family. We keep our liquid investable assets in bitcoin and invest in exciting
+          projects and companies throughout the Bitcoin ecosystem.
+        </Tagline>
+        <Bar />
 
-      {blurbs.map((blurb, index) => (
-        <Fragment key={index}>
-          <Animated>
-            <Box pt="1.5" pb="2.5">
-              <Text>{blurb}</Text>
-            </Box>
-            <Bar />
-          </Animated>
-        </Fragment>
-      ))}
+        {blurbs.map((blurb, index) => (
+          <Fragment key={index}>
+            <Animated>
+              <Box pt="1.5" pb="2.5">
+                <Text>{blurb}</Text>
+              </Box>
+              <Bar />
+            </Animated>
+          </Fragment>
+        ))}
 
-      <Box>
-        <CallToAction />
-      </Box>
-      <Bar />
-
-      <Animated>
         <Box>
-          <Quote img={'/kir.png'} />
-        </Box>
-        <Bar height="9.375rem" />
-      </Animated>
-
-      <Animated>
-        <Box>
-          <Contact />
+          <CallToAction />
         </Box>
         <Bar />
-      </Animated>
-    </Container>
+
+        <Animated>
+          <Box>
+            <Quote img={'/kir.png'} />
+          </Box>
+          <Bar height="9.375rem" />
+        </Animated>
+
+        <Animated>
+          <Box>
+            <Contact />
+          </Box>
+          <Bar />
+        </Animated>
+      </Container>
+    </>
+  )
+}
+
+IndexPage.getLayout = function getLayout(page) {
+  return (
+    <>
+      <BackgroundLottie />
+      <Layout>{page}</Layout>
+    </>
   )
 }
 

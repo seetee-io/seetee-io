@@ -1,17 +1,18 @@
 import styled from 'styled-components'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import { fetchEpisodes } from '../../../lib/feed'
+import { trimMessage, messageLength } from '../../../lib/utils'
 import { Text, Bar, Footer, BreezBadge } from '../../../components'
 
 const EpisodePlayer = dynamic(() => import('../../../components/EpisodePlayer'), { ssr: false })
+const FeaturedBoostagram = dynamic(() => import('../../../components/FeaturedBoostagram'), { ssr: false })
+const Boostagram = dynamic(() => import('../../../components/Boostagram'), { ssr: false })
 
 const Container = styled.div`
-  padding: 0rem 0rem 2rem 0rem;
-
   margin-left: auto;
   margin-right: auto;
 
@@ -28,26 +29,63 @@ const EpisodeContainer = styled.div`
 const BadgesContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 0rem 0 2rem 0;
+  margin: 2rem 0;
 
   @media (min-width: 50rem) {
     display: none;
   }
 `
 
+const FeaturedBoostagramsContainer = styled.div`
+  margin: 3rem 0 2rem 0;
+`
+
+const FeaturedBoostagramsHeading = styled.div`
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--white);
+`
+
+const FeaturedBoostagrams = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+
+  @media (min-width: 50rem) {
+    gap: 1.5rem;
+  }
+`
+
+const ScrollDownCard = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--darkgray);
+  border: 2px solid var(--darkgray);
+  border-radius: 16px;
+  padding: 1rem;
+
+  font-size: 0.8rem;
+  width: 5rem;
+
+  cursor: pointer;
+
+  :hover {
+    border: 2px solid var(--lightgray);
+  }
+`
+
 const DescriptionContainer = styled.div`
-  margin-top: 2rem;
+  margin: 2rem 0 2rem 0;
   display: flex;
   flex-direction: column;
 `
 
-const DescriptionHeadingContainer = styled.div`
-  padding: 1rem 1.2rem;
-  background: rgba(220, 220, 220, 1);
-  border-radius: 18px 18px 0 0;
+const SectionHeading = styled.div`
+  padding: 0 0 1rem 1.2rem;
   text-align: left;
   font-size: 1.4rem;
-  color: var(--gray);
 `
 
 const DescriptionTextContainer = styled.div`
@@ -57,12 +95,13 @@ const DescriptionTextContainer = styled.div`
   font-size: 1rem;
   text-align: justify;
 
-  border-radius: 0 0 18px 18px;
-  color: var(--black);
-  background: rgba(255, 255, 255, 0.9);
+  color: var(--white);
+
+  border-radius: 18px;
+  background-color: var(--darkgray);
 
   a {
-    color: var(--black);
+    color: var(--white);
     text-decoration: underline;
   }
 
@@ -78,19 +117,47 @@ const DescriptionTextContainer = styled.div`
   }
 
   hr {
-    border: 1px dashed var(--gray);
+    border: 1px dashed rgba(150, 150, 150, 1);
     margin: 2.5rem 10%;
+  }
+`
+
+const AllBoostagramsContainer = styled.div`
+  margin: 2rem 0 2rem 0;
+`
+
+const AllBoostagrams = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+
+  @media (min-width: 50rem) {
+    gap: 1.5rem;
   }
 `
 
 export default function Episode({ episode, isShortLink }) {
   const router = useRouter()
 
+  const boostagramRef = useRef()
+
+  const scrollToBoostagrams = () => {
+    boostagramRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
+
   useEffect(() => {
     if (isShortLink) {
       router.replace(`/podcast/${episode.shortcode}/${episode.seoSlug}`)
     }
   })
+
+  const numFeaturedBoostagrams = 5
+  const featuredBoostagrams = episode.boostagrams
+    .filter((boostagram) => {
+      return messageLength(boostagram.message) <= 50
+    })
+    .slice(0, numFeaturedBoostagrams)
 
   return (
     <>
@@ -119,13 +186,35 @@ export default function Episode({ episode, isShortLink }) {
         <BadgesContainer>
           <BreezBadge width={10} height="100%" episode={episode} />
         </BadgesContainer>
+        {featuredBoostagrams.length > 0 && (
+          <FeaturedBoostagramsContainer>
+            <FeaturedBoostagramsHeading>⚡️ Lightning Boosts</FeaturedBoostagramsHeading>
+            <FeaturedBoostagrams>
+              {featuredBoostagrams.map((boostagram, index) => (
+                <FeaturedBoostagram key={index} boostagram={boostagram} />
+              ))}
+              <ScrollDownCard onClick={scrollToBoostagrams}>Read More...</ScrollDownCard>
+            </FeaturedBoostagrams>
+          </FeaturedBoostagramsContainer>
+        )}
         <Bar height="6.25rem" />
         <DescriptionContainer>
-          <DescriptionHeadingContainer>Show Notes</DescriptionHeadingContainer>
+          <SectionHeading>Show Notes</SectionHeading>
           <DescriptionTextContainer>
             <div dangerouslySetInnerHTML={{ __html: episode.descriptionHTML }}></div>
           </DescriptionTextContainer>
         </DescriptionContainer>
+        <Bar height="6.25rem" />
+        {episode.boostagrams.length > 0 && (
+          <AllBoostagramsContainer ref={boostagramRef}>
+            <SectionHeading>Lightning Boosts</SectionHeading>
+            <AllBoostagrams>
+              {episode.boostagrams.map((boostagram, index) => (
+                <Boostagram key={index} boostagram={boostagram} />
+              ))}
+            </AllBoostagrams>
+          </AllBoostagramsContainer>
+        )}
       </Container>
       <Bar />
     </>
