@@ -1,10 +1,10 @@
-name: Test Ignore Boostagram
+name: Test Ignore Boostagrams
 on:
   pull_request_review:
     types: [submitted]
 jobs:
   ignore-boostagrams:
-    name: Ignore Boostagram
+    name: Ignore Boostagrams
     if: |
       contains(github.event.pull_request.labels.*.name, 'boostagram update') && (
         github.event.review.author_association == 'COLLABORATOR' ||
@@ -13,7 +13,6 @@ jobs:
       )
     runs-on: ubuntu-latest
     steps:
-      - uses: hmarr/debug-action@v2
       - name: Check for files to ignore
         if: contains(github.event.review.body, '/ignore')
         run: |
