@@ -1,56 +1,18 @@
-name: Update Boostagrams
-on: workflow_dispatch
+name: Ignore Boostagram
+on:
+  pull_request_review_comment:
+    types: [created]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
 jobs:
-  boostagrams:
-    name: Update Boostagrams
+  ignore-boostagrams:
+    name: Ignore Boostagram
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Website Repository
+      - name: Checkout Pull Request Branch
         uses: actions/checkout@v2
         with:
-          path: seetee-io
-      - name: Checkout Boostagrams Repository
-        uses: actions/checkout@v2
-        with:
-          repository: closing-the-loop/boostagrams
-          path: boostagrams
-      - name: Copy Boostagrams to Website
-        run: cp -R boostagrams/custom_records/ seetee-io/src/boostagrams/
-      - name: Summarize New Messages
-        id: messages-summary
-        run: |
-          summary="$(cd seetee-io/src/boostagrams && ./summary.sh)"
-          echo "messages_summary<<EOF" >> $GITHUB_ENV
-          echo "$summary" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-      - name: Create Pull Request to Website
-        uses: peter-evans/create-pull-request@v3
-        with:
-          path: seetee-io
-          add-paths: src/boostagrams/
-          commit-message: Update boostagrams (automated change)
-          author: Seetee Bot <bot@seetee.io>
-          branch: update-boostagrams
-          branch-suffix: timestamp
-          delete-branch: true
-          title: 'Update Boostagrams'
-          body: |
-            Updates Boostagrams for Closing the Loop. This is an automated change.
-
-            ## 📣 New Messages
-
-            ${{ env.messages_summary }}
-
-            ## ✋ Ignoring Messages
-
-            - Checkout the pull request branch
-            - Run the ignore script located at: `src/boostagrams/ignore.sh`:
-
-            ```
-            ./ignore.sh custom_records/custom_record_NNNNN.json
-            ```
-          labels: |
-            automated pr
-            boostagram update
-          team-reviewers: |
-            seetee-website
+          ref: ${{ github.head_ref }}
+      - run: |
+          echo ${{ github.event }}
