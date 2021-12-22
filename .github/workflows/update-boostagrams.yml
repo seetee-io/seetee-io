@@ -1,5 +1,8 @@
 name: Update Boostagrams
-on: workflow_dispatch
+on:
+  schedule:
+    - cron: '0 8 * * *' # every day at 08:00 UTC
+  workflow_dispatch:
 jobs:
   boostagrams:
     name: Update Boostagrams
@@ -43,11 +46,23 @@ jobs:
 
             ## ✋ Ignoring Messages
 
-            - Checkout the pull request branch
-            - Run the ignore script located at: `src/boostagrams/ignore.sh`:
+            To remove a boostagram file, leave a review on this pull request and mention the file prefixed with `/ignore`.
+            Make sure to leave a review. A simple comment won't work.
+
+            For example to ignore boostagrams 12, 14, and 34:
 
             ```
-            ./ignore.sh custom_records/custom_record_NNNNN.json
+            /ignore custom_records_00012
+            /ignore custom_records_00014
+            /ignore custom_records_00034
+            ```
+
+            Alternatively, checkout the pull request branch and the ignore script located at: `src/boostagrams/ignore.sh`:
+
+            ```
+            ./ignore.sh custom_records/custom_record_00012.json
+            ./ignore.sh custom_records/custom_record_00014.json
+            ./ignore.sh custom_records/custom_record_00034.json
             ```
           labels: |
             automated pr
