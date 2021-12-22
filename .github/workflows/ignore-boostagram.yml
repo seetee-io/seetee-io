@@ -1,0 +1,15 @@
+name: Ignore Boostagram
+on:
+  pull_request_review_comment:
+    types: [created]
+jobs:
+  ignore-boostagrams:
+    name: Ignore Boostagram
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Pull Request Branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - run: |
+          echo ${{ github.event }}
