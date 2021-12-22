@@ -25,6 +25,7 @@ jobs:
         if: env.message_ignores
         uses: actions/checkout@v2
       - name: Checkout pull request branch
+        if: env.message_ignores
         run: git fetch && git checkout ${{ github.event.pull_request.head.ref }}
       - name: Ignore files
         id: ignoring
@@ -48,7 +49,7 @@ jobs:
           done <<< "${{ env.message_ignores }}"
           echo "::set-output name=ignored_files::$ignored_files"
       - name: Comment on pull request
-        if: steps.ignoring.outputs.ignored_files != ''
+        if: env.message_ignores && steps.ignoring.outputs.ignored_files != ''
         uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
