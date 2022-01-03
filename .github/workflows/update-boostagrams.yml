@@ -34,7 +34,6 @@ jobs:
           commit-message: Update boostagrams (automated change)
           author: Seetee Bot <bot@seetee.io>
           branch: update-boostagrams
-          branch-suffix: timestamp
           delete-branch: true
           title: 'Update Boostagrams'
           body: |
