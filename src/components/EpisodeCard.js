@@ -5,7 +5,7 @@ import { Text, EpisodeImage, EpisodeTitle } from './'
 const Card = styled.div`
   background: rgba(255, 255, 255, 0.9);
   border: 2px solid rgba(30, 30, 30, 1);
-  border-radius: 18px;
+  border-radius: 1rem;
 
   max-width: 20rem;
   min-width: 20rem;
