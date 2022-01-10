@@ -4,23 +4,23 @@ import matter from 'gray-matter'
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkGfm from 'remark-gfm'
+import remarkMdx from 'remark-mdx'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import rehypeSlug from 'rehype-slug'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import { h } from 'hastscript'
+import { serialize } from 'next-mdx-remote/serialize'
+import { parseISO } from 'date-fns'
 import { trimMessage } from './utils'
-
-import { ZapIcon } from '@primer/octicons-react'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-export async function getSortedPosts() {
+export async function loadPostMetadataByYear() {
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = []
 
+  const allPosts = []
   for (let i = 0; i < fileNames.length; i++) {
     const fileName = fileNames[i]
     const id = fileName.replace(/\.md$/, '')
@@ -29,16 +29,14 @@ export async function getSortedPosts() {
     const fileContents = fs.readFileSync(fullPath, 'utf8')
 
     const matterResult = matter(fileContents)
-    const summary = trimMessage(matterResult.content, 280)
 
-    allPostsData.push({
+    allPosts.push({
       id,
-      summary,
       ...matterResult.data,
     })
   }
 
-  return allPostsData.sort(({ date: a }, { date: b }) => {
+  allPosts.sort(({ date: a }, { date: b }) => {
     if (a < b) {
       return 1
     } else if (a > b) {
@@ -47,9 +45,16 @@ export async function getSortedPosts() {
       return 0
     }
   })
+
+  return allPosts.reduce((acc, curr) => {
+    const currYear = parseISO(curr.date).getFullYear()
+    if (!acc[currYear]) acc[currYear] = []
+    acc[currYear].push(curr)
+    return acc
+  }, {})
 }
 
-export function getAllPostIds() {
+export function loadPostIds() {
   const fileNames = fs.readdirSync(postsDirectory)
 
   return fileNames.map((fileName) => {
@@ -72,7 +77,6 @@ export async function getPostData(id) {
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
-    .use(rehypeRaw)
     .use(rehypeSanitize)
     .use(rehypeStringify)
     .use(rehypeSlug)
@@ -82,11 +86,15 @@ export async function getPostData(id) {
     .process(matterResult.content)
 
   const contentHtml = processedContent.toString()
+  const mdxSource = await serialize(matterResult.content, {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
+    },
+  })
 
   const footnotesMarker = '<section data-footnotes class="footnotes">'
   const split = contentHtml.split(footnotesMarker)
-
-  console.log(split[1])
 
   const postHtml = split[0]
 
@@ -99,6 +107,7 @@ export async function getPostData(id) {
     id,
     postHtml,
     footnotesHtml,
+    mdxSource,
     ...matterResult.data,
   }
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Head from 'next/head'
 import Link from 'next/link'
-import { getSortedPosts } from '../../lib/posts'
+import { loadPostMetadataByYear } from '../../lib/posts'
 import config from '../../config'
 
 import { Text, Bar, Layout, BackgroundLottie, PostPreview } from '../../components'
@@ -10,6 +10,12 @@ const HeadlineContainer = styled.div`
   max-width: 43rem;
   margin-left: auto;
   margin-right: auto;
+
+  margin-bottom: 2.5rem;
+
+  @media (min-width: 50rem) {
+    margin-bottom: 3rem;
+  }
 `
 
 const Tagline = styled(Text)`
@@ -25,14 +31,32 @@ const PostsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
 
   a {
     text-decoration: none;
   }
 `
 
-export default function Blog({ postsData }) {
+const YearContainer = styled.div`
+  font-size: 1.5rem;
+  text-align: left;
+  margin-bottom: 0.5rem;
+
+  padding-left: 0.75rem;
+
+  @media (min-width: 50rem) {
+    padding-left: 1rem;
+  }
+`
+
+const PostsOfAYear = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
+
+export default function Blog({ years, postsByYear }) {
   return (
     <>
       <Head>
@@ -41,23 +65,24 @@ export default function Blog({ postsData }) {
       </Head>
       <HeadlineContainer>
         <Text as="h2" fontSize={2.5} fontSizeLarge={4.5}>
-          Seetee
+          Blog
         </Text>
-
-        <Tagline fontWeight="var(--weightLight)">
-          Seetee buys and holds Bitcoin, while investing in ambitious projects and companies throughout the ecosystem.
-        </Tagline>
       </HeadlineContainer>
-
       <Bar height="12.5rem" />
-
       <PostsContainer>
-        {postsData.map((post, index) => (
-          <Link key={index} href={`/blog/${post.id}`}>
-            <a>
-              <PostPreview post={post} />
-            </a>
-          </Link>
+        {years.map((year) => (
+          <div>
+            <YearContainer>{year}</YearContainer>
+            <PostsOfAYear>
+              {postsByYear[year].map((post, index) => (
+                <Link key={index} href={`/blog/${post.id}`}>
+                  <a>
+                    <PostPreview post={post} />
+                  </a>
+                </Link>
+              ))}
+            </PostsOfAYear>
+          </div>
         ))}
       </PostsContainer>
 
@@ -76,11 +101,13 @@ Blog.getLayout = function getLayout(page) {
 }
 
 export async function getStaticProps() {
-  const postsData = await getSortedPosts()
+  const postsByYear = await loadPostMetadataByYear()
+  const years = Object.keys(postsByYear).sort().reverse()
 
   return {
     props: {
-      postsData,
+      years,
+      postsByYear,
     },
   }
 }

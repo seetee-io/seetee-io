@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
 import { ZapIcon } from '@primer/octicons-react'
-import { getAllPostIds, getPostData } from '../../lib/posts'
-import { Date, Bar } from '../../components'
+import { loadPostIds, getPostData } from '../../lib/posts'
+import { Date, Bar, PostImage } from '../../components'
+import { MDXRemote } from 'next-mdx-remote'
 
 const PageContainer = styled.div`
   display: flex;
@@ -18,24 +19,27 @@ const ArticleContainer = styled.article`
 `
 
 const ArticleHeader = styled.header`
-  padding-left: 2rem;
+  padding-left: 2.5rem;
   margin-bottom: 2rem;
   text-align: left;
 
+  max-width: 50rem;
+  min-width: 50rem;
+
   h1 {
     font-weight: 700;
-    font-size: 4rem;
-    margin-bottom: 0.2rem;
+    font-size: 3rem;
+    margin-bottom: 1rem;
   }
 
   h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 `
 
 const MetadataContainer = styled.div`
   display: flex;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: var(--superlightgray);
   margin-bottom: 0.5rem;
 
@@ -57,7 +61,7 @@ const Article = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 2.5rem;
   border-radius: 18px;
   background-color: var(--darkgray);
   color: var(--white);
@@ -72,6 +76,9 @@ const Article = styled.div`
     a {
       text-decoration: none;
       font-style: normal;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   }
 
@@ -114,18 +121,24 @@ const Article = styled.div`
     }
   }
 
+  .footnote-backref {
+    padding-left: 0.5rem;
+  }
+
   img {
     max-width: 50rem;
   }
 
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   text-align: left;
   font-weight: var(--weightLight);
-  line-height: 2.2rem;
+  line-height: 2rem;
 
   max-width: 50rem;
   min-width: 50rem;
 `
+
+const components = { PostImage }
 
 export default function Post({ postData }) {
   return (
@@ -148,7 +161,9 @@ export default function Post({ postData }) {
           </ArticleHeader>
           <br />
           <Article>
-            <div dangerouslySetInnerHTML={{ __html: postData.postHtml }} />
+            <div className="wrapper">
+              <MDXRemote {...postData.mdxSource} components={components} />
+            </div>
             {postData.footnotesHtml && (
               <>
                 <hr />
@@ -164,7 +179,7 @@ export default function Post({ postData }) {
 }
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds()
+  const paths = loadPostIds()
 
   return {
     paths,
