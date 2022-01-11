@@ -148,22 +148,20 @@ const Article = styled.div`
 `
 
 export default function Post({ mdxSource, frontMatter }) {
+  console.log(frontMatter.title)
   return (
     <>
       <Head>
-        {frontMatter.title && frontMatter.subtitle && (
+        {frontMatter.title && frontMatter.summary && (
           <>
             <title>{frontMatter.title}</title>
-
-            <meta name="description" content={frontMatter.subtitle} />
-
             <meta name="og:type" property="og:type" content="website" />
             <meta name="og:title" property="og:title" content={frontMatter.title} />
-            <meta name="og:description" property="og:description" content={frontMatter.subtitle} />
-
             <meta name="twitter:card" content="summary" />
             <meta name="twitter:site" content="@seetee_io" />
             <meta name="twitter:image:alt" content={frontMatter.title} />
+            <meta name="og:description" property="og:description" content={frontMatter.summary} />
+            <meta name="description" content={frontMatter.summary} />
           </>
         )}
       </Head>
