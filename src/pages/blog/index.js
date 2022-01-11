@@ -18,14 +18,6 @@ const HeadlineContainer = styled.div`
   }
 `
 
-const Tagline = styled(Text)`
-  margin: 1rem 0 2.5rem;
-
-  @media (min-width: 50rem) {
-    margin: 1.5rem 0 3rem;
-  }
-`
-
 const PostsContainer = styled.div`
   margin: 2rem 0;
   display: flex;
@@ -42,12 +34,7 @@ const YearContainer = styled.div`
   font-size: 1.5rem;
   text-align: left;
   margin-bottom: 0.5rem;
-
-  padding-left: 0.75rem;
-
-  @media (min-width: 50rem) {
-    padding-left: 1rem;
-  }
+  padding-left: 1rem;
 `
 
 const PostsOfAYear = styled.div`
@@ -68,7 +55,7 @@ export default function Blog({ years, postsByYear }) {
           Blog
         </Text>
       </HeadlineContainer>
-      <Bar height="12.5rem" />
+      <Bar height="6.25rem" />
       <PostsContainer>
         {years.map((year) => (
           <div>

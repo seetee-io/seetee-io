@@ -32,16 +32,12 @@ const Card = styled.div`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0.75rem;
-
-  @media (min-width: 50rem) {
-    padding: 1rem;
-  }
+  padding: 1rem;
 `
 
 const MetadataContainer = styled.div`
   display: flex;
+  justify-content: flex-start;
   font-size: 1rem;
   margin-bottom: 0.5rem;
   color: var(--superlightgray);
@@ -62,6 +58,7 @@ const MetadataSeparator = styled.span`
 
 const Title = styled.h1`
   font-size: 1.5rem;
+  text-align: left;
   margin-bottom: 1rem;
   color: var(--white);
 `

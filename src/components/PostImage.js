@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Container = styled.div`
-  padding: 2rem 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,15 +10,20 @@ const Container = styled.div`
   font-size: 1rem;
   color: var(--superlightgray);
 
+  @media (min-width: 50rem) {
+    padding: 2rem;
+  }
+
   img {
     width: 100%;
+    object-fit: contain;
   }
 `
 
 const PostImage = ({ postId, name, caption }) => {
   return (
     <Container>
-      <img src={'/assets/blog/' + postId + '/' + name} />
+      <img src={'/assets/blog/' + postId + '/' + name} alt={caption} />
       {caption}
     </Container>
   )

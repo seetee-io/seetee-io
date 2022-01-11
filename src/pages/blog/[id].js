@@ -1,8 +1,8 @@
 import styled from 'styled-components'
+import Head from 'next/head'
 
-import { ZapIcon } from '@primer/octicons-react'
-import { loadPostIds, getPostData } from '../../lib/posts'
-import { Date, Bar, PostImage } from '../../components'
+import { loadPostIds, loadPost } from '../../lib/posts'
+import { Date, Bar, PostImage as Image } from '../../components'
 import { MDXRemote } from 'next-mdx-remote'
 
 const PageContainer = styled.div`
@@ -10,6 +10,14 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 2rem;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 50rem) {
+    min-width: 50rem;
+    max-width: 50rem;
+  }
 `
 
 const ArticleContainer = styled.article`
@@ -19,12 +27,13 @@ const ArticleContainer = styled.article`
 `
 
 const ArticleHeader = styled.header`
-  padding-left: 2.5rem;
+  padding-left: 0.5rem;
   margin-bottom: 2rem;
   text-align: left;
 
-  max-width: 50rem;
-  min-width: 50rem;
+  @media (min-width: 50rem) {
+    padding-left: 2.5rem;
+  }
 
   h1 {
     font-weight: 700;
@@ -58,13 +67,18 @@ const MetadataSeparator = styled.span`
 `
 
 const Article = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0.5rem 2.5rem;
+  padding: 0 0.5rem;
   border-radius: 18px;
-  background-color: var(--darkgray);
   color: var(--white);
+  font-size: 1.3rem;
+  text-align: left;
+  font-weight: var(--weightLight);
+  line-height: 2rem;
+
+  @media (min-width: 50rem) {
+    background-color: var(--darkgray);
+    padding: 0.5rem 2.5rem;
+  }
 
   h1,
   h2,
@@ -87,8 +101,10 @@ const Article = styled.div`
     margin: 3.5rem 0 2rem 0;
   }
   h3,
-  h4 {
-    margin: 3rem 0 1.25rem 0;
+  h4,
+  h5,
+  h6 {
+    margin: 3rem 0 0 0;
   }
 
   p {
@@ -105,7 +121,10 @@ const Article = styled.div`
     padding-right: 0.1rem;
     a {
       text-decoration: none;
-      font-style: normal;
+      font-style: italic;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   }
 
@@ -114,62 +133,60 @@ const Article = styled.div`
     margin: 2.5rem 10%;
   }
 
-  .footnotes {
-    h2 {
-      font-size: 1.5rem;
-      font-weight: var(--weightNormal);
-    }
-  }
-
-  .footnote-backref {
-    padding-left: 0.5rem;
-  }
-
   img {
     max-width: 50rem;
   }
 
-  font-size: 1.3rem;
-  text-align: left;
-  font-weight: var(--weightLight);
-  line-height: 2rem;
+  .footnote-backref {
+    padding-left: 0.5rem;
+    text-decoration: none;
 
-  max-width: 50rem;
-  min-width: 50rem;
+    @media (min-width: 50rem) {
+      text-decoration: underline;
+    }
+  }
 `
 
-const components = { PostImage }
-
-export default function Post({ postData }) {
+export default function Post({ mdxSource, frontMatter }) {
   return (
     <>
+      <Head>
+        {frontMatter.title && frontMatter.subtitle && (
+          <>
+            <title>{frontMatter.title}</title>
+
+            <meta name="description" content={frontMatter.subtitle} />
+
+            <meta name="og:type" property="og:type" content="website" />
+            <meta name="og:title" property="og:title" content={frontMatter.title} />
+            <meta name="og:description" property="og:description" content={frontMatter.subtitle} />
+
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="@seetee_io" />
+            <meta name="twitter:image:alt" content={frontMatter.title} />
+          </>
+        )}
+      </Head>
       <PageContainer>
         <ArticleContainer>
           <ArticleHeader>
             <MetadataContainer>
-              <Date dateString={postData.date} />
+              <Date dateString={frontMatter.date} />
               <MetadataSeparator>&#8226;</MetadataSeparator>
               By&nbsp;
-              {postData.linkAuthorTwitter ? (
-                <a href={'https://twitter.com/' + postData.author}>{postData.author}</a>
+              {frontMatter.linkAuthorTwitter ? (
+                <a href={'https://twitter.com/' + frontMatter.author}>{frontMatter.author}</a>
               ) : (
-                postData.author
+                frontMatter.author
               )}
             </MetadataContainer>
-            <h1>{postData.title}</h1>
-            <h2>{postData.subtitle}</h2>
+            <h1>{frontMatter.title}</h1>
+            <h2>{frontMatter.subtitle}</h2>
           </ArticleHeader>
-          <br />
           <Article>
             <div className="wrapper">
-              <MDXRemote {...postData.mdxSource} components={components} />
+              <MDXRemote {...mdxSource} components={{ Image }} />
             </div>
-            {postData.footnotesHtml && (
-              <>
-                <hr />
-                <div dangerouslySetInnerHTML={{ __html: postData.footnotesHtml }} />
-              </>
-            )}
           </Article>
         </ArticleContainer>
       </PageContainer>
@@ -188,11 +205,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const postData = await getPostData(params.id)
+  const { mdxSource, frontMatter } = await loadPost(params.id)
 
   return {
     props: {
-      postData,
+      mdxSource,
+      frontMatter,
     },
   }
 }
