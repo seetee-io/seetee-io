@@ -13,17 +13,17 @@ const Container = styled.div`
   @media (min-width: 50rem) {
     padding: 2rem;
   }
+`
 
-  img {
-    width: 100%;
-    object-fit: contain;
-  }
+const Image = styled.img`
+  width: 100%;
+  object-fit: contain;
 `
 
 const PostImage = ({ postId, name, caption }) => {
   return (
     <Container>
-      <img src={'/assets/blog/' + postId + '/' + name} alt={caption} />
+      <Image src={'/assets/blog/' + postId + '/' + name} alt={caption} />
       {caption}
     </Container>
   )
