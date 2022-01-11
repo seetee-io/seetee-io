@@ -57,12 +57,12 @@ export default function Blog({ years, postsByYear }) {
       </HeadlineContainer>
       <Bar height="6.25rem" />
       <PostsContainer>
-        {years.map((year) => (
-          <div>
+        {years.map((year, yearIndex) => (
+          <div key={yearIndex}>
             <YearContainer>{year}</YearContainer>
             <PostsOfAYear>
-              {postsByYear[year].map((post, index) => (
-                <Link key={index} href={`/blog/${post.id}`}>
+              {postsByYear[year].map((post, postIndex) => (
+                <Link key={postIndex} href={`/blog/${post.id}`}>
                   <a>
                     <PostPreview post={post} />
                   </a>
