@@ -20,15 +20,15 @@ A bitcoin transaction consists of inputs and outputs. Every transaction input re
 
 Once properly understood, it is easy to see what the Bitcoin network generates: a tree-like structure, starting with the genesis block, that splits and combines bundles of sats as time goes on.
 
-<Image postId="anatomy-bitcoin-transaction" name="tx0.png" caption="Todo: Image Caption" />
+<Image postId="2022-01-11-anatomy-bitcoin-transaction" name="tx0.png" caption="Todo: Image Caption" />
 
 Every transaction has at least one input and at least one output. The simplest and traditionally most common transaction type has one input and two outputs: one describing the actual payment and one describing the change that goes back to the one who initiated the payment.
 
-<Image postId="anatomy-bitcoin-transaction" name="tx1.png" caption="Todo: Image Caption" />
+<Image postId="2022-01-11-anatomy-bitcoin-transaction" name="tx1.png" caption="Todo: Image Caption" />
 
 The concept of change is required because Bitcoin doesn't allow an update of the past. It is an append-only log, so instead of going back and modifying past entries, new entries have to be created to reflect any updates. Transactions are what create these updates.
 
-<Image postId="anatomy-bitcoin-transaction" name="tx2.png" caption="Todo: Image Caption" />
+<Image postId="2022-01-11-anatomy-bitcoin-transaction" name="tx2.png" caption="Todo: Image Caption" />
 
 While this design is ingenious when it comes to validation—you can easily make sure that everything adds up at all times—there are certain nuances to consider when it comes to privacy.
 
@@ -40,11 +40,11 @@ Luckily, the situation is not as grim. Developments and techniques exist to reme
 
 We already discussed the most common transaction type: the "simple spend." There are also transactions that have only one input and one output, transactions that have multiple inputs and one output, and transactions that have multiple inputs and multiple outputs. Let's call them "No Change," "Consolidation," and "Batch," respectively.
 
-<Image postId="anatomy-bitcoin-transaction" name="tx3.png" caption="Todo: Image Caption" />
+<Image postId="2022-01-11-anatomy-bitcoin-transaction" name="tx3.png" caption="Todo: Image Caption" />
 
 While Bitcoin's transaction graph is public, it is important to point out that any analysis that is applied to this data is heuristic. For example, a user might create a transaction that splits a UTXO in half, resulting in two outputs that belong to the same entity. Or, to pick another example, a regular spend might produce two outputs that are exactly equal, making change detection virtually impossible.
 
-<Image postId="anatomy-bitcoin-transaction" name="tx4.png" caption="Todo: Image Caption" />
+<Image postId="2022-01-11-anatomy-bitcoin-transaction" name="tx4.png" caption="Todo: Image Caption" />
 
 Because identification can only happen heuristically, one part of the solution to Bitcoin's privacy conundrum lies in collaboration.
 
@@ -58,11 +58,11 @@ So, how can we think about a "handshake" in the world of bitcoin transactions? I
 
 Once the collaborating parties agree on the parameters of the transaction, the transaction is signed by all parties and broadcast to the network. Because of the heuristical nature of transaction analysis, an onlooker won't be able to figure out the flow of funds.
 
-<Image postId="anatomy-bitcoin-transaction" name="tx5.png" caption="Todo: Image Caption" />
+<Image postId="2022-01-11-anatomy-bitcoin-transaction" name="tx5.png" caption="Todo: Image Caption" />
 
 One especially promising technique to increase the privacy of all is to combine the above with an actual payment. In this scenario, the "handshake" is about bringing a merchant and a customer together to craft a special transaction that can only be deciphered by said merchant or customer. An eavesdropper is left with multiple interpretations of the transaction, each equally likely.
 
-<Image postId="anatomy-bitcoin-transaction" name="tx6.png" caption="Todo: Image Caption" />
+<Image postId="2022-01-11-anatomy-bitcoin-transaction" name="tx6.png" caption="Todo: Image Caption" />
 
 Even if only a small percentage of transactions are PayJoin transactions, the privacy of all participants in the network is increased substantially.
 

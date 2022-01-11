@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Head from 'next/head'
 
-import { loadPostIds, loadPost } from '../../lib/posts'
+import { loadPostsMetadata, loadPost } from '../../lib/posts'
 import { Date, Bar, PostImage as Image } from '../../components'
 import { MDXRemote } from 'next-mdx-remote'
 
@@ -196,7 +196,15 @@ export default function Post({ mdxSource, frontMatter }) {
 }
 
 export async function getStaticPaths() {
-  const paths = loadPostIds()
+  const posts = loadPostsMetadata()
+
+  const paths = posts.map((post) => {
+    return {
+      params: {
+        id: post.id,
+      },
+    }
+  })
 
   return {
     paths,

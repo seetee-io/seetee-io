@@ -46,16 +46,26 @@ export async function loadPostMetadataByYear() {
   }, {})
 }
 
-export function loadPostIds() {
+export function loadPostsMetadata() {
   const fileNames = fs.readdirSync(postsDirectory)
 
-  return fileNames.map((fileName) => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, ''),
-      },
-    }
-  })
+  const allPosts = []
+  for (let i = 0; i < fileNames.length; i++) {
+    const fileName = fileNames[i]
+    const id = fileName.replace(/\.md$/, '')
+
+    const fullPath = path.join(postsDirectory, fileName)
+    const fileContents = fs.readFileSync(fullPath, 'utf8')
+
+    const matterResult = matter(fileContents)
+
+    allPosts.push({
+      id,
+      ...matterResult.data,
+    })
+  }
+
+  return allPosts
 }
 
 export async function loadPost(id) {
