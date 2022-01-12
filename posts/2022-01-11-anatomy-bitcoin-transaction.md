@@ -4,6 +4,8 @@ summary: 'When it comes to Bitcoin, misconceptions abound. This is not surprisin
 date: '2022-01-11'
 author: '@dergigi'
 linkAuthorTwitter: true
+thumbnail: thumbnail.png
+cover: cover.png
 ---
 
 When it comes to Bitcoin, misconceptions abound. This is not surprising. Bitcoin is a new thing, and, consequently, all metaphors and comparisons fall short, in one way or another.

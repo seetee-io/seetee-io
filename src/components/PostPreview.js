@@ -31,8 +31,32 @@ const Card = styled.div`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  color: var(--black);
   padding: 1rem;
+
+  @media (min-width: 50rem) {
+    padding: 1rem 1rem;
+  }
+`
+
+const Thumbnail = styled.img`
+  border-radius: 18px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  display: none;
+
+  @media (min-width: 50rem) {
+    display: initial;
+    width: 8rem;
+    object-fit: contain;
+  }
+`
+
+const TextContainer = styled.div`
+  @media (min-width: 50rem) {
+    margin-left: 1rem;
+  }
 `
 
 const MetadataContainer = styled.div`
@@ -73,13 +97,16 @@ const PostPreview = ({ post }) => {
   return (
     <Card id="post-preview-card">
       <Content>
-        <MetadataContainer>
-          <Date dateString={post.date} />
-          <MetadataSeparator>&#8226;</MetadataSeparator>
-          By&nbsp;{post.author}
-        </MetadataContainer>
-        <Title>{post.title}</Title>
-        <Summary dangerouslySetInnerHTML={{ __html: post.summary }} />
+        <Thumbnail src={'/assets/blog/' + post.id + '/' + post.thumbnail} alt={post.title}></Thumbnail>
+        <TextContainer>
+          <MetadataContainer>
+            <Date dateString={post.date} />
+            <MetadataSeparator>&#8226;</MetadataSeparator>
+            By&nbsp;{post.author}
+          </MetadataContainer>
+          <Title>{post.title}</Title>
+          <Summary dangerouslySetInnerHTML={{ __html: post.summary }} />
+        </TextContainer>
       </Content>
     </Card>
   )

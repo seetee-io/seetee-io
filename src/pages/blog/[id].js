@@ -27,22 +27,22 @@ const ArticleContainer = styled.article`
 `
 
 const ArticleHeader = styled.header`
-  padding-left: 0.5rem;
+  padding-left: 0 0.5rem;
   margin-bottom: 2rem;
   text-align: left;
 
   @media (min-width: 50rem) {
-    padding-left: 2.5rem;
+    padding: 0 2.5rem;
   }
 
   h1 {
     font-weight: 700;
     font-size: 3rem;
-    margin-bottom: 1rem;
   }
 
   h2 {
     font-size: 1.5rem;
+    margin-top: 1rem;
   }
 `
 
@@ -64,6 +64,34 @@ const MetadataSeparator = styled.span`
   @media (min-width: 50rem) {
     margin: 0 0.4rem 0 0.4rem;
   }
+`
+
+const CoverImageContainer = styled.div`
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  @media (min-width: 50rem) {
+    min-width: 50rem;
+    max-width: 50rem;
+  }
+`
+
+const CoverImage = styled.img`
+  width: 90%;
+
+  border-radius: 18px;
+`
+
+const CoverImageCaption = styled.div`
+  width: 90%;
+  padding-right: 2rem;
+  text-align: right;
+  font-size: 1rem;
+  color: rgba(120, 120, 120, 0.1);
 `
 
 const Article = styled.div`
@@ -147,8 +175,7 @@ const Article = styled.div`
   }
 `
 
-export default function Post({ mdxSource, frontMatter }) {
-  console.log(frontMatter.title)
+export default function Post({ id, mdxSource, frontMatter }) {
   return (
     <>
       <Head>
@@ -179,8 +206,14 @@ export default function Post({ mdxSource, frontMatter }) {
               )}
             </MetadataContainer>
             <h1>{frontMatter.title}</h1>
-            <h2>{frontMatter.subtitle}</h2>
+            {frontMatter.subtitle && <h2>{frontMatter.subtitle}</h2>}
           </ArticleHeader>
+          {frontMatter.cover && (
+            <CoverImageContainer>
+              <CoverImage src={'/assets/blog/' + id + '/' + frontMatter.cover} />
+              {frontMatter.coverImageCaption && <CoverImageCaption>{frontMatter.coverImageCaption}</CoverImageCaption>}
+            </CoverImageContainer>
+          )}
           <Article>
             <div className="wrapper">
               <MDXRemote {...mdxSource} components={{ Image }} />
@@ -215,6 +248,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
+      id: params.id,
       mdxSource,
       frontMatter,
     },
