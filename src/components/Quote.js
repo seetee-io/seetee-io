@@ -42,14 +42,13 @@ const StyledText = styled(Text)`
 const Quote = forwardRef(({ img }, ref) => {
   return (
     <Wrapper ref={ref}>
-      <ImageWrapper>
-        {img && <Image src={img} alt="Kjell Inge Røkke" />}
-      </ImageWrapper>
+      <ImageWrapper>{img && <Image src={img} alt="Kjell Inge Røkke" />}</ImageWrapper>
 
       <Blockquote>
-        &quot;We are not going to wait for the future - we want to join in
-        building it as well! I encourage entrepreneurs to reach out to Seetee.
-        The bigger the dream, the more we listen.&quot;
+        &quot;We are not going to wait for the
+        <br />
+        future—we want to join in building it as well! I encourage entrepreneurs to reach out to Seetee. The bigger the
+        dream, the more we listen.&quot;
       </Blockquote>
       <StyledText fontSize={1} fontSizeLarge={1.5} color="rgba(255,255,255,.8)">
         Kjell Inge Røkke <br /> Chairman of Aker &amp; Founder of Seetee
