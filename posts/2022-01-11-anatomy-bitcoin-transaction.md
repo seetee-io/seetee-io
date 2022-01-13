@@ -1,6 +1,6 @@
 ---
 title: 'Anatomy of a Bitcoin Transaction'
-summary: 'When it comes to Bitcoin, misconceptions abound. This is not surprising. Bitcoin is a new thing, and, consequently, all metaphors and comparisons fall short, in one way or another. '
+summary: 'When it comes to Bitcoin, misconceptions abound. This is not surprising. Bitcoin is a new thing, and, consequently, all metaphors and comparisons fall short, in one way or another.'
 date: '2022-01-11'
 author: '@dergigi'
 linkAuthorTwitter: true
