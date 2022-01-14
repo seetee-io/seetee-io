@@ -102,6 +102,8 @@ const PostPreview = ({ post }) => {
           <MetadataContainer>
             <Date dateString={post.date} />
             <MetadataSeparator>&#8226;</MetadataSeparator>
+            <a href={`https://blockstream.info/block-height/${post.blocktime}`}>{post.blocktime}</a>
+            <MetadataSeparator>&#8226;</MetadataSeparator>
             By&nbsp;{post.author}
           </MetadataContainer>
           <Title>{post.title}</Title>

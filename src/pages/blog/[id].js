@@ -198,6 +198,8 @@ export default function Post({ id, mdxSource, frontMatter }) {
             <MetadataContainer>
               <Date dateString={frontMatter.date} />
               <MetadataSeparator>&#8226;</MetadataSeparator>
+              <a href={`https://blockstream.info/block-height/${frontMatter.blocktime}`}>{frontMatter.blocktime}</a>
+              <MetadataSeparator>&#8226;</MetadataSeparator>
               By&nbsp;
               {frontMatter.linkAuthorTwitter ? (
                 <a href={'https://twitter.com/' + frontMatter.author}>{frontMatter.author}</a>
