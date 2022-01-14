@@ -23,8 +23,8 @@ const Image = styled.img`
 const PostImage = ({ postId, name, caption }) => {
   return (
     <Container>
-      <Image src={'/assets/blog/' + postId + '/' + name} alt={caption} />
-      {caption}
+      <Image src={'/assets/blog/' + postId + '/' + name} alt={caption ? caption : name} />
+      {caption && <div>{caption}</div>}
     </Container>
   )
 }
