@@ -6,6 +6,7 @@ import { Date, Bar, PostImage as Image } from '../../components'
 import { MDXRemote } from 'next-mdx-remote'
 
 const PageContainer = styled.div`
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -167,6 +168,33 @@ const Article = styled.div`
 
   img {
     max-width: 50rem;
+  }
+
+  code {
+    display: inline-block;
+    white-space: normal;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+
+  .footnotes {
+    max-width: 100%;
+    word-wrap: break-word;
+
+    ol {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-right: 2rem;
+    }
+
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+
+    @media (min-width: 50rem) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
   }
 
   .footnote-backref {
