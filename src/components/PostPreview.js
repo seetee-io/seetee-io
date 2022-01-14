@@ -62,13 +62,17 @@ const TextContainer = styled.div`
 const MetadataContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin-bottom: 0.5rem;
   color: var(--superlightgray);
 
   a {
     color: var(--superlightgray);
     text-decoration: underline;
+  }
+
+  @media (min-width: 50rem) {
+    font-size: 1rem;
   }
 `
 

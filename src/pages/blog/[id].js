@@ -48,13 +48,17 @@ const ArticleHeader = styled.header`
 
 const MetadataContainer = styled.div`
   display: flex;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: var(--superlightgray);
   margin-bottom: 0.5rem;
 
   a {
     color: var(--superlightgray);
     text-decoration: underline;
+  }
+
+  @media (min-width: 50rem) {
+    font-size: 1.3rem;
   }
 `
 
