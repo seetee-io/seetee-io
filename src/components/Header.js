@@ -55,7 +55,7 @@ const NavItems = styled.span`
   display: flex;
   justify-content: flex-end;
   align-items: baseline;
-  gap: 0.3rem;
+  gap: 0.5rem;
 `
 
 const TextItem = styled.a`
@@ -66,8 +66,7 @@ const TextItem = styled.a`
 
   padding: 0.5rem 0.75rem;
   border-radius: 24px;
-  background: ${(props) =>
-    props.active ? 'rgba(255, 255, 255, .1)' : 'rgba(255, 255, 255, 0)'};
+  background: ${(props) => (props.active ? 'rgba(255, 255, 255, .1)' : 'rgba(255, 255, 255, 0)')};
 
   @media (min-width: 50rem) {
     font-size: 1.25rem;
@@ -111,10 +110,10 @@ const Header = () => {
       </HomeItem>
       <TrailingItems>
         <NavItems>
-          <TextItem
-            onClick={(e) => handleItemClick(e, '/podcast')}
-            active={activeItem == 2}
-          >
+          <TextItem onClick={(e) => handleItemClick(e, '/blog')} active={activeItem == 1}>
+            Blog
+          </TextItem>
+          <TextItem onClick={(e) => handleItemClick(e, '/podcast')} active={activeItem == 2}>
             Podcast
           </TextItem>
         </NavItems>
