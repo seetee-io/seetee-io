@@ -28,7 +28,7 @@ const ArticleContainer = styled.article`
 `
 
 const ArticleHeader = styled.header`
-  padding-left: 0 0.5rem;
+  padding: 0 0.5rem;
   margin-bottom: 2rem;
   text-align: left;
 
