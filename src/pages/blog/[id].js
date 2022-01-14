@@ -61,6 +61,10 @@ const MetadataContainer = styled.div`
   @media (min-width: 50rem) {
     font-size: 1.3rem;
   }
+
+  @media (max-width: 20rem) {
+    font-size: 0.8rem;
+  }
 `
 
 const MetadataSeparator = styled.span`
