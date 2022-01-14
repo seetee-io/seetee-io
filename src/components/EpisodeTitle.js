@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 import dateformat from 'dateformat'
 import { Text } from '.'
@@ -39,6 +40,10 @@ const TitleContainer = styled.div`
   @media (min-width: 50rem) {
     font-size: 1.1rem;
   }
+
+  a {
+    color: var(--black) !important;
+  }
 `
 
 const formatEpisodeDuration = (seconds) => {
@@ -59,9 +64,11 @@ const EpisodeTitle = ({ episode }) => {
         <Text>{dateformat(episode.date, 'dd. mmm, yyyy')}</Text>
       </MetadataContainer>
       <TitleContainer>
-        <Text>
-          {episode.guest}: {episode.title}
-        </Text>
+        <Link href="https://pod.link/1578199828">
+          <a>
+            {episode.guest}: {episode.title}
+          </a>
+        </Link>
       </TitleContainer>
     </Container>
   )

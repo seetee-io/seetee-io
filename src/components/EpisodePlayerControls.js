@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import Link from 'next/link'
 
 const Container = styled.div`
-  padding: 0 1rem 0 1rem;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
   background-color: var(--orange);
-  height: 2.5rem;
-  border-radius: 0 0 18px 18px;
+  height: 2rem;
+  border-radius: 0 0 1rem 1rem;
   display: flex;
   justify-content flex-start;
   align-items: center;
@@ -134,21 +134,16 @@ const EpisodePlayerControls = ({ episode }) => {
   return (
     <Container>
       <PlayPause className="amplitude-play-pause" />
-      <ProgressBar
-        className="amplitude-song-played-progress"
-        id="song-played-progress"
-      />
+      <ProgressBar className="amplitude-song-played-progress" id="song-played-progress" />
       <DurationDownloadContainer>
         <DurationContainer>
           <CurrentDurationContainer>
-            <span className="amplitude-current-hours"></span>:
-            <span className="amplitude-current-minutes"></span>:
+            <span className="amplitude-current-hours"></span>:<span className="amplitude-current-minutes"></span>:
             <span className="amplitude-current-seconds"></span>
           </CurrentDurationContainer>
           &nbsp;/&nbsp;
           <TotalDurationContainer>
-            <span className="amplitude-duration-hours"></span>:
-            <span className="amplitude-duration-minutes"></span>:
+            <span className="amplitude-duration-hours"></span>:<span className="amplitude-duration-minutes"></span>:
             <span className="amplitude-duration-seconds"></span>
           </TotalDurationContainer>
         </DurationContainer>
