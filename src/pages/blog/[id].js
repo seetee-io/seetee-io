@@ -8,7 +8,7 @@ import { MDXRemote } from 'next-mdx-remote'
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   margin-bottom: 2rem;
 
   margin-left: auto;
@@ -23,7 +23,7 @@ const PageContainer = styled.div`
 const ArticleContainer = styled.article`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
 `
 
 const ArticleHeader = styled.header`

@@ -83,7 +83,6 @@ const MetadataSeparator = styled.span`
 const Title = styled.h1`
   font-size: 1.5rem;
   text-align: left;
-  margin-bottom: 1rem;
   color: var(--white);
 `
 
@@ -91,6 +90,7 @@ const Summary = styled.div`
   font-size: 1rem;
   text-align: left;
   color: var(--white);
+  margin-top: 1rem;
 `
 
 const PostPreview = ({ post }) => {
@@ -107,7 +107,7 @@ const PostPreview = ({ post }) => {
             By&nbsp;{post.author}
           </MetadataContainer>
           <Title>{post.title}</Title>
-          <Summary dangerouslySetInnerHTML={{ __html: post.summary }} />
+          {post.summary && <Summary dangerouslySetInnerHTML={{ __html: post.summary }} />}
         </TextContainer>
       </Content>
     </Card>
