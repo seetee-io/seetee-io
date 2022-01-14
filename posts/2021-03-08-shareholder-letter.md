@@ -11,7 +11,7 @@ cover: cover.png
 This letter is also available
 
 - as an audio version read by Guy Swann: [Bitcoin Audible #504](https://pod.link/1359544516/episode/8734b563dc083dbe289225733f8c8105)
-- in PDF format: [Shareholder Letter](http://localhost:3000/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf)
+- in PDF format: [Shareholder Letter](https://www.seetee.io/static/shareholder_letter-6ae7e85717c28831bf1c0eca1d632722.pdf)
 
 ---
 
