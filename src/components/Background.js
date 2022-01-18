@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
-import BackgroundSVG from '../../public/bg_header.svg'
+import BackgroundSVG from '../../public/bg_header_pod.svg'
 
 const Wrapper = styled.div`
   position: fixed;
@@ -15,39 +15,19 @@ const Wrapper = styled.div`
   z-index: -1;
 `
 
-const InnerWrapper = styled.div`
-  width: 100%;
-`
-
 const StyledSVG = styled(BackgroundSVG)`
   position: relative;
   fill: rgba(255, 255, 255, 0.05);
+  width: 100%;
+  margin-bottom: 4px;
 `
 
-const Button = () => {
-  const svgRef = useRef()
-
-  useEffect(() => {
-    const scrollRotate = () => {
-      const middleSvg = svgRef.current.childNodes[0].children[1]
-      middleSvg.style.transform = 'rotate(' + window.pageYOffset / 32 + 'deg)'
-      middleSvg.style.transformOrigin = 'center'
-    }
-
-    window.addEventListener('scroll', scrollRotate)
-
-    return () => {
-      window.removeEventListener('scroll', scrollRotate)
-    }
-  }, [])
-
+const PodBackground = () => {
   return (
     <Wrapper>
-      <InnerWrapper ref={svgRef}>
         <StyledSVG />
-      </InnerWrapper>
     </Wrapper>
   )
 }
 
-export default Button
+export default PodBackground

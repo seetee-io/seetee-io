@@ -5,7 +5,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import config from '../../config'
 
-import { Text, Bar, Animated, EpisodeCard, Footer, Layout, BackgroundLottie } from '../../components'
+import { Text, Bar, Animated, EpisodeCard, Footer, Layout, PodBackground } from '../../components'
 import { fetchEpisodes } from '../../lib/feed'
 
 const EpisodePlayer = dynamic(() => import('../../components/EpisodePlayer'), {
@@ -78,7 +78,7 @@ export default function Podcasts({ episodes }) {
         </Tagline>
       </HeadlineContainer>
 
-      <Bar height="12.5rem" />
+      <Bar height="6rem" />
 
       {episodes.length > 0 && (
         <EpisodePlayerContainer>
@@ -114,7 +114,7 @@ export default function Podcasts({ episodes }) {
 Podcasts.getLayout = function getLayout(page) {
   return (
     <>
-      <BackgroundLottie />
+      <PodBackground />
       <Layout>{page}</Layout>
     </>
   )

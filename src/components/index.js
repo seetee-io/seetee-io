@@ -1,5 +1,5 @@
 export { default as Animated } from './Animated'
-export { default as Background } from './Background'
+export { default as PodBackground } from './Background'
 export { default as BackgroundLottie } from './BackgroundLottie'
 export { default as Bar } from './Bar'
 export { default as Button } from './Button'
