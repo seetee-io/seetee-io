@@ -188,7 +188,7 @@ export default function Episode({ episode, isShortLink }) {
         </BadgesContainer>
         {featuredBoostagrams.length > 0 && (
           <FeaturedBoostagramsContainer>
-            <FeaturedBoostagramsHeading>⚡️ Lightning Boosts</FeaturedBoostagramsHeading>
+            <FeaturedBoostagramsHeading>⚡️ Boostagrams</FeaturedBoostagramsHeading>
             <FeaturedBoostagrams>
               {featuredBoostagrams.map((boostagram, index) => (
                 <FeaturedBoostagram key={index} boostagram={boostagram} />
@@ -207,7 +207,7 @@ export default function Episode({ episode, isShortLink }) {
         <Bar height="6.25rem" />
         {episode.boostagrams.length > 0 && (
           <AllBoostagramsContainer ref={boostagramRef}>
-            <SectionHeading>Lightning Boosts</SectionHeading>
+            <SectionHeading>Boostagrams</SectionHeading>
             <AllBoostagrams>
               {episode.boostagrams.map((boostagram, index) => (
                 <Boostagram key={index} boostagram={boostagram} />
