@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import Amplitude from 'amplitudejs'
+import { randomBoostEmoji } from '../lib/utils'
 
 const Card = styled.div`
   display: flex;
@@ -45,11 +46,9 @@ const skipTo = (seconds) => {
 }
 
 const FeaturedBoostagram = ({ boostagram }) => {
-  const boostEmojis = ['🚀', '💬', '📣', '🧡']
-  const boostEmoji = boostEmojis[Math.floor(Math.random() * boostEmojis.length)]
   return (
     <Card onClick={(e) => skipTo(boostagram.ts)}>
-      <Timestamp>{`${boostEmoji} @ ${boostagram.time}`}</Timestamp>
+      <Timestamp>{`${randomBoostEmoji()} @ ${boostagram.time}`}</Timestamp>
       <Message>{boostagram.message}</Message>
     </Card>
   )

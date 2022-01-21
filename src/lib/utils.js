@@ -20,3 +20,9 @@ export function messageLength(message) {
 
   return graphemes.length
 }
+
+export function randomBoostEmoji() {
+  const emojis = ['🚀', '💬', '📣', '🧡']
+
+  return emojis[Math.floor(Math.random() * emojis.length)]
+}

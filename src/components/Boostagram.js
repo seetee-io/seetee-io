@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import Amplitude from 'amplitudejs'
+import Link from 'next/link'
+import { randomBoostEmoji } from '../lib/utils'
 
 const Card = styled.div`
   display: flex;
@@ -18,15 +20,34 @@ const Card = styled.div`
   }
 `
 
-const Timestamp = styled.div`
+const MetadataContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
   font-size: 0.8rem;
   text-align: left;
+`
+
+const AppIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
 `
 
 const Message = styled.div`
   font-size: 1rem;
   text-align: left;
   min-width: 5rem;
+`
+
+const AppIcon = styled.img`
+  ${({ content }) => content && `content: url(${content});`}
+
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
 `
 
 const skipTo = (seconds) => {
@@ -37,11 +58,29 @@ const skipTo = (seconds) => {
 }
 
 const Boostagram = ({ boostagram }) => {
-  const boostEmojis = ['🚀', '⚡️', '💬', '📣', '🧡']
-  const boostEmoji = boostEmojis[Math.floor(Math.random() * boostEmojis.length)]
+  const apps = {
+    Breez: {
+      icon: <AppIcon content="/assets/podcast/icon_breez.png" />,
+      url: 'https://breez.technology',
+    },
+    Fountain: {
+      icon: <AppIcon content="/assets/podcast/icon_fountain.jpg" />,
+      url: 'https://fountain.fm',
+    },
+  }
+
   return (
     <Card onClick={(e) => skipTo(boostagram.ts)}>
-      <Timestamp>{`${boostEmoji} @ ${boostagram.time}`}</Timestamp>
+      <MetadataContainer>
+        {`${randomBoostEmoji()} @ ${boostagram.time}`}
+        <AppIconContainer>
+          {apps[boostagram.app_name] && (
+            <Link href={apps[boostagram.app_name].url}>
+              <a>{apps[boostagram.app_name].icon}</a>
+            </Link>
+          )}
+        </AppIconContainer>
+      </MetadataContainer>
       <Message>{boostagram.message}</Message>
     </Card>
   )
