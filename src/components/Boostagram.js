@@ -64,7 +64,7 @@ const Boostagram = ({ boostagram }) => {
       url: 'https://breez.technology',
     },
     Fountain: {
-      icon: <AppIcon content="/assets/podcast/icon_fountain.jpg" />,
+      icon: <AppIcon content="/assets/podcast/icon_fountain.png" />,
       url: 'https://fountain.fm',
     },
   }
