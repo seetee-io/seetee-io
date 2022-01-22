@@ -116,7 +116,7 @@ const TotalDurationContainer = styled.div`
   }
 `
 
-const DownloadLink = styled.a`
+const DownloadLink = styled.span`
   font-size: 0.7rem;
 
   @media (min-width: 50rem) {
