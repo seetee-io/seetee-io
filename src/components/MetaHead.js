@@ -5,7 +5,7 @@ const MetaHead = () => {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href={'favicon.ico'} />
+        <link rel="shortcut icon" href={'/favicon.ico'} />
 
         <title>{config.title}</title>
 

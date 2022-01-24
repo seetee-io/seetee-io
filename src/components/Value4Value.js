@@ -51,7 +51,7 @@ const getTooltipText = (recipient, recipients) => {
 export default function Value4Value({ recipients }) {
   return (
     <Container>
-      <ReactTooltip effect="solid" place="bottom" multiline="true" />
+      <ReactTooltip effect="solid" place="bottom" multiline={true} />
       {recipients.map((r, index) => (
         <Recipient key={index} data-tip={getTooltipText(r, recipients)}>
           {r.name}
