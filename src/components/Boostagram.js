@@ -43,8 +43,6 @@ const Message = styled.div`
 `
 
 const AppIcon = styled.img`
-  ${({ content }) => content && `content: url(${content});`}
-
   width: 1rem;
   height: 1rem;
   border-radius: 1rem;
@@ -60,11 +58,11 @@ const skipTo = (seconds) => {
 const Boostagram = ({ boostagram }) => {
   const apps = {
     Breez: {
-      icon: <AppIcon content="/assets/podcast/icon_breez.png" />,
+      icon: <AppIcon src="/assets/podcast/icon_breez.png" />,
       url: 'https://breez.technology',
     },
     Fountain: {
-      icon: <AppIcon content="/assets/podcast/icon_fountain.png" />,
+      icon: <AppIcon src="/assets/podcast/icon_fountain.png" />,
       url: 'https://fountain.fm',
     },
   }
