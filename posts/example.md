@@ -8,6 +8,8 @@ author: '@seetee_io' # Author; Required.
 linkAuthorTwitter: true # Set to `true` ff the author field is a Twitter handle. Optional.
 thumbnail: thumbnail.png # Thumbnail for the blog homepage. Required. See below for where the image file is expected to be.
 cover: cover.png # Cover image shown on the article page. Optional. See below for where the image file is expected to be.
+coverImageCaption: 'Photo by <a href="https://bitcoin.org">Satoshi Nakamoto</a>' # Cover image caption (can be HTML). Optional.
+unlisted: true # Hide the post on the /blog overview page. It'll still be accessible by direct link. Optional. Defaults to true.
 ---
 
 This is an _example_ post that will **not** be published.
