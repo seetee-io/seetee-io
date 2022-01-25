@@ -54,7 +54,7 @@ function filterAndFix(boostagrams) {
       } else if (!!boostagram.ts && !boostagram.time) {
         boostagram.ts = sanitize(boostagram.ts.trim())
         // Add `time` field if missing.
-        boostagram.time = new Date(boostagram.ts * 1000).toISOString().substr(11, 8)
+        boostagram.time = new Date(boostagram.ts * 1000).toISOString().substring(11, 19)
       }
 
       return boostagram
