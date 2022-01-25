@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-import { StyledLogo, Text, Button } from '.'
+import { StyledLogo, Button } from '.'
 
 const StyledHeader = styled.header`
   margin-bottom: 3.4375rem;

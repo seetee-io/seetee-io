@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import dateformat from 'dateformat'
 import Amplitude from 'amplitudejs'
-import { Text, EpisodeImage, EpisodeTitle, Value4Value, EpisodePlayerControls } from '.'
+import { EpisodeImage, EpisodeTitle, Value4Value, EpisodePlayerControls } from '.'
 
 const Container = styled.div`
   display: flex;
