@@ -135,7 +135,7 @@ export async function fetchEpisodes() {
     
     const thumbnailFileName = await createEpisodeThumbnailIfMissing(episode)
     const thumbnailUrl = `/assets/podcast/episode/${thumbnailFileName}`
-    episode.thumbnail = thumbnailUrl;
+    episode.thumbnail = thumbnailUrl
 
     return episode
   }))
