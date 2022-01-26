@@ -12,7 +12,7 @@ async function createThumbnailFromUrl(imageUrl, size = default_thumbnail_size) {
   const response = await fetch(imageUrl)
   const buffer = await response.buffer()
 
-  return await new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const options = {
       srcData: buffer,
       width: size,
@@ -25,10 +25,11 @@ export async function createEpisodeThumbnailIfMissing(episode, size = default_th
   const fileName = toEpisodeThumbnailFileName(episode, size)
   const file = `${episode_thumbnail_dir}/${fileName}`
 
-  if (!fs.existsSync(file)) {
-    const buffer = await createThumbnailFromUrl(episode.image, size)
-    fs.writeFileSync(file, buffer, 'binary')
-  }
-
-  return fileName
+  return fs.promises
+    .access(file, fs.constants.F_OK)
+    .catch(async () => {
+      const buffer = await createThumbnailFromUrl(episode.image, size)
+      return fs.promises.writeFile(file, buffer, 'binary')
+    })
+    .then(() => fileName)
 }
