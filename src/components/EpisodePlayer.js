@@ -50,7 +50,7 @@ const Value4ValueContainer = styled.div`
 const renderCardContainer = (episode) => {
   return (
     <CardContentContainer>
-      <EpisodeImage src={episode.image} width={8} widthLarge={10} />
+      <EpisodeImage src={episode.thumbnail} width={8} widthLarge={10} />
       <EpisodeDataContainer>
         <EpisodeTitle episode={episode} />
         <Value4ValueContainer>
