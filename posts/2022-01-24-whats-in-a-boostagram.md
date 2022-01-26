@@ -11,7 +11,7 @@ coverImageCaption: 'Cover photo by <a href="https://unsplash.com/@snowshade">Ole
 unlisted: true
 ---
 
-_Closing the Loop_ is a podcast about Bitcoin and the entrepreneurs, developers, and thinkers who are pushing its evolution. But on top of that, it is also a playground for us to explore and experiment with the technological and financial possibilities that Bitcoin brings to online publishing.
+[Closing the Loop](https://seetee.io/podcast) is a podcast about Bitcoin and the entrepreneurs, developers, and thinkers who are pushing its evolution. But on top of that, it is also a playground for us to explore and experiment with the technological and financial possibilities that Bitcoin brings to online publishing.
 
 ## Podcasting 2.0
 
@@ -25,11 +25,9 @@ All of this is made possible by Bitcoin’s [Lightning Network](https://en.bitco
 
 ## Streaming Sats
 
-Back to Closing the Loop and Podcasting 2.0.
-
 When listening to a podcast, most Podcasting 2.0 apps let you choose between sending one-time payments—also called boosts—at any point during an episode or streaming a pre-configured amount of sats per minute as you listen to a show.
 
-When you listen to an episode of Closing the Loop and you send us some sats, they will be split between the episode’s guest and us. Your payment will be routed directly to the guests and us over the Lightning Network—no middlemen required.
+When you listen to an episode of _Closing the Loop_ and you send us some sats, they will be split between the episode’s guest and us, or go directly to a good cause like the HRF. Your payment will be routed directly to the recipients over the Lightning Network—no middlemen required.
 
 ## Boostagrams
 
