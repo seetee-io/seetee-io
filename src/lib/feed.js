@@ -96,6 +96,15 @@ const parseEpisode = (e) => {
   }
 }
 
+const episodeThumbnails = async (episode) => {
+  const thumbnailFileNameJpg = await createEpisodeThumbnailIfMissing(episode, 160, 'jpg')
+  const thumbnailFileNameWebp = await createEpisodeThumbnailIfMissing(episode, 160, 'webp')
+  return {
+    jpg: `/assets/podcast/episode/${thumbnailFileNameJpg}`,
+    webp: `/assets/podcast/episode/${thumbnailFileNameWebp}`,
+  }
+}
+
 export function boostagramsByEpisodes() {
   // Todo:
   // The 'episode' key is not required in the boostagram spec.
@@ -128,17 +137,18 @@ export async function fetchEpisodes() {
   const feed = parser.parse(xml, xml2jsonOpts)
   const allBoostagrams = boostagramsByEpisodes()
 
-  const episodes = await Promise.all(feed.rss.channel.item.map(async (item) => {
-    const episode = parseEpisode(item)
+  const episodes = await Promise.all(
+    feed.rss.channel.item.map(async (item) => {
+      const episode = parseEpisode(item)
 
-    episode.boostagrams = allBoostagrams[item.title] || []
-    
-    const thumbnailFileName = await createEpisodeThumbnailIfMissing(episode)
-    const thumbnailUrl = `/assets/podcast/episode/${thumbnailFileName}`
-    episode.thumbnail = thumbnailUrl
+      episode.boostagrams = allBoostagrams[item.title] || []
 
-    return episode
-  }))
+      episode.thumbnails = await episodeThumbnails(episode)
+      episode.thumbnailFallback = episode.thumbnails.jpg
+
+      return episode
+    })
+  )
 
   return episodes
 }

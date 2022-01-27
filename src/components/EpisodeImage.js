@@ -11,8 +11,14 @@ const Image = styled.img`
   }
 `
 
-const EpisodeImage = ({ src, width, widthLarge }) => {
-  return <Image src={src} width={width} widthLarge={widthLarge} alt="Episode Cover" />
+const EpisodeImage = ({ episode, width, widthLarge }) => {
+  return (
+    <picture>
+      {episode.thumbnails?.webp && <source srcSet={episode.thumbnails.webp} type="image/webp" />}
+      {episode.thumbnails?.jpg && <source srcSet={episode.thumbnails.jpg} type="image/jpeg" />}
+      <Image src={episode.thumbnailFallback} width={width} widthLarge={widthLarge} alt="Episode Cover" />
+    </picture>
+  )
 }
 
 export default EpisodeImage

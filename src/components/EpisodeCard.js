@@ -47,7 +47,7 @@ const EpisodeCard = ({ episode }) => {
   return (
     <Card>
       <Content>
-        <EpisodeImage src={episode.thumbnail} width={5} widthLarge={8} />
+        <EpisodeImage episode={episode} width={5} widthLarge={8} />
         <EpisodeDataContainer>
           <EpisodeTitle episode={episode} />
         </EpisodeDataContainer>
