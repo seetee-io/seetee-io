@@ -32,7 +32,7 @@ When you decide to press the boost button at a certain point of the episode, you
 
 Currently, people often use one-time boosts to highlight a certain part of an episode that they particularly enjoyed—a funny joke, an interesting insight, or a great quote. In the future, boosts and boostagrams might be used as the base for censorship-resistant discussions of the content that is being broadcast. Time will tell how it all develops.
 
-### Play & Pay
+## Play & Pay
 
 This mechanism flips the publishing model for online content on its head. Instead of maximizing clicks or view time, creators can focus on providing actual value for their audience. And if the audience likes what they see or hear, some value will flow back to the creators.
 
