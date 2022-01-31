@@ -3,7 +3,8 @@ title: 'Shareholder Letter'
 summary: 'Today we announced that Aker has established Seetee, a new company that will invest in exciting projects and companies throughout the Bitcoin ecosystem while keeping all of its liquid investable assets in bitcoin.'
 date: '2021-03-08'
 blocktime: '673676'
-author: 'Kjell Inge Røkke'
+authors:
+  - name: 'Kjell Inge Røkke'
 thumbnail: thumbnail.png
 cover: cover.png
 ---

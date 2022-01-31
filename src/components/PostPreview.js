@@ -106,9 +106,21 @@ const PostPreview = ({ post }) => {
           <MetadataContainer>
             <Date dateString={post.date} />
             <MetadataSeparator>&#8226;</MetadataSeparator>
-            <a href={`https://blockstream.info/block-height/${post.blocktime}`}>{post.blocktime}</a>
-            <MetadataSeparator>&#8226;</MetadataSeparator>
-            By&nbsp;{post.author}
+            {post.blocktime}
+            {post.authors.map((author, index) => {
+              return (
+                <span key={index}>
+                  {index === 0 ? (
+                    <>
+                      <MetadataSeparator>&#8226;</MetadataSeparator>By &nbsp;
+                    </>
+                  ) : (
+                    <>,&nbsp;</>
+                  )}
+                  {author.name}
+                </span>
+              )
+            })}
           </MetadataContainer>
           <Title>{post.title}</Title>
           {post.summary && <Summary dangerouslySetInnerHTML={{ __html: post.summary }} />}

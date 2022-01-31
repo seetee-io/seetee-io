@@ -238,13 +238,20 @@ export default function Post({ id, mdxSource, frontMatter }) {
               <Date dateString={frontMatter.date} />
               <MetadataSeparator>&#8226;</MetadataSeparator>
               <a href={`https://blockstream.info/block-height/${frontMatter.blocktime}`}>{frontMatter.blocktime}</a>
-              <MetadataSeparator>&#8226;</MetadataSeparator>
-              By&nbsp;
-              {frontMatter.linkAuthorTwitter ? (
-                <a href={'https://twitter.com/' + frontMatter.author}>{frontMatter.author}</a>
-              ) : (
-                frontMatter.author
-              )}
+              {frontMatter.authors.map((author, index) => {
+                return (
+                  <span key={index}>
+                    {index === 0 ? (
+                      <>
+                        <MetadataSeparator>&#8226;</MetadataSeparator>By &nbsp;
+                      </>
+                    ) : (
+                      <>,&nbsp;</>
+                    )}
+                    {author.link ? <a href={author.link}>{author.name}</a> : author.name}
+                  </span>
+                )
+              })}
             </MetadataContainer>
             <h1>{frontMatter.title}</h1>
             {frontMatter.subtitle && <h2>{frontMatter.subtitle}</h2>}

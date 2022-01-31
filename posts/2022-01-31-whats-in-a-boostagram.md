@@ -3,8 +3,11 @@ title: 'What’s in a Boostagram?'
 summary: 'A boostagram is a short text message attached to a voluntary value-for-value payment integrated into modern Podcasting 2.0 apps. The payment and the message are direct, peer-to-peer, enabled by Bitcoin’s Lightning Network.'
 date: '2022-01-31'
 blocktime: '721166'
-author: '@dnlggr'
-linkAuthorTwitter: true
+authors:
+  - name: '@dnlggr'
+    link: 'https://twitter.com/@dnlggr'
+  - name: '@dergigi'
+    link: 'https://twitter.com/@dergigi'
 thumbnail: 'thumbnail.jpeg'
 cover: 'cover.jpeg'
 coverImageCaption: 'Cover photo by <a href="https://unsplash.com/@snowshade">Oleg Laptev</a> on <a href="https://unsplash.com/s/photos/megaphone">Unsplash</a>.'
