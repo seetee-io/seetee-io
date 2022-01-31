@@ -66,5 +66,3 @@ jobs:
           labels: |
             automated pr
             boostagram update
-          team-reviewers: |
-            seetee-website
