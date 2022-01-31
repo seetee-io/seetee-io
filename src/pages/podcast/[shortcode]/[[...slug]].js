@@ -242,7 +242,7 @@ export default function Episode({ episode, isShortLink }) {
               <div>Boostagrams</div>
               <SectionHeadingSubtitle>
                 <GoInfo />
-                <Link href="/blog/2022-01-24-whats-in-a-boostagram/#boostagrams">
+                <Link href="/blog/2022-01-31-whats-in-a-boostagram">
                   <a>What is this?</a>
                 </Link>
               </SectionHeadingSubtitle>
