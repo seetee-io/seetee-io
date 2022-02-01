@@ -9,6 +9,7 @@ import { parseISO } from 'date-fns'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
+// Does not return posts marked as unlisted in their frontmatter.
 export async function loadPostMetadataByYear() {
   const fileNames = fs.readdirSync(postsDirectory)
 
@@ -22,10 +23,12 @@ export async function loadPostMetadataByYear() {
 
     const matterResult = matter(fileContents)
 
-    allPosts.push({
-      id,
-      ...matterResult.data,
-    })
+    if (!matterResult.data.unlisted) {
+      allPosts.push({
+        id,
+        ...matterResult.data,
+      })
+    }
   }
 
   allPosts.sort(({ date: a }, { date: b }) => {

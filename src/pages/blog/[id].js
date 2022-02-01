@@ -96,11 +96,14 @@ const CoverImage = styled.img`
 `
 
 const CoverImageCaption = styled.div`
-  width: 90%;
-  padding-right: 2rem;
+  margin-top: 3rem;
   text-align: right;
   font-size: 1rem;
-  color: rgba(120, 120, 120, 0.1);
+  color: rgba(120, 120, 120, 0.5);
+
+  div a {
+    color: rgba(120, 120, 120, 0.5);
+  }
 `
 
 const Article = styled.div`
@@ -235,13 +238,20 @@ export default function Post({ id, mdxSource, frontMatter }) {
               <Date dateString={frontMatter.date} />
               <MetadataSeparator>&#8226;</MetadataSeparator>
               <a href={`https://blockstream.info/block-height/${frontMatter.blocktime}`}>{frontMatter.blocktime}</a>
-              <MetadataSeparator>&#8226;</MetadataSeparator>
-              By&nbsp;
-              {frontMatter.linkAuthorTwitter ? (
-                <a href={'https://twitter.com/' + frontMatter.author}>{frontMatter.author}</a>
-              ) : (
-                frontMatter.author
-              )}
+              {frontMatter.authors.map((author, index) => {
+                return (
+                  <span key={index}>
+                    {index === 0 ? (
+                      <>
+                        <MetadataSeparator>&#8226;</MetadataSeparator>By &nbsp;
+                      </>
+                    ) : (
+                      <>,&nbsp;</>
+                    )}
+                    {author.link ? <a href={author.link}>{author.name}</a> : author.name}
+                  </span>
+                )
+              })}
             </MetadataContainer>
             <h1>{frontMatter.title}</h1>
             {frontMatter.subtitle && <h2>{frontMatter.subtitle}</h2>}
@@ -249,13 +259,18 @@ export default function Post({ id, mdxSource, frontMatter }) {
           {frontMatter.cover && (
             <CoverImageContainer>
               <CoverImage src={'/assets/blog/' + id + '/' + frontMatter.cover} />
-              {frontMatter.coverImageCaption && <CoverImageCaption>{frontMatter.coverImageCaption}</CoverImageCaption>}
             </CoverImageContainer>
           )}
           <Article>
             <div className="wrapper">
               <MDXRemote {...mdxSource} components={{ Image }} />
             </div>
+
+            {frontMatter.coverImageCaption && (
+              <CoverImageCaption>
+                <div dangerouslySetInnerHTML={{ __html: frontMatter.coverImageCaption }}></div>
+              </CoverImageCaption>
+            )}
           </Article>
         </ArticleContainer>
       </PageContainer>

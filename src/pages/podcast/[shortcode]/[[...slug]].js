@@ -3,6 +3,8 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+import { GoInfo } from 'react-icons/go'
 
 import { fetchEpisodes } from '../../../lib/feed'
 import { trimMessage, messageLength } from '../../../lib/utils'
@@ -44,6 +46,7 @@ const FeaturedBoostagramsHeading = styled.div`
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
   color: var(--white);
+  cursor: pointer;
 `
 
 const FeaturedBoostagrams = styled.div`
@@ -83,9 +86,35 @@ const DescriptionContainer = styled.div`
 `
 
 const SectionHeading = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: flex-start;
   padding: 0 0 1rem 1.2rem;
   text-align: left;
   font-size: 1.4rem;
+`
+
+const SectionHeadingSubtitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2rem;
+
+  font-size: 1rem;
+
+  a {
+    text-decoration: none;
+    color: var(--white);
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+
+  svg {
+    padding-bottom: 1px;
+  }
 `
 
 const DescriptionTextContainer = styled.div`
@@ -188,7 +217,9 @@ export default function Episode({ episode, isShortLink }) {
         </BadgesContainer>
         {featuredBoostagrams.length > 0 && (
           <FeaturedBoostagramsContainer>
-            <FeaturedBoostagramsHeading>⚡️ Boostagrams</FeaturedBoostagramsHeading>
+            <FeaturedBoostagramsHeading onClick={scrollToBoostagrams}>
+              ⚡️ Featured Boostagrams
+            </FeaturedBoostagramsHeading>
             <FeaturedBoostagrams>
               {featuredBoostagrams.map((boostagram, index) => (
                 <FeaturedBoostagram key={index} boostagram={boostagram} />
@@ -207,7 +238,15 @@ export default function Episode({ episode, isShortLink }) {
         <Bar height="6.25rem" />
         {episode.boostagrams.length > 0 && (
           <AllBoostagramsContainer ref={boostagramRef}>
-            <SectionHeading>Boostagrams</SectionHeading>
+            <SectionHeading>
+              <div>Boostagrams</div>
+              <SectionHeadingSubtitle>
+                <GoInfo />
+                <Link href="/blog/2022-01-31-whats-in-a-boostagram">
+                  <a>What is this?</a>
+                </Link>
+              </SectionHeadingSubtitle>
+            </SectionHeading>
             <AllBoostagrams>
               {episode.boostagrams.map((boostagram, index) => (
                 <Boostagram key={index} boostagram={boostagram} />
