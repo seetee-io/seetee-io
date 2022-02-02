@@ -8,7 +8,7 @@ import { JSDOM } from 'jsdom'
 import config from '../config'
 
 import { readBoostagrams } from './boostagrams'
-import { createEpisodeThumbnailIfMissing } from './thumbnails'
+import { createEpisodeThumbnailsIfMissing } from './thumbnails'
 
 const replacements = (str) => {
   return str && str.replace(/<\/?u>/g, '')
@@ -96,15 +96,6 @@ const parseEpisode = (e) => {
   }
 }
 
-const episodeThumbnails = async (episode) => {
-  const thumbnailFileNameJpg = await createEpisodeThumbnailIfMissing(episode, 160, 'jpg')
-  const thumbnailFileNameWebp = await createEpisodeThumbnailIfMissing(episode, 160, 'webp')
-  return {
-    jpg: `/assets/podcast/episode/${thumbnailFileNameJpg}`,
-    webp: `/assets/podcast/episode/${thumbnailFileNameWebp}`,
-  }
-}
-
 export function boostagramsByEpisodes() {
   // Todo:
   // The 'episode' key is not required in the boostagram spec.
@@ -143,7 +134,7 @@ export async function fetchEpisodes() {
 
       episode.boostagrams = allBoostagrams[item.title] || []
 
-      episode.thumbnails = await episodeThumbnails(episode)
+      episode.thumbnails = await createEpisodeThumbnailsIfMissing(episode, 160)
       episode.thumbnailFallback = episode.thumbnails.jpg
 
       return episode
