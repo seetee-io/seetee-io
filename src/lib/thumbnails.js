@@ -5,7 +5,7 @@ const episode_thumbnail_dir = 'public/assets/podcast/thumbnails'
 const episode_thumbnails_url_path = '/assets/podcast/thumbnails'
 
 const supported_thumbnail_formats = ['jpg', 'webp']
-const default_size = 160
+const default_size = 400
 
 const toEpisodeThumbnailFileName = (episode, size, format) =>
   `s${episode.season}e${episode.episode}_${size}x${size}.${format}`

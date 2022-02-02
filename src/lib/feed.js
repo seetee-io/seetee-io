@@ -128,15 +128,13 @@ export async function fetchEpisodes() {
   const feed = parser.parse(xml, xml2jsonOpts)
   const allBoostagrams = boostagramsByEpisodes()
 
-  const episodes = await Promise.all(
-    feed.rss.channel.item.map(async (item) => {
-      const episode = parseEpisode(item)
+  const episodes = feed.rss.channel.item.map((item) => {
+    const episode = parseEpisode(item)
 
-      episode.boostagrams = allBoostagrams[item.title] || []
+    episode.boostagrams = allBoostagrams[item.title] || []
 
-      return episode
-    })
-  )
+    return episode
+  })
 
   await downloadAllMissingEpisodeThumbnails(episodes)
 
