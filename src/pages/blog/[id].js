@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import Head from 'next/head'
-
+import { MDXRemote } from 'next-mdx-remote'
 import { loadPostsMetadata, loadPost } from '../../lib/posts'
 import { Date, Bar, PostImage as Image } from '../../components'
-import { MDXRemote } from 'next-mdx-remote'
+import config from '../../config'
 
 const PageContainer = styled.div`
   overflow-x: hidden;
@@ -223,10 +223,17 @@ export default function Post({ id, mdxSource, frontMatter }) {
             <title>{frontMatter.title}</title>
             <meta name="og:type" property="og:type" content="website" />
             <meta name="og:title" property="og:title" content={frontMatter.title} />
-            <meta name="twitter:card" content="summary" />
+            {frontMatter.cover && (
+              <meta
+                name="og:image"
+                property="og:image"
+                content={config.url + '/assets/blog/' + id + '/' + frontMatter.cover}
+              />
+            )}
+            <meta name="og:description" property="og:description" content={frontMatter.summary} />
+            <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:site" content="@seetee_io" />
             <meta name="twitter:image:alt" content={frontMatter.title} />
-            <meta name="og:description" property="og:description" content={frontMatter.summary} />
             <meta name="description" content={frontMatter.summary} />
           </>
         )}
