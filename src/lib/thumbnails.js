@@ -1,8 +1,8 @@
 import fs from 'fs'
 import { ImagePool } from '@squoosh/lib'
 
-const episode_thumbnail_dir = 'public/assets/podcast/episode'
-const episode_thumbnails_url_path = '/assets/podcast/episode'
+const episode_thumbnail_dir = 'public/assets/podcast/thumbnails'
+const episode_thumbnails_url_path = '/assets/podcast/thumbnails'
 const default_size = 320
 
 const toEpisodeThumbnailFileName = (episode, size, format) =>
