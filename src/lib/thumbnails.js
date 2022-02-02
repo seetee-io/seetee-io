@@ -3,10 +3,15 @@ import { ImagePool } from '@squoosh/lib'
 
 const episode_thumbnail_dir = 'public/assets/podcast/thumbnails'
 const episode_thumbnails_url_path = '/assets/podcast/thumbnails'
-const default_size = 320
+
+const supported_thumbnail_formats = ['jpg', 'webp']
+const default_size = 160
 
 const toEpisodeThumbnailFileName = (episode, size, format) =>
   `s${episode.season}e${episode.episode}_${size}x${size}.${format}`
+
+const toThumbnailFileNamesByFormat = (episode, size, formats) =>
+  Object.fromEntries(formats.map((format) => [format, toEpisodeThumbnailFileName(episode, size, format)]))
 
 const fileExists = async (file) =>
   fs.promises
@@ -14,8 +19,9 @@ const fileExists = async (file) =>
     .then(() => true)
     .catch(() => false)
 
-const createThumbnailsFromImageBuffer = async (imageBuffer, size) => {
-  const imagePool = new ImagePool()
+const fetchRawImage = async (imageUrl) => (await fetch(imageUrl)).buffer()
+
+const createThumbnailsFromImageBufferPool = async (imagePool, imageBuffer, size) => {
   const image = imagePool.ingestImage(imageBuffer)
 
   await image.decoded
@@ -29,12 +35,7 @@ const createThumbnailsFromImageBuffer = async (imageBuffer, size) => {
   await image.encode({
     webp: {},
     mozjpeg: {},
-    jxl: {
-      quality: 90,
-    },
   })
-
-  await imagePool.close()
 
   return {
     jpg: (await image.encodedWith.mozjpeg).binary,
@@ -42,39 +43,40 @@ const createThumbnailsFromImageBuffer = async (imageBuffer, size) => {
   }
 }
 
-const createThumbnailsFromUrl = async (imageUrl, size) => {
-  const response = await fetch(imageUrl)
-  const buffer = await response.buffer()
-  return await createThumbnailsFromImageBuffer(buffer, size)
-}
+export async function downloadAllMissingEpisodeThumbnails(episodes, size = default_size) {
+  const imagePool = new ImagePool()
 
-export async function createEpisodeThumbnailsIfMissing(episode, size = default_size) {
-  const formats = ['jpg', 'webp']
+  for (const episode of episodes) {
+    const thumbnailFileNamesByFormat = toThumbnailFileNamesByFormat(episode, size, supported_thumbnail_formats)
 
-  const thumbnailFileNamesByFormat = Object.fromEntries(
-    formats.map((format) => [format, toEpisodeThumbnailFileName(episode, size, format)])
-  )
+    const allThumbnailsPresent = await Object.values(thumbnailFileNamesByFormat)
+      .map(async (fileName) => await fileExists(`${episode_thumbnail_dir}/${fileName}`))
+      .reduce((a, b) => a && b, true)
 
-  const allThumbnailsPresent = await Object.values(thumbnailFileNamesByFormat)
-    .map(async (fileName) => await fileExists(`${episode_thumbnail_dir}/${fileName}`))
-    .reduce((a, b) => a && b, true)
+    if (!allThumbnailsPresent) {
+      console.log(`Thumbnails for Episode ${episode.shortcode} are missing - generating..`)
+      const rawImageBuffer = await fetchRawImage(episode.image)
 
-  if (!allThumbnailsPresent) {
-    console.log(`Thumbnails for Episode ${episode.shortcode} are missing - generating..`)
+      const rawThumbnailBuffers = await createThumbnailsFromImageBufferPool(imagePool, rawImageBuffer, size)
 
-    const rawThumbnailBuffers = await createThumbnailsFromUrl(episode.image, size)
+      for (const [format, fileName] of Object.entries(thumbnailFileNamesByFormat)) {
+        const file = `${episode_thumbnail_dir}/${fileName}`
+        console.log(`Saving thumbnail for ${episode.shortcode}: ${file}`)
 
-    for (const [format, fileName] of Object.entries(thumbnailFileNamesByFormat)) {
-      const file = `${episode_thumbnail_dir}/${fileName}`
-      console.log(`Saving thumbnail for ${episode.shortcode}: ${file}`)
+        if (!rawThumbnailBuffers[format]) {
+          throw new Error(`Could not create thumbnail for format ${format}`)
+        }
 
-      if (!rawThumbnailBuffers[format]) {
-        throw new Error(`Could not create thumbnail for format ${format}`)
+        await fs.promises.writeFile(file, rawThumbnailBuffers[format], 'binary')
       }
-
-      await fs.promises.writeFile(file, rawThumbnailBuffers[format], 'binary')
     }
   }
+
+  await imagePool.close()
+}
+
+export function thumbnailUrlsByFormat(episode, size = default_size) {
+  const thumbnailFileNamesByFormat = toThumbnailFileNamesByFormat(episode, size, supported_thumbnail_formats)
 
   return Object.fromEntries(
     Object.entries(thumbnailFileNamesByFormat).map(([format, fileName]) => [
