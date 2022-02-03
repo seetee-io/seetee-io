@@ -19,6 +19,11 @@ const fileExists = async (file) =>
     .then(() => true)
     .catch(() => false)
 
+
+const allFilesExist = async (files) => (await Promise.all(files
+    .map(async (fileName) => await fileExists(`${episode_thumbnail_dir}/${fileName}`)))
+  ).reduce((a, b) => a && b, true)
+
 const fetchRawImage = async (imageUrl) => (await fetch(imageUrl)).buffer()
 
 const createThumbnailsFromImageBufferPool = async (imagePool, imageBuffer, size) => {
@@ -49,9 +54,7 @@ export async function downloadAllMissingEpisodeThumbnails(episodes, size = defau
   for (const episode of episodes) {
     const thumbnailFileNamesByFormat = toThumbnailFileNamesByFormat(episode, size, supported_thumbnail_formats)
 
-    const allThumbnailsPresent = await Object.values(thumbnailFileNamesByFormat)
-      .map(async (fileName) => await fileExists(`${episode_thumbnail_dir}/${fileName}`))
-      .reduce((a, b) => a && b, true)
+    const allThumbnailsPresent = await allFilesExist(Object.values(thumbnailFileNamesByFormat))
 
     if (!allThumbnailsPresent) {
       console.log(`Thumbnails for Episode ${episode.shortcode} are missing - generating..`)
