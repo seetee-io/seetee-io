@@ -202,7 +202,7 @@ export default function Episode({ episode, isShortLink }) {
             <meta name="og:description" property="og:description" content={episode.description} />
             <meta name="og:image" property="og:image" content={episode.image} />
 
-            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:card" content="summary" />
             <meta name="twitter:site" content="@seetee_io" />
             <meta name="twitter:image:alt" content={episode.title} />
           </>
