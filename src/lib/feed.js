@@ -140,7 +140,7 @@ export async function fetchEpisodes() {
 
   episodes.forEach((episode) => {
     episode.thumbnails = thumbnailUrlsByFormat(episode)
-    episode.thumbnailFallback = episode.thumbnails.jpg
+    episode.thumbnailFallback = episode.image
   })
 
   return episodes
