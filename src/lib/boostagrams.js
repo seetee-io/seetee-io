@@ -3,13 +3,13 @@ import createDOMPurify from 'dompurify'
 import { JSDOM } from 'jsdom'
 import { trimMessage } from './utils'
 
-const boostagrams_dir = 'src/boostagrams/custom_records'
+const boostagramsDir = 'src/boostagrams/custom_records'
 
 export function readBoostagrams() {
   const boostagrams = fs
-    .readdirSync(boostagrams_dir)
+    .readdirSync(boostagramsDir)
     .filter((paths) => paths.match(/custom_record_.*\.json/) !== null)
-    .map((path) => boostagrams_dir + '/' + path)
+    .map((path) => `${boostagramsDir}/${path}`)
     .map((path) => {
       try {
         return JSON.parse(fs.readFileSync(path))
