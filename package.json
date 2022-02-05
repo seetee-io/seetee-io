@@ -39,6 +39,7 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
+    "@squoosh/lib": "^0.4.0",
     "@svgr/webpack": "^5.5.0",
     "babel-plugin-styled-components": "^1.13.3",
     "eslint": "7.32.0",

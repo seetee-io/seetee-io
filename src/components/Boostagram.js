@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import styled from 'styled-components'
 import Amplitude from 'amplitudejs'
 import Link from 'next/link'

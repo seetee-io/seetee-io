@@ -8,6 +8,7 @@ import { JSDOM } from 'jsdom'
 import config from '../config'
 
 import { readBoostagrams } from './boostagrams'
+import { downloadAllMissingEpisodeThumbnails, thumbnailUrlsByFormat } from './thumbnails'
 
 const replacements = (str) => {
   return str && str.replace(/<\/?u>/g, '')
@@ -72,7 +73,6 @@ const parseEpisode = (e) => {
   const descriptionHTML = styledDescriptionHTML(sanitize(e['description']))
   const description = stripHTML(replacements(descriptionHTML))
   const guid = e['guid']['#text']
-  const value = {}
   const parsedRecipients = [].concat(e['podcast:value']['podcast:valueRecipient'])
   const recipients = parsedRecipients.map((r) => {
     return r['@_']
@@ -134,6 +134,13 @@ export async function fetchEpisodes() {
     episode.boostagrams = allBoostagrams[item.title] || []
 
     return episode
+  })
+
+  await downloadAllMissingEpisodeThumbnails(episodes)
+
+  episodes.forEach((episode) => {
+    episode.thumbnails = thumbnailUrlsByFormat(episode)
+    episode.thumbnailFallback = episode.image
   })
 
   return episodes

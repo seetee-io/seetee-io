@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import ReactTooltip from 'react-tooltip'
 
-import { Text } from '.'
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;

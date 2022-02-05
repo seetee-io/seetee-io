@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import dateformat from 'dateformat'
-import { Text, EpisodeImage, EpisodeTitle } from './'
+import { EpisodeImage, EpisodeTitle } from './'
 
 const Card = styled.div`
   background: rgba(255, 255, 255, 0.9);
@@ -48,7 +47,7 @@ const EpisodeCard = ({ episode }) => {
   return (
     <Card>
       <Content>
-        <EpisodeImage src={episode.image} width={5} widthLarge={8} />
+        <EpisodeImage episode={episode} width={5} widthLarge={8} />
         <EpisodeDataContainer>
           <EpisodeTitle episode={episode} />
         </EpisodeDataContainer>

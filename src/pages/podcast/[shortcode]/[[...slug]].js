@@ -7,8 +7,8 @@ import Link from 'next/link'
 import { GoInfo } from 'react-icons/go'
 
 import { fetchEpisodes } from '../../../lib/feed'
-import { trimMessage, messageLength } from '../../../lib/utils'
-import { Text, Bar, Footer, BreezBadge } from '../../../components'
+import { messageLength } from '../../../lib/utils'
+import { Bar, BreezBadge } from '../../../components'
 
 const EpisodePlayer = dynamic(() => import('../../../components/EpisodePlayer'), { ssr: false })
 const FeaturedBoostagram = dynamic(() => import('../../../components/FeaturedBoostagram'), { ssr: false })

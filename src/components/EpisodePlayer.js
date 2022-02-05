@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import dateformat from 'dateformat'
 import Amplitude from 'amplitudejs'
-import { Text, EpisodeImage, EpisodeTitle, Value4Value, EpisodePlayerControls } from '.'
+import { EpisodeImage, EpisodeTitle, Value4Value, EpisodePlayerControls } from '.'
 
 const Container = styled.div`
   display: flex;
@@ -51,7 +50,7 @@ const Value4ValueContainer = styled.div`
 const renderCardContainer = (episode) => {
   return (
     <CardContentContainer>
-      <EpisodeImage src={episode.image} width={8} widthLarge={10} />
+      <EpisodeImage episode={episode} width={8} widthLarge={10} />
       <EpisodeDataContainer>
         <EpisodeTitle episode={episode} />
         <Value4ValueContainer>
