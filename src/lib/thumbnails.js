@@ -19,7 +19,6 @@ const fileExists = async (file) =>
     .then(() => true)
     .catch(() => false)
 
-
 const allFilesExist = async (files) => (await Promise.all(files
     .map(async (fileName) => await fileExists(`${episodeThumbnailsDir}/${fileName}`)))
   ).reduce((a, b) => a && b, true)
