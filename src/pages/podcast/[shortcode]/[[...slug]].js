@@ -9,6 +9,7 @@ import { GoInfo } from 'react-icons/go'
 import { fetchEpisodes } from '../../../lib/feed'
 import { messageLength } from '../../../lib/utils'
 import { Bar, BreezBadge } from '../../../components'
+import BoostagramBadge from '../../../../public/boostagram.svg'
 
 const EpisodePlayer = dynamic(() => import('../../../components/EpisodePlayer'), { ssr: false })
 const FeaturedBoostagram = dynamic(() => import('../../../components/FeaturedBoostagram'), { ssr: false })
@@ -47,6 +48,15 @@ const FeaturedBoostagramsHeading = styled.div`
   margin-bottom: 1.5rem;
   color: var(--white);
   cursor: pointer;
+  display: inline-flex;
+`
+
+const StyledBoostagramBadge = styled(BoostagramBadge)`
+  position: relative;
+  top: -0.2em;
+  width: 1.8rem;
+  padding-right: 0.2rem;
+  fill: var(--orange);
 `
 
 const FeaturedBoostagrams = styled.div`
@@ -218,7 +228,8 @@ export default function Episode({ episode, isShortLink }) {
         {featuredBoostagrams.length > 0 && (
           <FeaturedBoostagramsContainer>
             <FeaturedBoostagramsHeading onClick={scrollToBoostagrams}>
-              ⚡️ Featured Boostagrams
+              <StyledBoostagramBadge />
+              Featured Boostagrams
             </FeaturedBoostagramsHeading>
             <FeaturedBoostagrams>
               {featuredBoostagrams.map((boostagram, index) => (
