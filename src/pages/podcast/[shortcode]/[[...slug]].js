@@ -4,11 +4,11 @@ import Head from 'next/head'
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { GoInfo } from 'react-icons/go'
 
 import { fetchEpisodes } from '../../../lib/feed'
 import { messageLength } from '../../../lib/utils'
 import { Bar, BreezBadge } from '../../../components'
+import BoostagramBadge from '../../../../public/boostagram.svg'
 
 const EpisodePlayer = dynamic(() => import('../../../components/EpisodePlayer'), { ssr: false })
 const FeaturedBoostagram = dynamic(() => import('../../../components/FeaturedBoostagram'), { ssr: false })
@@ -47,6 +47,14 @@ const FeaturedBoostagramsHeading = styled.div`
   margin-bottom: 1.5rem;
   color: var(--white);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+`
+
+const StyledBoostagramBadge = styled(BoostagramBadge)`
+  ${({ size }) => `width: ${size}rem; height: ${size}rem;`};
+  padding-right: 0.2rem;
+  fill: var(--orange);
 `
 
 const FeaturedBoostagrams = styled.div`
@@ -218,7 +226,8 @@ export default function Episode({ episode, isShortLink }) {
         {featuredBoostagrams.length > 0 && (
           <FeaturedBoostagramsContainer>
             <FeaturedBoostagramsHeading onClick={scrollToBoostagrams}>
-              ⚡️ Featured Boostagrams
+              <StyledBoostagramBadge size={1.5} />
+              Featured Boostagrams
             </FeaturedBoostagramsHeading>
             <FeaturedBoostagrams>
               {featuredBoostagrams.map((boostagram, index) => (
@@ -241,7 +250,7 @@ export default function Episode({ episode, isShortLink }) {
             <SectionHeading>
               <div>Boostagrams</div>
               <SectionHeadingSubtitle>
-                <GoInfo />
+                <StyledBoostagramBadge size={1.5} />
                 <Link href="/blog/2022-01-31-whats-in-a-boostagram">
                   <a>What is this?</a>
                 </Link>
