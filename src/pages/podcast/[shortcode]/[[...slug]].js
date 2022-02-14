@@ -4,7 +4,6 @@ import Head from 'next/head'
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { GoInfo } from 'react-icons/go'
 
 import { fetchEpisodes } from '../../../lib/feed'
 import { messageLength } from '../../../lib/utils'
@@ -49,12 +48,11 @@ const FeaturedBoostagramsHeading = styled.div`
   color: var(--white);
   cursor: pointer;
   display: inline-flex;
+  align-items: center;
 `
 
 const StyledBoostagramBadge = styled(BoostagramBadge)`
-  position: relative;
-  top: -0.2em;
-  width: 1.8rem;
+  ${({ size }) => `width: ${size}rem; height: ${size}rem;`};
   padding-right: 0.2rem;
   fill: var(--orange);
 `
@@ -228,7 +226,7 @@ export default function Episode({ episode, isShortLink }) {
         {featuredBoostagrams.length > 0 && (
           <FeaturedBoostagramsContainer>
             <FeaturedBoostagramsHeading onClick={scrollToBoostagrams}>
-              <StyledBoostagramBadge />
+              <StyledBoostagramBadge size={1.5} />
               Featured Boostagrams
             </FeaturedBoostagramsHeading>
             <FeaturedBoostagrams>
@@ -252,7 +250,7 @@ export default function Episode({ episode, isShortLink }) {
             <SectionHeading>
               <div>Boostagrams</div>
               <SectionHeadingSubtitle>
-                <GoInfo />
+                <StyledBoostagramBadge size={1.5} />
                 <Link href="/blog/2022-01-31-whats-in-a-boostagram">
                   <a>What is this?</a>
                 </Link>
