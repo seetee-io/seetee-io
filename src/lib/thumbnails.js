@@ -1,7 +1,7 @@
-import fs from 'fs'
-import { ImagePool } from '@squoosh/lib'
+//import fs from 'fs'
+//import { ImagePool } from '@squoosh/lib'
 
-const episodeThumbnailsDir = 'public/assets/podcast/thumbnails'
+// const episodeThumbnailsDir = 'public/assets/podcast/thumbnails'
 const episodeThumbnailsUrlPath = '/assets/podcast/thumbnails'
 
 const supportedThumbnailFormats = ['jpg', 'webp']
@@ -13,6 +13,7 @@ const toEpisodeThumbnailFileName = (episode, size, format) =>
 const toThumbnailFileNamesByFormat = (episode, size, formats) =>
   Object.fromEntries(formats.map((format) => [format, toEpisodeThumbnailFileName(episode, size, format)]))
 
+/*
 const fileExists = async (file) =>
   fs.promises
     .access(file)
@@ -75,7 +76,7 @@ export async function downloadAllMissingEpisodeThumbnails(episodes, size = defau
   }
 
   await imagePool.close()
-}
+}*/
 
 export function thumbnailUrlsByFormat(episode, size = defaultThumbnailSize) {
   const thumbnailFileNamesByFormat = toThumbnailFileNamesByFormat(episode, size, supportedThumbnailFormats)
