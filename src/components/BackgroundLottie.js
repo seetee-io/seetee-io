@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Lottie from 'react-lottie'
+import Lottie from '../lib/lottie'
 import animation from '../../public/lottie.json'
 
 const Wrapper = styled.div`
