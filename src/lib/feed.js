@@ -8,7 +8,7 @@ import { JSDOM } from 'jsdom'
 import config from '../config'
 
 import { readBoostagrams } from './boostagrams'
-import { /*downloadAllMissingEpisodeThumbnails,*/ thumbnailUrlsByFormat } from './thumbnails'
+import { downloadAllMissingEpisodeThumbnails, thumbnailUrlsByFormat } from './thumbnails'
 
 const replacements = (str) => {
   return str && str.replace(/<\/?u>/g, '')
@@ -136,7 +136,7 @@ export async function fetchEpisodes() {
     return episode
   })
 
-  // await downloadAllMissingEpisodeThumbnails(episodes)
+  await downloadAllMissingEpisodeThumbnails(episodes)
 
   episodes.forEach((episode) => {
     episode.thumbnails = thumbnailUrlsByFormat(episode)
