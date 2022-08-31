@@ -6,7 +6,7 @@
   "homepage": "https://seetee.io",
   "scripts": {
     "dev": "next dev",
-    "thumbnails": "./scripts/thumbnails.sh",
+    "thumbnails": "scripts/thumbnails.sh",
     "build": "next build",
     "start": "next start",
     "export": "next export",

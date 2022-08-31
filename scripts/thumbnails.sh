@@ -2,6 +2,10 @@
 
 set -e
 
+PODCAST_FEED="https://closing-the-loop.github.io/feed.xml"
+THUMBNAIL_SIZE=400
+THUMBNAIL_QUALITY=90
+
 rm -rf /tmp/ctl-thumbnails
 mkdir -p /tmp/ctl-thumbnails
 
@@ -38,7 +42,7 @@ yq_command() {
 }
 
 episodes=$(
-  curl -sS https://closing-the-loop.github.io/feed.xml \
+  curl -sS $PODCAST_FEED \
     | $(yq_command) -p xml -o json \
     | jq '
         .rss.channel.item
@@ -64,8 +68,9 @@ echo $episodes | jq --compact-output | while read episode ; do
      [ -z $($(find_command) "public/assets/podcast/thumbnails" -maxdepth 1 -name "s${s}e${e}_*x*.webp" -printf 1 -quit) ]
   then
     echo "Generating thumbnails for S${s}, E${e}..."
+
     wget -q -O "/tmp/ctl-thumbnails/s${s}e${e}_original.jpg" $i
-    convert "/tmp/ctl-thumbnails/s${s}e${e}_original.jpg" -resize 400x400 -quality 90 "public/assets/podcast/thumbnails/s${s}e${e}_400x400.jpg"
-    convert "/tmp/ctl-thumbnails/s${s}e${e}_original.jpg" -resize 400x400 -quality 90 "public/assets/podcast/thumbnails/s${s}e${e}_400x400.webp"
+    convert "/tmp/ctl-thumbnails/s${s}e${e}_original.jpg" -resize "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}" -quality $THUMBNAIL_QUALITY "public/assets/podcast/thumbnails/s${s}e${e}_${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}.jpg"
+    convert "/tmp/ctl-thumbnails/s${s}e${e}_original.jpg" -resize "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}" -quality $THUMBNAIL_QUALITY "public/assets/podcast/thumbnails/s${s}e${e}_${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}.webp"
   fi
 done
