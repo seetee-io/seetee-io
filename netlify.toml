@@ -1,5 +1,5 @@
 [build]
-  command = "rm -rf public/assets/blog/example && rm posts/example.md && npm run build && npm run export"
+  command = "rm -rf public/assets/blog/example && rm posts/example.md && npm run thumbnails && npm run build && npm run export"
   publish = "out/"
 
 [[redirects]]
