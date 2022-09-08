@@ -58,6 +58,31 @@ const styledDescriptionHTML = (descr) => {
   return descr.replace(/<p>---<\/p>/, '<hr>')
 }
 
+/**
+ * Parse duration value and always return as "number of seconds".
+ *
+ * @param {any} rawValue expecting either "number of seconds" directly or string in format "hh:mm:ss"
+ * @return duration of episode in seconds or -1 for invalid values
+ */
+ const parseDuration = (rawValue) => {
+  if (rawValue && `${rawValue}`.includes(':')) {
+    // try parse as string with format "hh:mm:ss"
+    const splitted = `${rawValue}`.split(':')
+    if (splitted.length !== 3) return -1
+
+    const hours = parseInt(splitted[0], 10)
+    const minutes = parseInt(splitted[1], 10)
+    const seconds = parseInt(splitted[2], 10)
+
+    const isValid = !isNaN(hours) && !isNaN(minutes) && !isNaN(seconds)
+    return isValid ? hours * 3600 + minutes * 60 + seconds : -1
+  } else {
+    // try parse as string representing seconds
+    const seconds = parseInt(rawValue, 10)
+    return !isNaN(seconds) ? seconds : -1
+  }
+}
+
 const parseEpisode = (e) => {
   const title = e.title.replace(/^#[0-9]* - /, '').replace(/^[\w\W]*: /, '')
   const guestMatch = e.title.replace(/^#[0-9]* - /, '').match(/^[\w\W]*: /)
@@ -66,7 +91,7 @@ const parseEpisode = (e) => {
   const image = e['itunes:image']['@_'].href
   const season = e['itunes:season']
   const episode = e['itunes:episode']
-  const duration = e['itunes:duration']
+  const duration = parseDuration(e['itunes:duration'])
   const shortcode = `S${season}E${episode}`
   const seoSlug = slugify(`${guest} ${title}`)
   const url = e['enclosure']['@_'].url

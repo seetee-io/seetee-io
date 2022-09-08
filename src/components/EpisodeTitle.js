@@ -58,8 +58,12 @@ const EpisodeTitle = ({ episode }) => {
     <Container>
       <MetadataContainer>
         <Text>{episode.shortcode.split(/(?=[E])/).join(' ')}</Text>
-        <MetadataSeparator>&#8226;</MetadataSeparator>
-        <Text>{formatEpisodeDuration(episode.duration)}</Text>
+        {episode.duration >= 0 && (
+          <>
+            <MetadataSeparator>&#8226;</MetadataSeparator>
+            <Text>{formatEpisodeDuration(episode.duration)}</Text>
+          </>
+        )}
         <MetadataSeparator>&#8226;</MetadataSeparator>
         <Text>{dateformat(episode.date, 'dd. mmm, yyyy')}</Text>
       </MetadataContainer>
