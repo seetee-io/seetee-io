@@ -64,7 +64,7 @@ const styledDescriptionHTML = (descr) => {
  * @param {any} rawValue expecting either "number of seconds" directly or string in format "hh:mm:ss"
  * @return duration of episode in seconds or -1 for invalid values
  */
- const parseDuration = (rawValue) => {
+const parseDuration = (rawValue) => {
   if (rawValue && `${rawValue}`.includes(':')) {
     // try parse as string with format "hh:mm:ss"
     const splitted = `${rawValue}`.split(':')
